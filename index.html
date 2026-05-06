@@ -1,0 +1,3056 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台東區營業處電力線路失竊現場調查表(20260407)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+:root{--bg:#f5f3ee;--surface:#fff;--surface2:#f0ede6;--border:#d8d2c6;--text:#1a1714;--text2:#5a534a;--text3:#8a8178;--red:#c0392b;--red-dark:#962d22;--red-light:#fdf0ee;--blue:#1a4a7a;--blue-light:#eaf0f8;--green:#1e6b45;--green-light:#eaf5ef;--amber:#8a5a00;--r:8px;--rl:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+.topbar{background:var(--red);color:#fff;padding:0 28px;display:flex;align-items:center;justify-content:space-between;min-height:54px;box-shadow:0 2px 8px rgba(192,57,43,.3)}
+.topbar-left{display:flex;align-items:center;gap:12px;min-width:0;flex:1}
+.topbar-logo{width:34px;height:34px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.topbar h1{font-size:16px;font-weight:600;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-sub{font-size:11px;opacity:.8;white-space:nowrap}
+.topbar-right{font-size:11px;opacity:.85;text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;padding:8px 0}
+.tabs{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28px;display:flex;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:12px 16px;font-size:13px;font-weight:500;color:var(--text3);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;user-select:none;flex-shrink:0}
+.tab:hover{color:var(--text2)}.tab.active{color:var(--red);border-bottom-color:var(--red)}
+.main{display:flex;min-height:calc(100vh - 102px)}
+.sidebar{width:210px;background:var(--surface);border-right:1px solid var(--border);padding:18px 0;flex-shrink:0}
+.sb-title{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;padding:5px 18px}
+.sb-item{display:flex;align-items:center;gap:8px;padding:8px 18px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s}
+.sb-item:hover{background:var(--surface2);color:var(--text)}
+.sb-item.active{background:var(--red-light);color:var(--red);font-weight:500;border-right:3px solid var(--red)}
+.sb-item .icon{font-size:14px;width:18px;text-align:center}
+.content{flex:1;padding:24px 28px;overflow-x:hidden}
+.page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.page-title{font-size:19px;font-weight:700}.page-sub{font-size:12px;color:var(--text3);margin-top:3px}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:var(--r);font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;border:none;transition:all .15s;white-space:nowrap}
+.btn-primary{background:var(--red);color:#fff}.btn-primary:hover{background:var(--red-dark)}
+.btn-secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border)}.btn-secondary:hover{background:var(--border)}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:#123a62}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#165234}
+.btn-danger{background:#fff;color:var(--red);border:1px solid var(--red)}.btn-danger:hover{background:var(--red-light)}
+.btn-sm{padding:4px 10px;font-size:12px}.btn-xs{padding:2px 8px;font-size:11px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:22px;margin-bottom:18px}
+.card-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.card-title-left{display:flex;align-items:center;gap:8px}
+.dot{width:4px;height:17px;background:var(--red);border-radius:2px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fl{font-size:12px;font-weight:600;color:var(--text2)}.fl .req{color:var(--red)}
+.fi,.fs,.fta{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:var(--r);font-size:13px;font-family:inherit;color:var(--text);background:var(--surface);transition:all .15s;outline:none}
+.fi:focus,.fs:focus,.fta:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(192,57,43,.1)}
+.fi[readonly]{background:var(--surface2);color:var(--text3)}
+.fta{resize:vertical;min-height:64px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px}
+.etable{width:100%;border-collapse:collapse;font-size:13px}
+.etable th{background:var(--surface2);padding:9px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text2);border-bottom:2px solid var(--border);white-space:nowrap}
+.etable td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:middle}
+.etable tr:last-child td{border-bottom:none}
+.etable tr:hover td{background:#fafaf8}
+.etable .num{text-align:right;font-variant-numeric:tabular-nums}
+.etable input{padding:4px 7px;border:1px solid var(--border);border-radius:5px;font-size:12px;font-family:inherit;outline:none;width:100%}
+.etable input:focus{border-color:var(--red)}
+.etable input[type=number]{text-align:right}
+.etable .calc-cell{color:var(--text3);font-size:12px;text-align:right}
+.etable tfoot td{font-weight:700;background:var(--surface2);padding:9px 10px;border-top:2px solid var(--border)}
+.ptable{width:100%;border-collapse:collapse;font-size:12px}
+.ptable th{background:var(--blue);color:#fff;padding:8px 10px;text-align:left;font-size:11px;font-weight:600;white-space:nowrap}
+.ptable td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ptable tr:hover td{background:var(--blue-light)}
+.ptable input{padding:3px 6px;border:1px solid var(--border);border-radius:4px;font-size:12px;font-family:inherit;outline:none}
+.ptable input:focus{border-color:var(--blue)}
+.ptable input[type=number]{text-align:right;width:80px}
+.ptable input[type=text]{width:100%}
+.act-cell{display:flex;gap:4px;justify-content:center}
+.updated-row td{background:#fffbe6!important}
+.ndcis-panel{background:var(--blue-light);border:1px solid #b8cfe0;border-radius:var(--rl);padding:16px 20px;margin-bottom:18px}
+.ndcis-steps{display:flex;gap:0;margin-top:12px}
+.ndcis-step{flex:1;text-align:center;padding:10px 6px;position:relative}
+.ndcis-step::after{content:'→';position:absolute;right:-5px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px}
+.ndcis-step:last-child::after{display:none}
+.step-num{width:26px;height:26px;background:var(--blue);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-bottom:5px}
+.step-text{font-size:10px;color:var(--text2);line-height:1.4}
+.total-bar{position:sticky;bottom:0;background:var(--surface);border-top:2px solid var(--border);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -4px 16px rgba(0,0,0,.08);z-index:10}
+.totals{display:flex;gap:28px;align-items:center}
+.t-label{font-size:11px;color:var(--text3)}
+.t-value{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--red)}
+.t-value.bk{color:var(--text);font-size:14px}
+.page{display:none}.page.active{display:block}
+#print-area{display:none}
+
+@media print{
+/* ══ 列印四頁仿Excel格式 ══ */
+
+  html,body{margin:0!important;padding:0!important;background:#fff;font-family:'PMingLiU','新細明體','MingLiU',serif;font-size:11pt;color:#000}
+  #print-area *{color:#000!important}
+  #print-area [style*="color:#"]:not([style*="color:#fff"]):not([style*="color:#000"]):not([style*="color:#1a4a7a"]):not([style*="color:#dde8f5"]){color:#000!important}
+  body>*:not(#print-area){display:none!important;height:0!important;overflow:hidden!important;margin:0!important;padding:0!important}
+  .topbar,.tabs,.sidebar,.total-bar,.no-print,.page{display:none!important;height:0!important;overflow:hidden!important;margin:0!important;padding:0!important}
+  #print-area{display:block!important}
+  @page{size:A4 portrait;margin:10mm 12mm 10mm 12mm}
+  @page:first{margin-top:10mm}
+  @page{margin-top:10mm;margin-bottom:10mm}
+  /* 若要完全去除頁首/頁尾網址，請在 Chrome 列印設定中取消勾選「頁首和頁尾」*/
+
+  /* 強制每個報表區塊分頁 */
+  .rpt-page{page-break-after:always;page-break-inside:avoid;width:194mm;box-sizing:border-box}
+  .rpt-page:last-child{page-break-after:avoid}
+
+  /* 共用標題 */
+  .rpt-hd{text-align:center;font-size:11pt;font-weight:700;margin-bottom:2mm;letter-spacing:.05em}
+  .rpt-sub{text-align:center;font-size:8pt;color:#444;margin-bottom:3mm}
+
+  /* 邊框表格 */
+  .bt{width:100%;border-collapse:collapse;font-size:7.5pt}
+  .bt th,.bt td{border:1px solid #555;padding:1mm 2mm;vertical-align:middle}
+  .bt th{background:#1a4a7a;color:#fff;text-align:left;white-space:nowrap}
+  .bt td.lbl{background:#dde8f5;font-weight:700;white-space:nowrap;width:22mm}
+  .bt td.lbl2{background:#dde8f5;font-weight:700;white-space:nowrap;width:16mm}
+  .bt td.r{text-align:right;font-variant-numeric:tabular-nums}
+  .bt td.c{text-align:center}
+  .bt tr.sub td{background:#f0ede6;font-weight:700}
+  .bt tr.grand td{background:#c0392b;color:#fff;font-weight:700}
+
+  /* 區段標題 */
+  .sec{background:#1a4a7a;color:#fff;font-size:8pt;font-weight:700;padding:1mm 2.5mm;margin:2.5mm 0 1mm}
+
+  /* 摘要列 */
+  .smry{width:100%;border-collapse:collapse;margin-bottom:2mm}
+  .smry td{border:1.5px solid #1a4a7a;padding:1.5mm 2mm;text-align:center}
+  .smry .sl{font-size:7pt;color:#000}
+  .smry .sv{font-size:10pt;font-weight:700;color:#c0392b}
+  .smry .sv.bk{color:#000;font-size:8.5pt}
+
+  /* 現場情形空格 */
+  .field-box{border:1px solid #555;height:38mm;margin-bottom:2mm;padding:1.5mm 2mm;font-size:7.5pt}
+
+  /* 簽名欄 */
+  .sign-t{width:100%;border-collapse:collapse;margin-top:2mm;font-size:7.5pt}
+  .sign-t td{border:1px solid #555;padding:1.5mm 2mm;text-align:center;height:12mm;vertical-align:top}
+  .sign-t .role{font-weight:700;color:#1a4a7a;border-bottom:1px solid #bbb;margin-bottom:1mm;padding-bottom:.5mm}
+
+  /* 注意事項 */
+  .notes{font-size:7pt;color:#000;margin:1.5mm 0;line-height:1.5}
+  .notes li{margin-left:3mm;margin-bottom:.5mm}
+
+  /* 計算式頁 */
+  .calc-box{border:1px solid #555;padding:1.5mm 2.5mm;margin-bottom:1.5mm;font-size:7.5pt}
+  .calc-title{font-weight:700;background:#eaf0f8;padding:.5mm 2mm;margin-bottom:1mm;border-left:3px solid #1a4a7a}
+}
+
+/* ══════════════════════════════════════════
+   手機響應式設計 (max-width: 768px)
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* ── 頂部標題欄 ── */
+  .topbar { padding: 0 14px; height: auto; min-height: 50px; }
+  .topbar h1 { font-size: 12px; }
+  .topbar-sub { font-size: 10px; opacity: .8; display: block; }
+  .topbar-right { display: none; }
+  .topbar-logo { width: 28px; height: 28px; font-size: 14px; flex-shrink: 0; }
+
+  /* ── 分頁標籤捲動 ── */
+  .tabs {
+    padding: 0 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { padding: 10px 12px; font-size: 12px; white-space: nowrap; }
+
+  /* ── 主體：隱藏側邊欄，全寬內容 ── */
+  .main { flex-direction: column; }
+  .sidebar { display: none; }
+  .content { padding: 14px 12px; }
+
+  /* ── 底部合計列 ── */
+  .total-bar {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    align-items: flex-start;
+  }
+  .totals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 20px;
+    width: 100%;
+  }
+  .total-bar > .btn { width: 100%; justify-content: center; }
+
+  /* ── 卡片 ── */
+  .card { padding: 14px; margin-bottom: 12px; }
+  .card-title { font-size: 13px; flex-wrap: wrap; gap: 8px; }
+
+  /* ── 表單格線：全部改單欄 ── */
+  .grid2, .grid3, .grid4 {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+  }
+
+  /* ── 頁面標題 ── */
+  .page-hdr {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .page-title { font-size: 16px; }
+  .page-hdr > div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+  .page-hdr .btn { flex: 1; justify-content: center; min-width: 100px; }
+
+  /* ── 材料填寫表格：橫向捲動 ── */
+  .card > .etable,
+  .card > table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  /* ── 價格資料庫表格：橫向捲動 ── */
+  .ptable {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    font-size: 11px;
+  }
+  .ptable input[type=number],
+  .ptable input[type=text] { min-width: 60px; }
+
+  /* ── 按鈕 ── */
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
+  .btn-xs { padding: 3px 8px; font-size: 11px; }
+
+  /* ── 下拉選單列（含＋－按鈕）── */
+  .fg > div[style*="display:flex"] {
+    flex-wrap: nowrap;
+  }
+
+  /* ── 服務所/價格管理 act-cell ── */
+  .act-cell { flex-direction: column; gap: 3px; }
+
+  /* ── 輸入框字體 ── */
+  .fi, .fs, .fta {
+    font-size: 15px; /* iOS 防止自動縮放 */
+  }
+  input[type=number], input[type=date], input[type=time] {
+    font-size: 15px;
+  }
+
+  /* ── 報損自主檢核表 ── */
+  #checklist-print-area .card { padding: 12px; }
+  #cl-line-items td,
+  #cl-meter-items td,
+  #cl-asset-items td { font-size: 12px; line-height: 1.5; }
+
+  /* ── 浮動導覽按鈕 ── */
+  .fab-nav {
+    display: flex !important;
+    position: fixed;
+    bottom: 80px;
+    right: 14px;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 50;
+  }
+  .fab-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--red);
+    color: white;
+    border: none;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .fab-btn:active { transform: scale(0.93); }
+  .fab-btn.blue { background: var(--blue); }
+  .fab-btn.green { background: var(--green); }
+
+  /* ── 側邊欄改底部快速選單 ── */
+  .mobile-nav {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    z-index: 40;
+    padding: 6px 0 env(safe-area-inset-bottom);
+    justify-content: space-around;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+  }
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 4px 8px;
+    font-size: 10px;
+    color: var(--text3);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.15s;
+    min-width: 56px;
+  }
+  .mobile-nav-item .nav-icon { font-size: 20px; }
+  .mobile-nav-item.active { color: var(--red); }
+  .mobile-nav-item:active { background: var(--surface2); }
+
+  /* ── 為底部導覽列留空間 ── */
+  .main { padding-bottom: 60px; }
+  .total-bar { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+}
+
+/* 手機上隱藏的元素（預設隱藏） */
+.fab-nav { display: none; }
+.mobile-nav { display: none; }
+</style>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<!-- js-sha256：支援 file:// 環境，取代 crypto.subtle -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">&#9889;</div>
+    <div>
+      <div class="topbar h1" style="font-size:16px;font-weight:600;letter-spacing:.05em">台灣電力公司｜台東區營業處</div>
+      <div class="topbar-sub">電纜失竊調查暨損失計算系統</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div id="clock"></div>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:2px">
+      <button id="btn-no-theft-top" onclick="openNoTheftManual()" style="display:none;font-size:10px;padding:2px 10px;border-radius:10px;font-weight:600;letter-spacing:.03em;background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.45);cursor:pointer;white-space:nowrap">📋 無失竊案件</button>
+      <div id="sync-badge" style="display:none;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;letter-spacing:.03em"></div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('checklist')">✅ 報損自主檢核表</div>
+  <div class="tab" onclick="switchTab('form')">📋 失竊調查填寫</div>
+  <div class="tab" onclick="switchTab('price')">💰 導線價格資料庫</div>
+  <div class="tab" onclick="switchTab('units')">🏢 服務所管理</div>
+  <div class="tab" onclick="switchTab('records')">📁 填報歷史</div>
+  <div class="tab" onclick="switchTab('help')">📌 使用說明</div>
+  <div class="tab" onclick="switchTab('history')">📜 修訂歷史</div>
+</div>
+
+<div class="main">
+<div class="sidebar">
+  <div class="sb-title">填寫區塊</div>
+  <div class="sb-item" onclick="switchTab('checklist')"><span class="icon">✅</span>報損檢核表</div>
+  <div class="sb-item" onclick="goSec('sec-basic')"><span class="icon">📍</span>基本資訊</div>
+  <div class="sb-item" onclick="goSec('sec-case')"><span class="icon">📁</span>案件資訊</div>
+  <div class="sb-item" onclick="goSec('sec-line')"><span class="icon">🔌</span>線路材料</div>
+  <div class="sb-item" onclick="goSec('sec-svc')"><span class="icon">🏠</span>接戶線</div>
+  <div class="sb-item" onclick="goSec('sec-meter')"><span class="icon">🔢</span>電表</div>
+  <div class="sb-item" onclick="goSec('sec-restore')"><span class="icon">🔧</span>復舊材料</div>
+  <div class="sb-item" onclick="goSec('sec-labor')"><span class="icon">👷</span>處理費用</div>
+  <div class="sb-title" style="margin-top:10px">快速操作</div>
+  <div class="sb-item" onclick="switchTab('price')"><span class="icon">💰</span>更新導線價格</div>
+  <div class="sb-item" onclick="switchTab('units')"><span class="icon">🏢</span>管理服務所</div>
+  <div class="sb-item" onclick="doPrint()"><span class="icon">🖨</span>列印報告</div>
+  <div class="sb-item" onclick="clearForm()"><span class="icon">🗑</span>清除重填</div>
+</div>
+
+<div class="content">
+
+<!-- 報損自主檢核表頁 -->
+<div class="page active" id="page-checklist">
+<div class="page-hdr">
+  <div><div class="page-title">固定資產配電設備意外報損作業自主檢核表</div>
+  <div class="page-sub">得知失竊發生後第一步驟先確認此表 ｜ 禁止用電子檔直接打勾確認，請列印後手動勾選</div></div>
+  <button class="btn btn-primary btn-sm no-print" onclick="printChecklist()">🖨 列印檢核表</button>
+</div>
+<div id="checklist-print-area">
+<div class="card">
+  <div style="text-align:center;margin-bottom:4px">
+    <div style="font-size:16px;font-weight:700">固定資產配電設備意外報損作業自主檢核表</div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <div style="font-size:13px">資產報損單E表單單號：<input class="fi" style="width:200px;display:inline-block" id="cl-form-no"></div>
+    <div style="font-size:11px;color:var(--text3)">104.04.21訂定</div>
+  </div>
+  <div style="background:var(--amber-light);border:1px solid #e8d090;border-radius:6px;padding:8px 14px;margin-bottom:16px;font-size:12px;color:var(--amber)">
+    ⚠️ 請依序打勾確認（禁止用電子檔直接打勾確認）
+  </div>
+
+  <!-- 電力線路失竊現場調查報告表 -->
+  <div style="font-weight:700;font-size:14px;border-left:4px solid var(--blue);padding-left:10px;margin-bottom:10px;color:var(--blue)">
+    電力(訊)線路失竊現場調查報告表
+  </div>
+  <table style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead><tr style="background:var(--surface2)">
+      <th style="width:40px;padding:6px 8px;border-bottom:2px solid var(--border);text-align:center">項次</th>
+      <th style="padding:6px 8px;border-bottom:2px solid var(--border);text-align:left">檢核內容</th>
+      <th style="width:40px;padding:6px 8px;border-bottom:2px solid var(--border);text-align:center">確認</th>
+    </tr></thead>
+    <tbody id="cl-line-items"></tbody>
+  </table>
+
+  <!-- 計量設備報損佐證表 -->
+  <div style="font-weight:700;font-size:14px;border-left:4px solid var(--blue);padding-left:10px;margin:18px 0 10px;color:var(--blue)">
+    計量設備報損（廢）佐證表
+  </div>
+  <table style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead><tr style="background:var(--surface2)">
+      <th style="width:40px;padding:6px 8px;border-bottom:2px solid var(--border);text-align:center">項次</th>
+      <th style="padding:6px 8px;border-bottom:2px solid var(--border);text-align:left">檢核內容</th>
+      <th style="width:40px;padding:6px 8px;border-bottom:2px solid var(--border);text-align:center">確認</th>
+    </tr></thead>
+    <tbody id="cl-meter-items"></tbody>
+  </table>
+
+  <!-- 資產報損單 -->
+  <div style="font-weight:700;font-size:14px;border-left:4px solid var(--blue);padding-left:10px;margin:18px 0 10px;color:var(--blue)">
+    資產報損單
+  </div>
+  <table style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead><tr style="background:var(--surface2)">
+      <th style="width:40px;padding:6px 8px;border-bottom:2px solid var(--border);text-align:center">項次</th>
+      <th style="padding:6px 8px;border-bottom:2px solid var(--border);text-align:left">檢核內容</th>
+      <th style="width:40px;padding:6px 8px;border-bottom:2px solid var(--border);text-align:center">確認</th>
+    </tr></thead>
+    <tbody id="cl-asset-items"></tbody>
+  </table>
+
+  <!-- 備註 -->
+  <div style="margin-top:16px;padding:12px;background:var(--surface2);border-radius:var(--r);font-size:12px;color:var(--text2);line-height:1.7">
+    <b>備註1：</b>本表依本處常見缺失訂定，日後依執行成效不定期修正公告周知。<br>
+    <b>備註2：</b>本表採1案1檢查表（1張電力線路失竊現場調查報告表或計量設備報損（廢）佐證表就要1張檢查表）。<br>
+    <b>備註3：</b>本表由發現部門（巡修班、服務所、服務中心等）作自主檢查用，陳核後送回原填報人存查。
+  </div>
+
+  <!-- 簽名 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+    <div style="padding:8px 0">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px">使用（會核部門）</div>
+      <div style="display:flex;gap:24px;font-size:13px">
+        <span>填報人：<span style="border-bottom:1px solid var(--border);display:inline-block;width:80px"></span></span>
+        <span>課長（所長、主任）：<span style="border-bottom:1px solid var(--border);display:inline-block;width:80px"></span></span>
+        <span>經理：<span style="border-bottom:1px solid var(--border);display:inline-block;width:80px"></span></span>
+      </div>
+    </div>
+    <div style="padding:8px 0">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px">經管部門</div>
+      <div style="display:flex;gap:24px;font-size:13px">
+        <span>經辦：<span style="border-bottom:1px solid var(--border);display:inline-block;width:80px"></span></span>
+        <span>課長：<span style="border-bottom:1px solid var(--border);display:inline-block;width:80px"></span></span>
+        <span>經理</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div><!-- /page-checklist -->
+
+<!-- 填寫頁 -->
+<div class="page" id="page-form">
+<div id="sec-basic">
+<input type="hidden" id="current-doc-id" value="">
+<div class="card">
+  <div class="card-title"><div class="card-title-left"><div class="dot"></div>基本資訊</div></div>
+  <div class="grid3" style="margin-bottom:14px">
+    <div class="fg"><label class="fl">經營線路單位<span class="req">*</span></label>
+      <select class="fs" id="unit" onchange="onUnitChange()"><option value="">請選擇…</option></select></div>
+    <div class="fg"><label class="fl">服務所地址</label>
+      <input class="fi" id="unit-addr" readonly placeholder="選擇後自動帶入"></div>
+    <div class="fg"><label class="fl">服務所電話</label>
+      <input class="fi" id="unit-tel" readonly placeholder="自動帶入"></div>
+  </div>
+  <div class="grid4">
+    <div class="fg"><label class="fl">通報日期<span class="req">*</span></label>
+      <input class="fi" type="date" id="report-date"></div>
+    <div class="fg"><label class="fl">發現失竊時間<span class="req">*</span></label>
+      <input class="fi" type="time" id="theft-time"></div>
+    <div class="fg"><label class="fl">通報人<span class="req">*</span></label>
+      <input class="fi" id="reporter" placeholder="填入姓名" lang="zh-TW" inputmode="text" style="ime-mode:active" onfocus="this.setAttribute('lang','zh-TW')"></div>
+    <div class="fg"><label class="fl">停電時間（小時）</label>
+      <input class="fi" type="number" id="outage-hrs" min="0" step="0.5" placeholder="0"></div>
+  </div>
+</div>
+</div>
+
+<div id="sec-case">
+<div class="card">
+  <div class="card-title"><div class="card-title-left"><div class="dot"></div>案件資訊</div></div>
+  <div class="grid2" style="margin-bottom:14px">
+    <div class="fg"><label class="fl">失竊地點（詳細地址）<span class="req">*</span></label>
+      <input class="fi" id="location1" placeholder="例：台東市吉林路二段407巷" lang="zh-TW" inputmode="text" style="ime-mode:active" onfocus="this.setAttribute('lang','zh-TW')"></div>
+    <div class="fg"><label class="fl">桿號範圍</label>
+      <input class="fi" id="location2" placeholder="例：R2241AC24～R2241AD77"></div>
+  </div>
+  <div class="grid3" style="margin-bottom:14px">
+    <div class="fg"><label class="fl">線路名稱（變電所）</label>
+      <div style="display:flex;gap:6px">
+        <select class="fs" id="line-name" style="flex:1">
+          <option value="">請選擇…</option>
+          <option>池上D/S</option><option>關山S/S</option><option>鹿野D/S</option>
+          <option>台東P/S</option><option>重安S/S</option><option>東成D/S</option>
+          <option>東河S/S</option><option>馬蘭D/S</option><option>豐里D/S</option>
+          <option>知本D/S</option><option>太麻變電所</option><option>大武D/S</option>
+        </select>
+        <button class="btn btn-secondary btn-xs" onclick="addDropdownOption('line-name')" title="新增選項">＋</button>
+        <button class="btn btn-danger btn-xs" onclick="delDropdownOption('line-name')" title="刪除選取項目">－</button>
+      </div>
+    </div>
+    <div class="fg"><label class="fl">饋線名稱</label>
+      <div style="display:flex;gap:6px">
+        <select class="fs" id="feeder" style="flex:1">
+          <option value="">請選擇…</option>
+          <option>鹿野</option><option>知本</option><option>大武</option>
+          <option>東河</option><option>馬蘭</option><option>初鹿</option>
+          <option>利嘉</option><option>都蘭</option><option>富岡</option>
+        </select>
+        <button class="btn btn-secondary btn-xs" onclick="addDropdownOption('feeder')" title="新增選項">＋</button>
+        <button class="btn btn-danger btn-xs" onclick="delDropdownOption('feeder')" title="刪除選取項目">－</button>
+      </div>
+    </div>
+    <div class="fg"><label class="fl">管轄警察分駐所</label>
+      <div style="display:flex;gap:6px">
+        <select class="fs" id="police" style="flex:1">
+          <option value="">請選擇…</option>
+          <option>土坂</option><option>太麻里</option><option>台板</option><option>正興</option>
+          <option>多良</option><option>尚武</option><option>金峰</option><option>金崙</option>
+          <option>美和</option><option>森永</option><option>新化</option><option>達仁</option>
+          <option>歷坵</option><option>大武</option><option>關山</option><option>加南</option>
+          <option>鹿野</option><option>瑞豐</option><option>瑞源</option><option>池上</option>
+          <option>錦安</option><option>向陽</option><option>利稻</option><option>海端</option>
+          <option>初來</option><option>崁頂</option><option>龍泉</option><option>霧鹿</option>
+          <option>延平</option><option>武陵</option><option>紅葉</option><option>鸞山</option>
+          <option>中興</option><option>綠島</option><option>永樂</option><option>卑南</option>
+          <option>知本</option><option>南王</option><option>馬蘭</option><option>富岡</option>
+          <option>豐里</option><option>蘭嶼</option><option>建蘭</option><option>新豐</option>
+          <option>東河</option><option>都蘭</option><option>泰源</option><option>都歷</option>
+          <option>忠孝</option><option>寧埔</option><option>竹湖</option><option>長濱</option>
+          <option>三間</option><option>樟原</option><option>利嘉</option>
+        </select>
+        <button class="btn btn-secondary btn-xs" onclick="addDropdownOption('police')" title="新增選項">＋</button>
+        <button class="btn btn-danger btn-xs" onclick="delDropdownOption('police')" title="刪除選取項目">－</button>
+      </div>
+    </div>
+  </div>
+  <div class="grid4">
+    <div class="fg"><label class="fl">刑事報案三聯單編號</label>
+      <input class="fi" id="case-no" placeholder="報案後填入"></div>
+    <div class="fg"><label class="fl">停電戶數（戶）</label>
+      <input class="fi" type="number" id="outage-homes" min="0" placeholder="0" oninput="calcAll()"></div>
+    <div class="fg"><label class="fl">影響產值（元）</label>
+      <input class="fi" type="number" id="impact-value" min="0" placeholder="0" oninput="calcAll()"></div>
+    <div class="fg"><label class="fl">現場照片（張）</label>
+      <input class="fi" type="number" id="photos" min="0" placeholder="0"></div>
+  </div>
+  <div style="margin-top:14px"><div class="fg"><label class="fl">備註（可選預設或自行輸入）</label>
+    <div style="display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap">
+      <button class="btn btn-secondary btn-xs" onclick="setRemarks(this.textContent)">造成用戶無電及路燈不亮，影響用電權益。</button>
+      <button class="btn btn-secondary btn-xs" onclick="setRemarks(this.textContent)">造成路燈不亮，不但嚴重影響交通安全且易引發治安問題。</button>
+      <button class="btn btn-secondary btn-xs" onclick="setRemarks(this.textContent)">造成交通號誌不亮，易生車禍，致生死傷。</button>
+      <button class="btn btn-secondary btn-xs" onclick="setRemarks(this.textContent)">造成電纜線斷線垂落，易造成交通意外及感電傷害。</button>
+      <button class="btn btn-secondary btn-xs" onclick="setRemarks(this.textContent)">造成農作物無從灌溉，致作物枯萎或產量減少。</button>
+      <button class="btn btn-secondary btn-xs" onclick="setRemarks(this.textContent)">造成養殖池魚蝦大量死亡，嚴重影響養殖戶之生計。</button>
+      <button class="btn btn-secondary btn-xs" onclick="setRemarks(this.textContent)">造成醫院停電，影響手術及其他急救行動，危及病人生命安全。</button>
+      <button class="btn btn-secondary btn-xs" onclick="setRemarks(this.textContent)">造成畜牧業者無法正常飬養牲畜，致其產能減少。</button>
+    </div>
+    <textarea class="fta" id="remarks" placeholder="或自行輸入備註…"></textarea>
+  </div>
+  </div>
+</div>
+</div>
+
+<div id="sec-line">
+<div class="card">
+  <div class="card-title">
+    <div class="card-title-left"><div class="dot"></div>B-1 損失材料 — 線路電纜</div>
+    <button class="btn btn-secondary btn-sm" onclick="addLossRow('line')">＋ 新增導線</button>
+  </div>
+  <table class="etable"><thead><tr>
+    <th style="width:34%">導線規範</th><th style="width:10%">數量(M)</th>
+    <th style="width:14%">重量(kg)</th><th style="width:12%">單價(元/M)</th>
+    <th style="width:14%">損失金額(元)</th><th style="width:10%">工作積點</th>
+    <th style="width:6%">刪除</th>
+  </tr></thead>
+  <tbody id="line-tbody"><tr id="line-empty-row"><td colspan="7" style="text-align:center;padding:14px;color:var(--text3);font-size:13px">按「＋ 新增導線」選擇失竊的導線材料</td></tr></tbody>
+  <tfoot><tr>
+    <td colspan="2">合計</td>
+    <td class="num" id="line-wt-total">—</td><td></td>
+    <td class="num" id="line-loss-total" style="color:var(--red)">—</td>
+    <td class="num" id="line-pts-total">—</td>
+    <td></td>
+  </tr></tfoot></table>
+</div>
+</div>
+
+<div id="sec-svc">
+<div class="card">
+  <div class="card-title">
+    <div class="card-title-left"><div class="dot"></div>B-1 損失材料 — 接戶線</div>
+    <button class="btn btn-secondary btn-sm" onclick="addLossRow('svc')">＋ 新增接戶線</button>
+  </div>
+  <table class="etable"><thead><tr>
+    <th style="width:34%">導線規範</th><th style="width:10%">數量(M)</th>
+    <th style="width:14%">重量(kg)</th><th style="width:12%">單價(元/M)</th>
+    <th style="width:14%">損失金額(元)</th><th style="width:10%">工作積點</th>
+    <th style="width:6%">刪除</th>
+  </tr></thead>
+  <tbody id="svc-tbody"><tr id="svc-empty-row"><td colspan="7" style="text-align:center;padding:14px;color:var(--text3);font-size:13px">按「＋ 新增接戶線」選擇失竊的接戶線材料</td></tr></tbody>
+  <tfoot><tr>
+    <td colspan="2">合計</td>
+    <td class="num" id="svc-wt-total">—</td><td></td>
+    <td class="num" id="svc-loss-total" style="color:var(--red)">—</td>
+    <td class="num" id="svc-pts-total">—</td>
+    <td></td>
+  </tr></tfoot></table>
+</div>
+</div>
+
+<div id="sec-meter">
+<div class="card">
+  <div class="card-title">
+    <div class="card-title-left"><div class="dot"></div>B-1 損失材料 — 電表 / 比流器</div>
+    <button class="btn btn-secondary btn-sm" onclick="addMeterRow()">＋ 新增電表</button>
+  </div>
+  <table class="etable"><thead><tr>
+    <th style="width:40%">器材別</th><th style="width:10%">數量(具)</th>
+    <th style="width:16%">單價(元/具)</th><th style="width:18%">損失金額(元)</th>
+    <th style="width:16%">刪除</th>
+  </tr></thead>
+  <tbody id="meter-tbody">
+    <tr id="meter-empty-row"><td colspan="5" style="text-align:center;padding:14px;color:var(--text3);font-size:13px">按「＋ 新增電表」選擇失竊的電表器材</td></tr>
+  </tbody>
+  <tfoot><tr>
+    <td colspan="2">合計</td><td></td>
+    <td class="num" id="meter-loss-total" style="color:var(--red)">—</td><td></td>
+  </tr></tfoot></table>
+</div>
+</div>
+
+<div id="sec-restore">
+<div class="card">
+  <div class="card-title">
+    <div class="card-title-left"><div class="dot"></div>B-2 復舊材料</div>
+    <button class="btn btn-secondary btn-sm" onclick="addLossRow('rst')">＋ 新增復舊材料</button>
+  </div>
+  <table class="etable"><thead><tr>
+    <th style="width:34%">導線規範</th><th style="width:10%">數量(M)</th>
+    <th style="width:14%">重量(kg)</th><th style="width:12%">單價(元/M)</th>
+    <th style="width:14%">裝設金額(元)</th><th style="width:10%">工作積點</th>
+    <th style="width:6%">刪除</th>
+  </tr></thead>
+  <tbody id="restore-tbody"><tr id="rst-empty-row"><td colspan="7" style="text-align:center;padding:14px;color:var(--text3);font-size:13px">按「＋ 新增復舊材料」選擇復舊導線</td></tr></tbody>
+  <tfoot><tr>
+    <td colspan="2">合計</td>
+    <td class="num" id="rst-wt-total">—</td><td></td>
+    <td class="num" id="rst-cost-total" style="color:var(--green)">—</td>
+    <td class="num" id="rst-pts-total">—</td>
+    <td></td>
+  </tr></tfoot></table>
+</div>
+</div>
+
+<div id="sec-labor">
+<div class="card">
+  <div class="card-title"><div class="card-title-left"><div class="dot"></div>A 勘查處理費</div></div>
+  <div class="grid3">
+    <div class="fg"><label class="fl">薪資／小時（元）</label>
+      <input class="fi" type="number" id="wage" value="250" oninput="calcAll()"></div>
+    <div class="fg"><label class="fl">處理時數（小時）</label>
+      <input class="fi" type="number" id="labor-hrs" value="4" oninput="calcAll()"></div>
+    <div class="fg"><label class="fl">處理費用（自動計算）</label>
+      <input class="fi" id="labor-cost" readonly style="font-weight:700;color:var(--red)"></div>
+  </div>
+</div>
+</div>
+</div><!-- /page-form -->
+
+<!-- 價格資料庫頁 -->
+<div class="page" id="page-price">
+<div class="page-hdr">
+  <div><div class="page-title">導線價格資料庫</div>
+  <div class="page-sub" id="price-page-sub">資料來自 Google 試算表（共用），如需更新請至試算表修改後按「重新同步」。</div></div>
+  <div style="display:flex;gap:8px">
+    <button class="btn btn-green" onclick="openSheetsEdit()">📝 編輯導線價格表</button>
+    <button class="btn btn-blue" onclick="openNDCIS()">🔗 開啟 NDCIS</button>
+    <button class="btn btn-secondary" onclick="manualSync()" id="btn-sync">🔄 重新同步</button>
+  </div>
+</div>
+<div class="ndcis-panel">
+  <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:10px">🔗 NDCIS 查詢步驟（組件代號查詢 IQRP_020030）</div>
+  <div class="ndcis-steps">
+    <div class="ndcis-step"><div class="step-num">1</div><div class="step-text">按「開啟NDCIS」Chrome登入</div></div>
+    <div class="ndcis-step"><div class="step-num">2</div><div class="step-text">上方「綜合查詢作業」</div></div>
+    <div class="ndcis-step"><div class="step-num">3</div><div class="step-text">左側「組件代號查詢IQRP_020030」</div></div>
+    <div class="ndcis-step"><div class="step-num">4</div><div class="step-text">右上輸入代號按「篩選資料」</div></div>
+    <div class="ndcis-step"><div class="step-num">5</div><div class="step-text">看到單價回此頁更新儲存</div></div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-title-left"><div class="dot"></div>線路電纜（sheet100）</div>
+  </div>
+  <table class="ptable"><thead><tr>
+    <th style="width:34%">導線規範名稱</th><th style="width:11%">組件代號</th>
+    <th style="width:11%">重量(kg/M)</th><th style="width:11%">單價(元/M)</th>
+    <th style="width:9%">積點/M</th><th style="width:8%">加乘</th>
+    <th style="width:16%">更新日期</th>
+  </tr></thead><tbody id="price-line-tbody"></tbody></table>
+</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-title-left"><div class="dot"></div>接戶線（sheet200）</div>
+  </div>
+  <table class="ptable"><thead><tr>
+    <th style="width:34%">導線規範名稱</th><th style="width:11%">組件代號</th>
+    <th style="width:11%">重量(kg/M)</th><th style="width:11%">單價(元/M)</th>
+    <th style="width:9%">積點/M</th><th style="width:8%">加乘</th>
+    <th style="width:16%">更新日期</th>
+  </tr></thead><tbody id="price-svc-tbody"></tbody></table>
+</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-title-left"><div class="dot"></div>電表 / 比流器（sheet300）</div>
+  </div>
+  <table class="ptable"><thead><tr>
+    <th style="width:38%">器材別名稱</th><th style="width:14%">組件代號</th>
+    <th style="width:16%">單價(元/具)</th><th style="width:11%">積點</th>
+    <th style="width:9%">加乘</th><th style="width:12%">更新日期</th>
+  </tr></thead><tbody id="price-meter-tbody"></tbody></table>
+</div>
+</div><!-- /page-price -->
+
+<!-- 服務所管理頁 -->
+<div class="page" id="page-units">
+<div class="page-hdr">
+  <div><div class="page-title">服務所管理</div>
+  <div class="page-sub">新增、編輯、刪除服務所，儲存後填表頁下拉選單自動更新。</div></div>
+  <div style="display:flex;gap:8px">
+    <button class="btn btn-primary" onclick="addUnitRow()">＋ 新增服務所</button>
+    <button class="btn btn-green" onclick="saveUnits()">💾 儲存服務所資料</button>
+  </div>
+</div>
+<div class="card">
+  <table class="ptable"><thead><tr>
+    <th style="width:20%">服務所名稱</th><th style="width:40%">地址</th>
+    <th style="width:22%">電話</th><th style="width:12%">操作</th>
+  </tr></thead><tbody id="units-tbody"></tbody></table>
+</div>
+</div><!-- /page-units -->
+
+<!-- 填報歷史頁 -->
+<div class="page" id="page-records">
+<style>
+.rec-badge{display:inline-flex;align-items:center;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.04em;}
+.rec-badge.draft{background:#fef3cd;color:#b45309;}
+.rec-badge.printed{background:#d1fae5;color:#065f46;}
+.rec-card{background:#fff;border-radius:10px;border:1px solid #e8edf3;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:14px;overflow:hidden;}
+.rec-card-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #f0f0f0;gap:10px;flex-wrap:wrap;}
+.rec-card-title{font-size:14px;font-weight:700;color:#1a2a3a;}
+.rec-card-meta{font-size:12px;color:#9aa5b4;}
+.rec-card-body{padding:12px 16px;font-size:13px;color:#4a5568;line-height:1.8;}
+.rec-card-photos{padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:6px;}
+.rec-photo-thumb{width:72px;height:72px;object-fit:cover;border-radius:6px;cursor:pointer;border:1px solid #e8edf3;}
+.rec-card-footer{display:flex;gap:8px;padding:10px 16px;background:#f9fafb;border-top:1px solid #f0f0f0;flex-wrap:wrap;}
+.rec-empty{text-align:center;padding:48px 20px;color:#9aa5b4;}
+.rec-empty-icon{font-size:48px;margin-bottom:12px;}
+/* 折疊卡片 */
+.rec-card-body{padding:12px 16px;font-size:13px;color:#4a5568;line-height:1.8;transition:all .2s;}
+.rec-card-body.collapsed,.rec-card-footer.collapsed{display:none;}
+.rec-collapse-btn{background:none;border:none;cursor:pointer;padding:4px 8px;font-size:16px;color:#9aa5b4;transition:transform .2s;line-height:1;}
+.rec-collapse-btn.open{transform:rotate(180deg);}
+/* 編輯 Modal */
+.edit-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9998;align-items:center;justify-content:center;}
+.edit-overlay.show{display:flex;}
+.edit-box{background:#fff;border-radius:14px;padding:28px 24px;width:min(480px,96vw);max-height:90vh;overflow-y:auto;}
+.edit-box-title{font-size:16px;font-weight:700;margin-bottom:16px;color:#1a2a3a;display:flex;align-items:center;gap:8px;}
+.edit-fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.edit-fl{font-size:12px;font-weight:600;color:#5a534a;}
+.edit-fi{width:100%;padding:8px 11px;border:1px solid #d8d2c6;border-radius:8px;font-size:13px;font-family:inherit;outline:none;}
+.edit-fi:focus{border-color:#c0392b;box-shadow:0 0 0 3px rgba(192,57,43,.1);}
+.edit-fta{resize:vertical;min-height:56px;}
+/* 未儲存提醒 Toast */
+.unsaved-toast{display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1a2a3a;color:#fff;padding:10px 20px;border-radius:24px;font-size:13px;font-weight:500;z-index:9990;box-shadow:0 4px 20px rgba(0,0,0,.3);white-space:nowrap;gap:12px;align-items:center;}
+.unsaved-toast.show{display:flex;}
+/* 離開提醒 Modal */
+.leave-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9997;align-items:center;justify-content:center;}
+.leave-overlay.show{display:flex;}
+.leave-box{background:#fff;border-radius:14px;padding:28px 24px;width:min(360px,94vw);text-align:center;}
+/* PIN modal */
+.pin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;}
+.pin-overlay.show{display:flex;}
+.pin-box{background:#fff;border-radius:14px;padding:28px 24px;width:300px;text-align:center;}
+.pin-title{font-size:16px;font-weight:700;margin-bottom:6px;}
+.pin-sub{font-size:13px;color:#9aa5b4;margin-bottom:16px;}
+.pin-input{font-size:22px;text-align:center;letter-spacing:.3em;width:100%;padding:10px;border:2px solid #e0e0e0;border-radius:8px;outline:none;}
+.pin-input:focus{border-color:#2563a8;}
+.pin-error{font-size:12px;color:#c0392b;margin-top:6px;min-height:18px;}
+/* 照片燈箱 */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;align-items:center;justify-content:center;flex-direction:column;}
+.lightbox.show{display:flex;}
+.lightbox img{max-width:94vw;max-height:82vh;border-radius:8px;}
+.lightbox-close{position:absolute;top:16px;right:20px;color:#fff;font-size:28px;cursor:pointer;line-height:1;}
+.lightbox-caption{color:#ccc;font-size:13px;margin-top:10px;}
+</style>
+
+<div class="page-hdr">
+  <div>
+    <div class="page-title">📁 填報歷史</div>
+    <div class="page-sub">暫存或列印後的紀錄，所有人均可查看。</div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <select class="fs" id="rec-year" onchange="loadRecords()" style="width:90px;font-size:13px">
+      <option value="all">全部年份</option>
+    </select>
+    <select class="fs" id="rec-month" onchange="loadRecords()" style="width:90px;font-size:13px">
+      <option value="all">全部月份</option>
+      <option value="1">1 月</option><option value="2">2 月</option><option value="3">3 月</option>
+      <option value="4">4 月</option><option value="5">5 月</option><option value="6">6 月</option>
+      <option value="7">7 月</option><option value="8">8 月</option><option value="9">9 月</option>
+      <option value="10">10 月</option><option value="11">11 月</option><option value="12">12 月</option>
+    </select>
+    <select class="fs" id="rec-filter" onchange="loadRecords()" style="width:110px;font-size:13px">
+      <option value="all">全部狀態</option>
+      <option value="draft">暫存草稿</option>
+      <option value="done">已完成</option>
+      <option value="no_theft">無失竊案件</option>
+    </select>
+    <button class="btn btn-secondary btn-sm" onclick="loadRecords()">🔄 重新整理</button>
+  </div>
+</div>
+
+<div id="rec-list"><div class="rec-empty"><div class="rec-empty-icon">📭</div><div>載入中…</div></div></div>
+</div><!-- /page-records -->
+
+<!-- 修訂歷史頁 -->
+<div class="page" id="page-history">
+<style>
+.hist-hero{background:linear-gradient(135deg,#2d3748 0%,#4a5568 100%);border-radius:14px;padding:32px;color:#fff;margin-bottom:24px;position:relative;overflow:hidden;}
+.hist-hero::before{content:'📜';position:absolute;right:24px;top:12px;font-size:68px;opacity:.1;line-height:1;}
+.hist-hero-title{font-size:19px;font-weight:700;letter-spacing:.06em;margin-bottom:5px;}
+.hist-hero-sub{font-size:13px;opacity:.75;}
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#3b82f6,#8b5cf6,#ec4899,#f59e0b);}
+.tl-item{position:relative;margin-bottom:28px;}
+.tl-dot{position:absolute;left:-27px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px currentColor;flex-shrink:0;}
+.tl-item.v1 .tl-dot{background:#3b82f6;color:#3b82f6;}
+.tl-item.v2 .tl-dot{background:#8b5cf6;color:#8b5cf6;}
+.tl-item.v3 .tl-dot{background:#10b981;color:#10b981;}
+.tl-item.v4 .tl-dot{background:#f59e0b;color:#f59e0b;}
+.tl-item.v5 .tl-dot{background:#ef4444;color:#ef4444;}
+.tl-item.v6 .tl-dot{background:#ec4899;color:#ec4899;}
+.tl-card{background:#fff;border-radius:10px;padding:16px 18px;box-shadow:0 2px 10px rgba(0,0,0,.07);border:1px solid #e8edf3;}
+.tl-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+.tl-version{font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;letter-spacing:.05em;}
+.tl-item.v1 .tl-version{background:#dbeafe;color:#1d4ed8;}
+.tl-item.v2 .tl-version{background:#ede9fe;color:#6d28d9;}
+.tl-item.v3 .tl-version{background:#d1fae5;color:#065f46;}
+.tl-item.v4 .tl-version{background:#fef3cd;color:#b45309;}
+.tl-item.v5 .tl-version{background:#fee2e2;color:#991b1b;}
+.tl-item.v6 .tl-version{background:#fce7f3;color:#9d174d;}
+.tl-date{font-size:12px;color:#9aa5b4;}
+.tl-title{font-size:14px;font-weight:700;color:#1a2a3a;}
+.tl-body{font-size:12.5px;color:#4a5568;line-height:1.7;margin-top:6px;}
+.tl-body li{margin-bottom:3px;}
+.tl-body ul{margin:4px 0 0 16px;padding:0;}
+.tl-tag{display:inline-block;font-size:10px;padding:1px 7px;border-radius:8px;margin-left:6px;vertical-align:middle;}
+.tag-new{background:#d1fae5;color:#065f46;}
+.tag-fix{background:#fee2e2;color:#991b1b;}
+.tag-change{background:#fef3cd;color:#b45309;}
+.hist-footer{text-align:center;font-size:11px;color:#b0bac8;margin-top:16px;padding-bottom:8px;}
+</style>
+<div class="hist-hero">
+  <div class="hist-hero-title">📜 系統修訂歷史</div>
+  <div class="hist-hero-sub">台東區營業處　電纜失竊調查暨損失計算系統　開發與修訂紀錄</div>
+</div>
+
+<div class="card">
+<div class="timeline">
+
+  <div class="tl-item v1">
+    <div class="tl-dot"></div>
+    <div class="tl-card">
+      <div class="tl-header">
+        <span class="tl-version">v1.0 初版</span>
+        <span class="tl-date">2026年初</span>
+        <span class="tl-title">原始 Excel 系統</span>
+      </div>
+      <div class="tl-body">
+        原始版本以 Excel 試算表為主要填報工具，作業流程由人工計算損失金額，表單格式固定不易調整，且無法在手機上便利操作。
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item v2">
+    <div class="tl-dot"></div>
+    <div class="tl-card">
+      <div class="tl-header">
+        <span class="tl-version">v2.0 HTML 化</span>
+        <span class="tl-date">2026年初</span>
+        <span class="tl-title">轉換為單一 HTML 網頁應用程式</span>
+      </div>
+      <div class="tl-body">
+        由線路課委託 AI Claude 協助，將 Excel 工作流程重新設計為單一 HTML 檔案，支援電腦與手機雙平台。主要功能包含：
+        <ul>
+          <li>四大分頁：自主檢核表、失竊調查填寫、導線價格資料庫、服務所管理</li>
+          <li>自動計算損失金額、損失材料合計、交通費</li>
+          <li>導線品名下拉選單、變電所/饋線/轄區警局管理</li>
+          <li>localStorage 本機資料儲存</li>
+          <li>手機響應式設計（底部導覽列、iOS 縮放防止）</li>
+          <li>列印輸出：現場調查、計算表、附件資料、登記表四大區塊</li>
+          <li>PDF 檔名自動產生（依填報資訊命名）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item v3">
+    <div class="tl-dot"></div>
+    <div class="tl-card">
+      <div class="tl-header">
+        <span class="tl-version">v2.1</span>
+        <span class="tl-date">2026年初</span>
+        <span class="tl-title">列印優化與 UI 細節調整</span>
+      </div>
+      <div class="tl-body">
+        針對實際列印輸出進行多次修訂：
+        <ul>
+          <li>解決列印時出現空白首頁的問題</li>
+          <li>字型統一為 PMingLiU／新細明體</li>
+          <li>自主檢核表列印視窗排除手機導覽元素</li>
+          <li>標題、簽名欄、章節標頭、出差費率、時間格式等排版細化</li>
+          <li>新增登入圖示（藍底白燈泡）</li>
+          <li>迴路名稱左至右快選槽（最多三組）</li>
+          <li>Android GPS 與相機權限提示</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item v4">
+    <div class="tl-dot"></div>
+    <div class="tl-card">
+      <div class="tl-header">
+        <span class="tl-version">v3.0 雲端同步</span>
+        <span class="tl-date">2026年4月</span>
+        <span class="tl-title">導線資料庫改為 Google 試算表共用同步</span>
+      </div>
+      <div class="tl-body">
+        各服務所人員使用私人手機，導線品名資料原本儲存於各自手機本機，造成資料各自獨立無法統一。本版本改以 Google 試算表作為共用資料來源：
+        <ul>
+          <li>新增 <code>SHEETS_CSV_URL</code> 設定常數，填入 Google 試算表 CSV 發布網址即可啟用</li>
+          <li>系統啟動時自動抓取最新導線清單（含四層 CORS proxy fallback 機制）</li>
+          <li>頂部顯示同步狀態徽章（✅ 雲端已同步 / ⚠️ 使用本機快取 / ❌ 同步失敗）</li>
+          <li>新增「🔄 重新同步」按鈕</li>
+          <li>斷線時自動 fallback 至本機快取，不影響填表</li>
+          <li>同步網址已設定為台東區營業處 Google 試算表</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item v5">
+    <div class="tl-dot"></div>
+    <div class="tl-card">
+      <div class="tl-header">
+        <span class="tl-version">v3.1</span>
+        <span class="tl-date">2026年4月</span>
+        <span class="tl-title">導線價格資料庫改為唯讀顯示</span>
+      </div>
+      <div class="tl-body">
+        導線資料統一由管理者維護 Google 試算表，HTML 端不再需要編輯功能：
+        <ul>
+          <li>移除導線價格資料庫的「新增材料」按鈕</li>
+          <li>移除各列「刪除」按鈕</li>
+          <li>移除「💾 儲存所有價格」按鈕（含手機浮動按鈕）</li>
+          <li>資料表格改為純文字唯讀顯示</li>
+          <li>保留「🔗 開啟 NDCIS」與「🔄 重新同步」按鈕</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item v6">
+    <div class="tl-dot"></div>
+    <div class="tl-card">
+      <div class="tl-header">
+        <span class="tl-version">v3.2</span>
+        <span class="tl-date">2026年4月</span>
+        <span class="tl-title">新增使用說明頁與修訂歷史頁</span>
+      </div>
+      <div class="tl-body">
+        為方便日後接手人員了解系統背景，新增兩個資訊分頁：
+        <ul>
+          <li>📌 使用說明：聯絡窗口（線路課巡修主辦）、填表前確認導線價格步驟</li>
+          <li>📜 修訂歷史：記錄系統各版本演進</li>
+          <li>標註系統由 AI Claude（Anthropic）協助製作</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item" style="--dot-color:#0ea5e9">
+    <div class="tl-dot" style="background:#0ea5e9;color:#0ea5e9"></div>
+    <div class="tl-card">
+      <div class="tl-header">
+        <span class="tl-version" style="background:#e0f2fe;color:#0369a1">v3.3</span>
+        <span class="tl-date">2026年4月</span>
+        <span class="tl-title">Firebase Firestore 填報歷史功能</span>
+      </div>
+      <div class="tl-body">
+        引入 Google Firebase Firestore 雲端資料庫，實現填報紀錄跨裝置共用：
+        <ul>
+          <li>新增「📁 填報歷史」分頁，所有服務所人員均可查看所有紀錄</li>
+          <li>表單頁新增「💾 暫存」按鈕，隨時儲存至 Firestore</li>
+          <li>按「🖨 列印」時自動將紀錄存入歷史（狀態：已列印）</li>
+          <li>歷史紀錄支援「📋 載入表單」，可將舊紀錄重新帶回填表頁修改</li>
+          <li>修改與刪除功能受 PIN 碼保護</li>
+          <li>Firebase 專案：taitung-cable-theft（台東區公務帳號管理）</li>
+          <li>Firestore 安全規則設定為永久開放（內部系統，風險可接受）</li>
+          <li>Firebase Storage 需付費，照片上傳功能暫不實作</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item" style="--dot-color:#8b5cf6">
+    <div class="tl-dot" style="background:#8b5cf6;color:#8b5cf6"></div>
+    <div class="tl-card">
+      <div class="tl-header">
+        <span class="tl-version" style="background:#ede9fe;color:#6d28d9">v3.4</span>
+        <span class="tl-date">2026年4月</span>
+        <span class="tl-title">PIN 碼改為 SHA-256 加密儲存</span>
+      </div>
+      <div class="tl-body">
+        原本 PIN 碼以明文存放於 HTML 中，任何人用記事本開啟即可看到。本版改為加密方式：
+        <ul>
+          <li>PIN 碼改以 SHA-256 雜湊值儲存，無法從 HTML 原始碼反推原始密碼</li>
+          <li>使用瀏覽器內建 Web Crypto API 在本機計算雜湊，原始 PIN 不離開裝置</li>
+          <li>任何裝置輸入正確密碼均可通過驗證，跨裝置使用不受影響</li>
+          <li>移除 PIN 輸入框的長度限制（原本限 6 位，實際需輸入 9 位）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item" style="--dot-color:#0d9488">
+    <div class="tl-dot" style="background:#0d9488;color:#0d9488"></div>
+    <div class="tl-card">
+      <div class="tl-header">
+        <span class="tl-version" style="background:#ccfbf1;color:#0f766e">v3.5</span>
+        <span class="tl-date">2026年4月22日</span>
+        <span class="tl-title">填報功能優化與 UI 修正</span>
+      </div>
+      <div class="tl-body">
+        根據實際使用測試，針對多項操作體驗問題進行修正：
+        <ul>
+          <li>修正「經營線路單位」下拉選單在同步期間顯示空白的問題：將 UI 初始化移至雲端同步之前執行，表單開啟即可立即使用，不再需要等待同步完成</li>
+          <li>修正「填報歷史」頁面的修改與刪除按鈕無反應的問題：改用 addEventListener 取代 innerHTML 內的箭頭函數 onclick，解決瀏覽器解析問題</li>
+          <li>修正「載入表單」呼叫 clearForm() 時重複跳出確認視窗的問題：新增 clearFormSilent() 靜默清空函數供程式內部呼叫</li>
+          <li>儲存流程改版：原「列印自動存檔」改為三個獨立按鈕（💾 暫存草稿、✅ 完成送出、🖨 列印），操作更直覺</li>
+          <li>新增頂部「📋 無失竊案件」常駐按鈕，可隨時手動送出無失竊回報，不限每月1~5號才能觸發</li>
+          <li>暫存資料完整性改善：collectFormData() 改存每列損失材料的品名、dbIdx 與數量，loadToForm() 改為完整還原動態列與自訂下拉選項</li>
+          <li>失竊地點、桿號範圍、通報人欄位加入 lang="zh-TW" 屬性，預設切換中文注音輸入法</li>
+          <li>損失材料與電表數量欄位從 value="0" 改為 placeholder="0"，輸入時不需先刪除預設值</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item" style="--dot-color:#0284c7">
+    <div class="tl-dot" style="background:#0284c7;color:#0284c7"></div>
+    <div class="tl-card">
+      <div class="tl-header">
+        <span class="tl-version" style="background:#e0f2fe;color:#0369a1">v3.6 本版</span>
+        <span class="tl-date">2026年4月27日</span>
+        <span class="tl-title">填報歷史 UX 大幅優化</span>
+      </div>
+      <div class="tl-body">
+        針對填報歷史頁面與填寫流程進行四項體驗改善：
+        <ul>
+          <li>修改紀錄改為彈出式 Modal：原本需連續填寫 4 個 prompt 視窗，改為一次顯示完整欄位（通報人、失竊地點、三聯單編號、備註、狀態），操作更直覺且不易被瀏覽器阻擋</li>
+          <li>填報歷史新增年份／月份篩選：可依年份、月份、狀態三個條件組合篩選紀錄，方便查閱特定時期的填報資料；年份選單自動從現有紀錄產生</li>
+          <li>切換分頁未儲存提醒：填寫頁有任何輸入時標記為「未儲存」，底部顯示 Toast 提示；切換至其他分頁時彈出確認 Modal，可選擇繼續填寫或直接離開，防止資料意外遺失</li>
+          <li>填報歷史卡片折疊收合：點擊卡片標頭可折疊/展開內容與按鈕區，清單較多時易於瀏覽；折疊按鈕（▼/▲）顯示目前狀態</li>
+          <li>操作成功訊息改為 Toast 自動消失：暫存、送出、更新紀錄等操作成功後以底部 Toast 顯示，不再跳出 alert 需手動關閉</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /timeline -->
+</div><!-- /card -->
+
+<div class="hist-footer">
+  此系統由台東區營業處線路課委託　AI Claude（Anthropic）協助設計與開發<br>
+  如需修改請洽線路課巡修主辦，並可透過 claude.ai 繼續與 AI 協作調整
+</div>
+</div><!-- /page-history -->
+<div class="page" id="page-help">
+<style>
+.help-hero{background:linear-gradient(135deg,#1a4a7a 0%,#2563a8 60%,#1e7abf 100%);border-radius:14px;padding:36px 32px 30px;color:#fff;margin-bottom:24px;position:relative;overflow:hidden;}
+.help-hero::before{content:'⚡';position:absolute;right:24px;top:16px;font-size:72px;opacity:.12;line-height:1;}
+.help-hero-title{font-size:20px;font-weight:700;letter-spacing:.06em;margin-bottom:6px;}
+.help-hero-sub{font-size:13px;opacity:.82;letter-spacing:.03em;}
+.help-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+@media(max-width:640px){.help-cards{grid-template-columns:1fr;}}
+.help-card{background:#fff;border-radius:12px;padding:24px 22px;box-shadow:0 2px 12px rgba(0,0,0,.07);border:1px solid #e8edf3;position:relative;overflow:hidden;}
+.help-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px;}
+.help-card.blue::before{background:linear-gradient(180deg,#2563a8,#1e7abf);}
+.help-card.orange::before{background:linear-gradient(180deg,#e67e22,#f39c12);}
+.help-card-icon{font-size:28px;margin-bottom:12px;display:block;}
+.help-card-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-size:12px;font-weight:700;margin-right:8px;flex-shrink:0;}
+.help-card.blue .help-card-num{background:#dbeafe;color:#2563a8;}
+.help-card.orange .help-card-num{background:#fef3cd;color:#c0720a;}
+.help-card-title{font-size:15px;font-weight:700;color:#1a2a3a;margin-bottom:10px;display:flex;align-items:center;}
+.help-card-body{font-size:13.5px;color:#4a5568;line-height:1.75;}
+.help-card-body strong{color:#1a2a3a;}
+.help-divider{border:none;border-top:1px solid #e8edf3;margin:6px 0 14px;}
+.help-contact{background:#f0f7ff;border:1px solid #bfd9f2;border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:6px;}
+.help-contact-icon{font-size:22px;flex-shrink:0;}
+.help-contact-text{font-size:13px;color:#2a4a6a;line-height:1.6;}
+.help-contact-text strong{font-size:14px;display:block;margin-bottom:2px;}
+.help-footer{text-align:center;font-size:12px;color:#9aa5b4;margin-top:8px;padding-bottom:8px;}
+</style>
+<div class="help-hero">
+  <div class="help-hero-title">📌 電纜失竊調查系統　使用說明</div>
+  <div class="help-hero-sub">台灣電力公司　台東區營業處　線路課</div>
+</div>
+
+<div class="help-cards">
+  <!-- 卡片一：疑問聯絡 -->
+  <div class="help-card blue">
+    <span class="help-card-icon">📞</span>
+    <div class="help-card-title"><span class="help-card-num blue">1</span>系統使用疑問</div>
+    <hr class="help-divider">
+    <div class="help-card-body">
+      使用本系統填寫失竊調查表時，如遇到<strong>操作問題、欄位不清楚或資料顯示異常</strong>等情形，請電洽：
+    </div>
+    <div class="help-contact">
+      <div class="help-contact-icon">☎️</div>
+      <div class="help-contact-text">
+        <strong>線路課　巡修主辦</strong>
+        如需修改系統功能或調整表單欄位，請說明需求由主辦協助處理。
+      </div>
+    </div>
+  </div>
+
+  <!-- 卡片二：填表注意 -->
+  <div class="help-card orange">
+    <span class="help-card-icon">⚠️</span>
+    <div class="help-card-title"><span class="help-card-num orange">2</span>填寫前注意事項</div>
+    <hr class="help-divider">
+    <div class="help-card-body">
+      發生導線失竊案件，<strong>填寫失竊調查表前請先確認導線價格是否為最新價格</strong>，避免計算金額有誤。<br><br>
+      確認步驟：<br>
+      ① 切換至「💰 導線價格資料庫」頁面<br>
+      ② 按右上角「🔗 開啟 NDCIS」查詢最新單價<br>
+      ③ 若價格有異動，請通知主辦更新試算表<br>
+      ④ 按「🔄 重新同步」取得最新資料後再填表
+    </div>
+  </div>
+</div>
+
+<div class="help-footer">台東區營業處　電纜失竊調查暨損失計算系統　© 台灣電力公司</div>
+<div style="text-align:center;font-size:11px;color:#b0bac8;margin-top:4px;padding-bottom:4px;">
+  此網頁由 <strong style="color:#7a9abf">AI Claude（Anthropic）</strong> 協助製作　如需修改請洽線路課巡修主辦
+</div>
+</div><!-- /page-help -->
+
+</div><!-- /content -->
+</div><!-- /main -->
+
+<div class="total-bar no-print">
+  <div class="totals">
+    <div><div class="t-label">損失材料合計</div><div class="t-value" id="bar-loss">$0</div></div>
+    <div><div class="t-label">修復裝設金額</div><div class="t-value bk" id="bar-restore">$0</div></div>
+    <div><div class="t-label">處理費用</div><div class="t-value bk" id="bar-labor">$0</div></div>
+    <div><div class="t-label">影響產值</div><div class="t-value bk" id="bar-impact">$0</div></div>
+  </div>
+  <div style="display:flex;gap:8px;flex-shrink:0">
+    <button class="btn btn-secondary btn-sm" onclick="saveReport('draft')" title="暫時儲存，之後可繼續編輯">💾 暫存草稿</button>
+    <button class="btn btn-green btn-sm" onclick="saveReport('done')" title="正式儲存完成，記錄至填報歷史">✅ 完成送出</button>
+    <button class="btn btn-primary btn-sm" onclick="doPrint()" title="列印紙本，不影響雲端紀錄">🖨 列印</button>
+  </div>
+</div>
+
+<div id="print-area"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// Firebase 設定
+// ══════════════════════════════════════════════════════════════
+const FB_CONFIG = {
+  apiKey: "AIzaSyBN_0LhgsV3FFMH50dPq7aEd4wdKUL4aWA",
+  authDomain: "taitung-cable-theft.firebaseapp.com",
+  projectId: "taitung-cable-theft",
+  storageBucket: "taitung-cable-theft.firebasestorage.app",
+  messagingSenderId: "514593892105",
+  appId: "1:514593892105:web:ea3966a90c461cfedcd5d8"
+};
+// PIN 碼以 SHA-256 雜湊儲存，不以明文存放（無法從此值反推原始 PIN）
+const EDIT_PIN_HASH = '23004bc74042b497c022110c85665db5f22b159912459807f3319aaeebb0e7f5';
+
+let fbApp, db, _pendingPinAction = null;
+// _currentDocId 透過 DOM 隱藏欄位存取，頁面重整不會遺失（只要不清表單）
+function getDocId(){ return document.getElementById('current-doc-id')?.value || null; }
+function setDocId(id){ const el=document.getElementById('current-doc-id'); if(el) el.value=id||''; }
+
+function initFirebase(){
+  try{
+    fbApp = firebase.initializeApp(FB_CONFIG);
+    db = firebase.firestore();
+    // Firebase 連線後顯示「無失竊案件」按鈕
+    const btn = document.getElementById('btn-no-theft-top');
+    if(btn) btn.style.display='';
+    console.log('[Firebase] 初始化成功');
+  }catch(e){ console.error('[Firebase]', e.message); }
+}
+
+// ── 收集表單資料 ────────────────────────────────────────────
+function collectFormData(){
+  // 收集動態損失列（含品名 dbIdx 和數量）
+  const lossLines=[], lossSvc=[], lossRst=[], lossMeter=[];
+  _lossRows.line.forEach(r=>{
+    if(r.dbIdx<0) return;
+    const qty=parseFloat(document.getElementById(`lq_line_${r.uid}`)?.value)||0;
+    lossLines.push({dbIdx:r.dbIdx, name:DB.line[r.dbIdx]?.name||'', qty});
+  });
+  _lossRows.svc.forEach(r=>{
+    if(r.dbIdx<0) return;
+    const qty=parseFloat(document.getElementById(`lq_svc_${r.uid}`)?.value)||0;
+    lossSvc.push({dbIdx:r.dbIdx, name:DB.service[r.dbIdx]?.name||'', qty});
+  });
+  _lossRows.rst.forEach(r=>{
+    if(r.dbIdx<0) return;
+    const items=[...DB.line,...DB.service];
+    const qty=parseFloat(document.getElementById(`lq_rst_${r.uid}`)?.value)||0;
+    lossRst.push({dbIdx:r.dbIdx, name:items[r.dbIdx]?.name||'', qty});
+  });
+  _meterRows.forEach(r=>{
+    if(r.dbIdx<0) return;
+    const qty=parseFloat(document.getElementById(`mq_${r.uid}`)?.value)||0;
+    lossMeter.push({dbIdx:r.dbIdx, name:DB.meter[r.dbIdx]?.name||'', qty});
+  });
+  // 收集自訂下拉選項
+  const getOpts=id=>Array.from(document.getElementById(id)?.options||[]).map(o=>o.value).filter(Boolean);
+  return {
+    unit:v('unit'), unitAddr:v('unit-addr'), unitTel:v('unit-tel'),
+    reportDate:v('report-date'), theftTime:v('theft-time'),
+    reporter:v('reporter'), outagHrs:v('outage-hrs'),
+    location1:v('location1'), location2:v('location2'),
+    lineName:v('line-name'), feeder:v('feeder'), police:v('police'),
+    caseNo:v('case-no'), outageHomes:v('outage-homes'),
+    impactValue:v('impact-value'), photos:v('photos'),
+    remarks:v('remarks'), wage:v('wage'), laborHrs:v('labor-hrs'),
+    totalLoss:document.getElementById('bar-loss')?.textContent||'',
+    totalRestore:document.getElementById('bar-restore')?.textContent||'',
+    // 完整列資料
+    lossLines, lossSvc, lossRst, lossMeter,
+    // 自訂下拉選項
+    customLineNames:getOpts('line-name'),
+    customFeeders:getOpts('feeder'),
+    customPolice:getOpts('police'),
+  };
+}
+
+// ── 暫存 / 列印存檔 ─────────────────────────────────────────
+async function saveReport(status='draft'){
+  if(!db){ alert('⚠️ Firebase 尚未連線，無法儲存。'); return; }
+  const data = collectFormData();
+  if(!data.unit && !data.reportDate && !data.location1){
+    alert('⚠️ 請至少填寫「經營線路單位」或「失竊地點」再儲存。'); return; }
+  const badge = document.getElementById('sync-badge');
+  const origText = badge?.textContent;
+  try{
+    if(badge){ badge.textContent='⏳ 儲存中…'; badge.style.background='rgba(255,255,255,0.2)'; badge.style.display='block'; }
+    const curId = getDocId();
+    if(curId){
+      // 已有紀錄 → 先確認存在，存在才更新，否則當作新增
+      const existing = await db.collection('reports').doc(curId).get();
+      if(existing.exists){
+        await db.collection('reports').doc(curId).update({
+          ...data,
+          status,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+      } else {
+        // 該紀錄已被刪除，清除 ID 改為新增
+        setDocId('');
+      }
+    }
+    if(!getDocId()){
+      // 全新紀錄 → 新增
+      const docRef = db.collection('reports').doc();
+      await docRef.set({
+        ...data,
+        status,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        docId: docRef.id,
+      });
+      setDocId(docRef.id);
+    }
+    if(badge){ badge.textContent='✅ 已儲存'; badge.style.background='rgba(30,180,80,0.85)'; }
+    setTimeout(()=>{ if(badge&&origText) badge.textContent=origText; },3000);
+    markClean();
+    if(status==='draft') showToast('✅ 已暫存草稿');
+    if(status==='done')  showToast('✅ 已完成送出');
+    return getDocId();
+  }catch(e){
+    console.error('[saveReport]',e);
+    alert('❌ 儲存失敗：'+e.message);
+    if(badge&&origText) badge.textContent=origText;
+    return null;
+  }
+}
+
+// ── 修改列印函數：列印前自動存檔 ───────────────────────────
+const _origDoPrint = typeof doPrint !== 'undefined' ? doPrint : null;
+
+// ── 載入歷史紀錄 ────────────────────────────────────────────
+async function loadRecords(){
+  const listEl = document.getElementById('rec-list');
+  if(!listEl) return;
+  if(!db){ listEl.innerHTML='<div class="rec-empty"><div class="rec-empty-icon">⚠️</div><div>Firebase 尚未連線</div></div>'; return; }
+  listEl.innerHTML='<div class="rec-empty"><div class="rec-empty-icon">⏳</div><div>載入中…</div></div>';
+  try{
+    const filter = document.getElementById('rec-filter')?.value || 'all';
+    const yearSel = document.getElementById('rec-year')?.value || 'all';
+    const monthSel = document.getElementById('rec-month')?.value || 'all';
+
+    let q = db.collection('reports').orderBy('createdAt','desc').limit(100);
+    if(filter!=='all') q = q.where('status','==',filter);
+
+    // 年月篩選：用 createdAt 時間範圍
+    if(yearSel!=='all'){
+      const y = parseInt(yearSel);
+      const m = monthSel!=='all' ? parseInt(monthSel) : null;
+      const start = m ? new Date(y,m-1,1) : new Date(y,0,1);
+      const end   = m ? new Date(y,m,1)   : new Date(y+1,0,1);
+      q = db.collection('reports')
+           .where('createdAt','>=', firebase.firestore.Timestamp.fromDate(start))
+           .where('createdAt','<',  firebase.firestore.Timestamp.fromDate(end))
+           .orderBy('createdAt','desc').limit(100);
+      if(filter!=='all') q = db.collection('reports')
+           .where('status','==',filter)
+           .where('createdAt','>=', firebase.firestore.Timestamp.fromDate(start))
+           .where('createdAt','<',  firebase.firestore.Timestamp.fromDate(end))
+           .orderBy('createdAt','desc').limit(100);
+    }
+
+    const snap = await q.get();
+
+    // 第一次載入時順便建立年份選單
+    _buildYearSelect(snap);
+
+    if(snap.empty){ listEl.innerHTML='<div class="rec-empty"><div class="rec-empty-icon">📭</div><div>目前尚無填報紀錄</div></div>'; return; }
+    listEl.innerHTML='';
+    snap.forEach(doc=>{ listEl.appendChild(renderRecCard(doc.id, doc.data())); });
+  }catch(e){
+    listEl.innerHTML=`<div class="rec-empty"><div class="rec-empty-icon">❌</div><div>載入失敗：${e.message}<br><small>請確認 Firestore 規則已設定為開放讀取</small></div></div>`;
+  }
+}
+
+// 從已載入紀錄建立年份選單（只跑一次，之後不蓋掉使用者選擇）
+let _yearSelectBuilt = false;
+function _buildYearSelect(snap){
+  if(_yearSelectBuilt) return;
+  const sel = document.getElementById('rec-year');
+  if(!sel) return;
+  const years = new Set();
+  snap.forEach(doc=>{
+    const d = doc.data();
+    if(d.createdAt?.toDate){ years.add(d.createdAt.toDate().getFullYear()); }
+    else if(d.reportDate){ years.add(parseInt(d.reportDate.split('-')[0])); }
+  });
+  const sorted = [...years].sort((a,b)=>b-a);
+  sorted.forEach(y=>{
+    if(!sel.querySelector(`option[value="${y}"]`)){
+      const o=document.createElement('option'); o.value=y; o.textContent=`${y} 年`; sel.appendChild(o);
+    }
+  });
+  _yearSelectBuilt = true;
+}
+
+function renderRecCard(id, d){
+  const card = document.createElement('div');
+  card.className='rec-card';
+  card.setAttribute('data-doc-id', id);
+
+  const dateStr = d.createdAt?.toDate ? d.createdAt.toDate().toLocaleString('zh-TW') : '—';
+  const badge = d.status==='done'
+    ? '<span class="rec-badge printed">✅ 已完成</span>'
+    : d.status==='no_theft'
+    ? '<span class="rec-badge" style="background:#e0f2fe;color:#0369a1">📋 無失竊案件</span>'
+    : '<span class="rec-badge draft">💾 暫存草稿</span>';
+  const title = [d.reportDate, d.unit, d.location1].filter(Boolean).join('　') || '（未填寫基本資訊）';
+
+  // 卡片標頭（含折疊按鈕）
+  const hdr = document.createElement('div');
+  hdr.className = 'rec-card-hdr';
+  hdr.style.cursor = 'pointer';
+  hdr.innerHTML = `
+    <div style="flex:1;min-width:0">
+      <div class="rec-card-title">${esc(title)}</div>
+      <div class="rec-card-meta">儲存時間：${dateStr}　通報人：${esc(d.reporter||'—')}</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+      ${badge}
+      <button class="rec-collapse-btn open" title="折疊/展開" onclick="event.stopPropagation()">▼</button>
+    </div>`;
+
+  // 點擊標頭折疊/展開
+  hdr.addEventListener('click', function(){
+    const btn = hdr.querySelector('.rec-collapse-btn');
+    const body = card.querySelector('.rec-card-body');
+    const footer = card.querySelector('.rec-card-footer');
+    const collapsed = body.classList.toggle('collapsed');
+    if(footer) footer.classList.toggle('collapsed', collapsed);
+    btn.classList.toggle('open', !collapsed);
+  });
+  card.appendChild(hdr);
+
+  // 卡片內容
+  const body = document.createElement('div');
+  body.className = 'rec-card-body';
+  body.innerHTML = `
+    <span>📍 ${esc(d.location1||'—')} ${esc(d.location2||'')}</span>　
+    <span>⚡ ${esc(d.lineName||'—')} ${esc(d.feeder||'—')}</span>　
+    <span>🚨 ${esc(d.police||'—')}分駐所</span>　
+    <span>💰 損失：${esc(d.totalLoss||'—')}</span>
+    ${d.remarks?`<br>📝 ${esc(d.remarks)}`:''}`;
+  card.appendChild(body);
+
+  // 操作按鈕列
+  const footer = document.createElement('div');
+  footer.className = 'rec-card-footer';
+
+  const btnLoad = document.createElement('button');
+  btnLoad.className = 'btn btn-secondary btn-xs';
+  btnLoad.textContent = '📋 載入表單';
+  btnLoad.addEventListener('click', function(){ loadToForm(id); });
+
+  const btnEdit = document.createElement('button');
+  btnEdit.className = 'btn btn-secondary btn-xs';
+  btnEdit.textContent = '✏️ 修改';
+  btnEdit.addEventListener('click', function(){ requirePin(function(){ openEditModal(id, d); }); });
+
+  const btnDel = document.createElement('button');
+  btnDel.className = 'btn btn-danger btn-xs';
+  btnDel.textContent = '🗑 刪除';
+  btnDel.addEventListener('click', function(){ requirePin(function(){ deleteRecord(id); }); });
+
+  footer.appendChild(btnLoad);
+  footer.appendChild(btnEdit);
+  footer.appendChild(btnDel);
+  card.appendChild(footer);
+
+  return card;
+}
+
+// ── 載入紀錄到表單 ───────────────────────────────────────────
+async function loadToForm(id){
+  if(!db) return;
+  if(!confirm('確定將此紀錄載入到填寫頁？目前填寫中的資料將被覆蓋。')) return;
+  try{
+    const doc = await db.collection('reports').doc(id).get();
+    if(!doc.exists){ alert('找不到此紀錄'); return; }
+    const d = doc.data();
+
+    _suppressDirty = true;
+    // clearFormSilent 結尾會 setDocId('')，所以必須在它之後再 setDocId(id)
+    clearFormSilent();
+    setDocId(id); // 清空後才設定，確保不被覆蓋
+
+    // 還原自訂下拉選項（在 set 之前，確保選項存在）
+    const restoreOpts = (selId, vals) => {
+      if(!vals?.length) return;
+      const sel = document.getElementById(selId);
+      if(!sel) return;
+      const existing = new Set(Array.from(sel.options).map(o=>o.value));
+      vals.forEach(v=>{ if(v && !existing.has(v)){ const o=document.createElement('option'); o.value=o.textContent=v; sel.appendChild(o); } });
+    };
+    restoreOpts('line-name', d.customLineNames);
+    restoreOpts('feeder', d.customFeeders);
+    restoreOpts('police', d.customPolice);
+
+    // 還原一般欄位
+    const set = (fid, val) => { const el=document.getElementById(fid); if(el) el.value=val||''; };
+    set('unit',d.unit); set('unit-addr',d.unitAddr); set('unit-tel',d.unitTel);
+    set('report-date',d.reportDate); set('theft-time',d.theftTime);
+    set('reporter',d.reporter); set('outage-hrs',d.outagHrs);
+    set('location1',d.location1); set('location2',d.location2);
+    set('line-name',d.lineName); set('feeder',d.feeder); set('police',d.police);
+    set('case-no',d.caseNo); set('outage-homes',d.outageHomes);
+    set('impact-value',d.impactValue); set('photos',d.photos);
+    set('remarks',d.remarks); set('wage',d.wage); set('labor-hrs',d.laborHrs);
+
+    // 還原動態列（新格式）
+    const restoreRows = (rows, section) => {
+      if(!rows?.length) return;
+      rows.forEach(r=>{
+        addLossRow(section);
+        const uid = _lossRows[section][_lossRows[section].length-1].uid;
+        const sel = document.querySelector(`#loss-row-${section}-${uid} select`);
+        if(sel){
+          const items = section==='line'?DB.line:section==='svc'?DB.service:[...DB.line,...DB.service];
+          let idx = r.dbIdx;
+          if(idx<0 || !items[idx] || items[idx].name!==r.name){
+            idx = items.findIndex(it=>it.name===r.name);
+          }
+          if(idx>=0){
+            sel.value = idx;
+            // 直接更新內部狀態，不呼叫 onLossSelect（避免 focus 干擾數值）
+            const row = _lossRows[section].find(rr=>rr.uid===uid);
+            if(row) row.dbIdx = idx;
+            const tr = document.getElementById(`loss-row-${section}-${uid}`);
+            if(tr) tr.dataset.dbidx = idx;
+            const qInput = document.getElementById(`lq_${section}_${uid}`);
+            if(qInput){ qInput.disabled = false; qInput.value = parseFloat(r.qty)||0; }
+            calcLossRow(section, uid);
+          }
+        }
+      });
+    };
+    const restoreMeters = (rows) => {
+      if(!rows?.length) return;
+      rows.forEach(r=>{
+        addMeterRow();
+        const uid = _meterRows[_meterRows.length-1].uid;
+        const sel = document.querySelector(`#meter-row-${uid} select`);
+        if(sel){
+          let idx = r.dbIdx;
+          if(idx<0 || !DB.meter[idx] || DB.meter[idx].name!==r.name){
+            idx = DB.meter.findIndex(it=>it.name===r.name);
+          }
+          if(idx>=0){
+            sel.value = idx;
+            const row = _meterRows.find(rr=>rr.uid===uid);
+            if(row) row.dbIdx = idx;
+            const item = DB.meter[idx];
+            setText(`mup_${uid}`, item ? N(item.price) : '—');
+            const qInput = document.getElementById(`mq_${uid}`);
+            if(qInput){ qInput.disabled = false; qInput.value = parseFloat(r.qty)||0; }
+            calcMeterRow(uid);
+          }
+        }
+      });
+    };
+
+    restoreRows(d.lossLines, 'line');
+    restoreRows(d.lossSvc, 'svc');
+    restoreRows(d.lossRst, 'rst');
+    restoreMeters(d.lossMeter);
+    setTimeout(()=>calcAll(), 100);
+
+    setTimeout(()=>{ _suppressDirty = false; markClean(); }, 300);
+    switchTab('form');
+    showToast('✅ 已載入紀錄，請確認後儲存');
+  }catch(e){ alert('載入失敗：'+e.message); }
+}
+
+// ── PIN 保護機制 ─────────────────────────────────────────────
+function requirePin(action){
+  _pendingPinAction = action;
+  document.getElementById('pin-input').value='';
+  document.getElementById('pin-error').textContent='';
+  document.getElementById('pin-overlay').classList.add('show');
+  setTimeout(()=>document.getElementById('pin-input').focus(),100);
+}
+function closePinModal(){
+  document.getElementById('pin-overlay').classList.remove('show');
+  _pendingPinAction = null;
+}
+function pinInputChanged(){ document.getElementById('pin-error').textContent=''; }
+function confirmPin(){
+  const entered = document.getElementById('pin-input').value;
+  if(!entered){ document.getElementById('pin-error').textContent='請輸入 PIN 碼。'; return; }
+  const hashed = sha256(entered);
+  if(hashed === EDIT_PIN_HASH){
+    // 先把 action 存起來，再關閉 modal（關閉會清空 _pendingPinAction）
+    const action = _pendingPinAction;
+    closePinModal();
+    if(typeof action === 'function') action();
+  }else{
+    document.getElementById('pin-error').textContent='密碼錯誤，請重試。';
+    document.getElementById('pin-input').value='';
+    document.getElementById('pin-input').focus();
+  }
+}
+
+// ── 修改紀錄（彈出式 Modal）────────────────────────────────
+function openEditModal(id, d){
+  document.getElementById('em-reporter').value = d.reporter||'';
+  document.getElementById('em-location').value = d.location1||'';
+  document.getElementById('em-caseno').value   = d.caseNo||'';
+  document.getElementById('em-remarks').value  = d.remarks||'';
+  document.getElementById('em-status').value   = d.status||'draft';
+  document.getElementById('em-error').textContent = '';
+  document.getElementById('edit-overlay')._docId = id;
+  document.getElementById('edit-overlay').classList.add('show');
+  setTimeout(()=>document.getElementById('em-reporter').focus(), 100);
+}
+function closeEditModal(){
+  document.getElementById('edit-overlay').classList.remove('show');
+}
+async function confirmEdit(){
+  const overlay = document.getElementById('edit-overlay');
+  const id = overlay._docId;
+  if(!id || !db) return;
+  const errEl = document.getElementById('em-error');
+  errEl.textContent='';
+  const reporter = document.getElementById('em-reporter').value.trim();
+  const location1 = document.getElementById('em-location').value.trim();
+  const caseNo    = document.getElementById('em-caseno').value.trim();
+  const remarks   = document.getElementById('em-remarks').value.trim();
+  const status    = document.getElementById('em-status').value;
+  try{
+    await db.collection('reports').doc(id).update({
+      reporter, location1, caseNo, remarks, status,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    closeEditModal();
+    showToast('✅ 已更新紀錄');
+    loadRecords();
+  }catch(e){
+    errEl.textContent = '儲存失敗：'+e.message;
+  }
+}
+
+// ── 刪除紀錄 ────────────────────────────────────────────────
+async function deleteRecord(id){
+  if(!db) return;
+  if(!confirm('確定刪除此筆紀錄？此動作無法復原。')) return;
+  try{
+    await db.collection('reports').doc(id).delete();
+    // 用 data-doc-id 找到對應卡片移除
+    const card = document.querySelector(`[data-doc-id="${id}"]`);
+    if(card) card.remove();
+    const listEl = document.getElementById('rec-list');
+    if(listEl && !listEl.children.length){
+      listEl.innerHTML='<div class="rec-empty"><div class="rec-empty-icon">📭</div><div>目前尚無填報紀錄</div></div>';
+    }
+  }catch(e){ alert('刪除失敗：'+e.message); }
+}
+
+// ── 每月1~5號無失竊案件提醒 ──────────────────────────────────
+// 取得應回報的目標月份：每月1~5號回報上個月，其餘回報本月
+function _getTargetMonth(){
+  const now = new Date();
+  const d = now.getDate();
+  const target = new Date(now.getFullYear(), now.getMonth() - (d <= 5 ? 1 : 0), 1);
+  return { year: target.getFullYear(), month: target.getMonth() + 1 };
+}
+
+async function checkMonthlyReport(){
+  if(!db) return;
+  const day = new Date().getDate();
+  if(day < 1 || day > 5) return;
+  const { year, month } = _getTargetMonth();
+  const cacheKey = `no_theft_reminded_${year}_${month}`;
+  if(localStorage.getItem(cacheKey)) return;
+  try{
+    const monthStart = new Date(year, month - 1, 1);
+    const monthEnd   = new Date(year, month, 1);
+    const snap = await db.collection('reports')
+      .where('createdAt','>=', firebase.firestore.Timestamp.fromDate(monthStart))
+      .where('createdAt','<',  firebase.firestore.Timestamp.fromDate(monthEnd))
+      .limit(1).get();
+    if(!snap.empty){ localStorage.setItem(cacheKey,'has_records'); return; }
+    const monthLabel = `${year} 年 ${month} 月`;
+    const el = document.getElementById('no-theft-month');
+    if(el) el.textContent = `查詢期間：${monthLabel}`;
+    document.getElementById('no-theft-overlay').classList.add('show');
+    localStorage.setItem(cacheKey,'reminded');
+  }catch(e){ console.warn('[checkMonthlyReport]', e.message); }
+}
+function closeNoTheftModal(){
+  document.getElementById('no-theft-overlay').classList.remove('show');
+}
+
+// 手動從頂部按鈕觸發：以目標月份（每月1~5號為上個月，其餘為本月）為準
+function openNoTheftManual(){
+  const { year, month } = _getTargetMonth();
+  const monthLabel = `${year} 年 ${month} 月`;
+  const el = document.getElementById('no-theft-month');
+  if(el) el.textContent = `查詢期間：${monthLabel}`;
+  document.getElementById('no-theft-overlay').classList.add('show');
+}
+
+async function submitNoTheft(){
+  if(!db){ alert('⚠️ Firebase 尚未連線'); return; }
+  const { year, month } = _getTargetMonth();
+  const monthLabel = `${year}年${month}月`;
+  try{
+    await db.collection('reports').add({
+      status: 'no_theft',
+      reportDate: `${year}-${String(month).padStart(2,'0')}-01`,
+      unit: document.getElementById('unit')?.value || '（未填）',
+      location1: `${monthLabel}無失竊案件`,
+      reporter: '系統自動回報',
+      totalLoss: '$0',
+      totalRestore: '$0',
+      remarks: `${monthLabel}本月無導線失竊案件，系統自動回報。`,
+      lossLines:[], lossSvc:[], lossRst:[], lossMeter:[],
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    closeNoTheftModal();
+    localStorage.setItem(`no_theft_reminded_${year}_${month}`,'submitted');
+    showToast(`✅ 已送出「${monthLabel}無失竊案件」回報`);
+  }catch(e){
+    alert('送出失敗：'+e.message);
+  }
+}
+
+const DEFAULT_UNITS=[
+  {name:'台東市區調度中心',addr:'台東縣台東市正氣路38號',tel:'(089)342173'},
+  {name:'太麻服務所',addr:'台東縣太麻里鄉太麻里街150號',tel:'(089)781330'},
+  {name:'關山服務所',addr:'台東縣關山鎮和平路138號',tel:'(089)811030'},
+  {name:'成功服務所',addr:'台東縣成功鎮東海路6號',tel:'(089)851014'},
+  {name:'卑南服務所',addr:'台東縣卑南鄉太平村和平路180號',tel:'(089)380911'},
+  {name:'池上服務所',addr:'台東縣池上鄉中山路60號',tel:'(089)862005'},
+  {name:'鹿野服務所',addr:'台東縣鹿野鄉龍田村光榮路539號',tel:'(089)551038'},
+  {name:'長濱服務所',addr:'台東縣長濱鄉長濱路1號',tel:'(089)831018'},
+  {name:'東河服務所',addr:'台東縣東河鄉南東河121號',tel:'(089)896150'},
+  {name:'知本服務所',addr:'台東縣知本路3段658號',tel:'(089)512624'},
+  {name:'大武服務所',addr:'台東縣大武鄉尚武村尚武路10號',tel:'(089)791002'},
+  {name:'都蘭服務所',addr:'台東縣東河鄉都蘭村378號',tel:'(089)531075'},
+  {name:'蘭嶼服務所',addr:'台東縣蘭嶼鄉紅頭村漁人145號',tel:'(089)732003'},
+  {name:'綠島服務所',addr:'台東縣綠島鄉南寮村漁港12號',tel:'(089)672508'},
+];
+const DEFAULT_DB={
+  line:[
+    {name:'交連PE電纜 600V 1C銅 250MCM',code:'',weight:1.31,price:482.05,pts:2.0,mult:1.1,updated:''},
+    {name:'交連PE電纜 600V 2/0 (7CXB020黑色)',code:'7CXB020',weight:0.71,price:230.98,pts:1.0,mult:1.1,updated:''},
+    {name:'交連PE電纜 600V 2/0 (7CXY020黃色)',code:'7CXY020',weight:0.71,price:230.98,pts:1.0,mult:1.1,updated:''},
+    {name:'交連PE電纜 600V 1C鋁 250MCM',code:'',weight:0.71,price:163.5,pts:1.0,mult:1.1,updated:''},
+    {name:'PVC風雨線22m/㎡（銅玻璃電線）',code:'',weight:0.261,price:79.62,pts:1.1,mult:1.1,updated:''},
+    {name:'PVC風雨線60m/㎡（銅玻璃電線）',code:'',weight:0.648,price:173,pts:1.1,mult:1.1,updated:''},
+    {name:'裸銅線22m/㎡',code:'',weight:0.1979,price:67.09,pts:1.1,mult:1.1,updated:''},
+    {name:'裸銅線60m/㎡',code:'',weight:0.537,price:183.65,pts:1.1,mult:1.1,updated:''},
+    {name:'裸銅線100m/㎡',code:'',weight:0.9,price:307.8,pts:1.9,mult:1.1,updated:''},
+    {name:'#2鋼心鋁線',code:'',weight:0.1359,price:14.27,pts:1.1,mult:1.1,updated:''},
+    {name:'交連PE電纜25KV級1/C#1(地下材料)',code:'',weight:2.33,price:414.38,pts:1.0,mult:1.1,updated:''},
+  ],
+  service:[
+    {name:'接戶電纜3cu8m/㎡',code:'',weight:0.303,price:80.08,pts:3,mult:1.1,updated:''},
+    {name:'接戶電纜3cu22m/㎡',code:'',weight:0.786,price:218.66,pts:3,mult:1.1,updated:''},
+    {name:'接戶電纜2cu22m/㎡',code:'',weight:0.522,price:113.48,pts:2,mult:1.1,updated:''},
+    {name:'接戶電纜2cu8m/㎡',code:'',weight:0.202,price:57.75,pts:2,mult:1.1,updated:''},
+  ],
+  meter:[
+    {name:'瓦時計1Φ2W110V(或220V) 10A',code:'',price:220,pts:0,mult:0},
+    {name:'瓦時計1Φ2W110V(或220V) 30A以下',code:'',price:460,pts:0,mult:0},
+    {name:'瓦時計1Φ3W110/220V 30A',code:'',price:954,pts:0,mult:0},
+    {name:'瓦時計3Φ3W220V 15A',code:'',price:3210,pts:0,mult:0},
+    {name:'乏時計3Φ3W220V 2.5A',code:'',price:3553,pts:0,mult:0},
+    {name:'乏時計3Φ4W220V 15A',code:'',price:5640,pts:0,mult:0},
+    {name:'比流器600V400/5A以下',code:'',price:650,pts:0,mult:0},
+  ]
+};
+// ═══════════════════════════════════════════════════════════════
+// ▼▼▼  Google 試算表同步設定  ▼▼▼
+//   步驟：
+//   1. 開啟 Google 試算表 → 檔案 → 分享 → 發布到網路
+//   2. 選擇「工作表1」→ 格式選「逗號分隔值 (.csv)」→ 按「發布」
+//   3. 複製產生的網址，貼到下方 SHEETS_CSV_URL（取代空字串）
+const SHEETS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQwBpDpTzf-65x5EV_DQRR2RKAhXD0ZvaJLcndvrc1dYyE8q9Y74xkbqAVkzCwrRnVvNwgnbNEm_X_n/pub?gid=1084776175&single=true&output=csv';
+// ▼▼▼  試算表編輯網址（貼上你的 Google 試算表網址，格式：https://docs.google.com/spreadsheets/d/【ID】/edit）▼▼▼
+const SHEETS_EDIT_URL = 'https://docs.google.com/spreadsheets/d/1J8D-Zar4z0VxAbPFbunibA7iZSeGawkOsYvfarED6NE/edit'; // ← 請將試算表網址貼在這裡
+// ▲▲▲  只需要改這一行  ▲▲▲
+// ═══════════════════════════════════════════════════════════════
+
+const CLOUD_CACHE_KEY = 'taipower_db_cloud_v1';
+
+function loadDB(){try{const s=localStorage.getItem('taipower_db');return s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULT_DB))}catch{return JSON.parse(JSON.stringify(DEFAULT_DB))}}
+function loadUnits(){try{const s=localStorage.getItem('taipower_units');return s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULT_UNITS))}catch{return JSON.parse(JSON.stringify(DEFAULT_UNITS))}}
+let DB=loadDB(),UNITS=loadUnits();
+
+// ─── 同步狀態顯示 ─────────────────────────────────────────────
+function showSyncBadge(state){
+  const el=document.getElementById('sync-badge');
+  if(!el)return;
+  const styles={
+    loading:{bg:'rgba(255,255,255,0.2)',text:'⏳ 同步中…'},
+    ok:     {bg:'rgba(30,180,80,0.85)',text:'✅ 雲端已同步'},
+    cache:  {bg:'rgba(200,150,0,0.85)',text:'⚠️ 使用本機快取'},
+    error:  {bg:'rgba(200,50,50,0.85)',text:'❌ 同步失敗'},
+    local:  {bg:'rgba(120,120,120,0.5)',text:'💾 本機模式'},
+  };
+  const s=styles[state]||styles.local;
+  el.style.background=s.bg;el.textContent=s.text;el.style.display='block';
+}
+
+// ─── CSV 解析 ────────────────────────────────────────────────
+function parseCSVLine(line){
+  const result=[];let cur='',inQ=false;
+  for(let i=0;i<line.length;i++){
+    if(line[i]==='"'){inQ=!inQ;}
+    else if(line[i]===','&&!inQ){result.push(cur.trim());cur='';}
+    else cur+=line[i];
+  }
+  result.push(cur.trim());return result;
+}
+function parseCSVtoDB(csv){
+  const lines=csv.trim().split(/\r?\n/);
+  const db={line:[],service:[],meter:[]};
+  for(let i=1;i<lines.length;i++){
+    if(!lines[i].trim())continue;
+    const c=parseCSVLine(lines[i]);
+    if(c.length<2)continue;
+    const type=c[0].toLowerCase();
+    const entry={
+      name:c[1]||'',code:c[2]||'',
+      weight:parseFloat(c[3])||0,price:parseFloat(c[4])||0,
+      pts:parseFloat(c[5])||1,mult:parseFloat(c[6])||1.1,updated:''
+    };
+    if(type==='line')db.line.push(entry);
+    else if(type==='service')db.service.push(entry);
+    else if(type==='meter')db.meter.push(entry);
+  }
+  return db;
+}
+
+// ─── 從 Google 試算表抓取（含多層 CORS proxy fallback）──────────
+async function fetchCSVText(rawUrl){
+  const proxies=[
+    u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),
+    u=>'https://corsproxy.io/?url='+encodeURIComponent(u),
+    u=>'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(u),
+  ];
+  // 方法1：直接抓（部分瀏覽器可行）
+  try{
+    const res=await fetch(rawUrl,{mode:'cors',redirect:'follow'});
+    if(res.ok){const t=await res.text();if(t.includes(','))return t;}
+  }catch(e){console.warn('[Direct]',e.message);}
+  // 方法2~4：依序試各 proxy
+  for(const makeUrl of proxies){
+    try{
+      const res=await fetch(makeUrl(rawUrl),{redirect:'follow'});
+      if(res.ok){const t=await res.text();if(t.includes(','))return t;}
+    }catch(e){console.warn('[Proxy fallback]',e.message);}
+  }
+  return null;
+}
+async function fetchFromSheets(){
+  if(!SHEETS_CSV_URL)return null;
+  try{
+    const url=SHEETS_CSV_URL.split('&_t=')[0]; // 防止快取參數累積
+    const urlWithTs=url+(url.includes('?')?'&':'?')+'_t='+Date.now();
+    const text=await fetchCSVText(urlWithTs);
+    if(!text)throw new Error('所有連線方式均失敗');
+    const db=parseCSVtoDB(text);
+    const total=db.line.length+db.service.length+db.meter.length;
+    if(total===0)throw new Error('試算表沒有資料，請確認格式是否正確');
+    return db;
+  }catch(e){
+    console.warn('[Sheets Sync]',e.message);return null;
+  }
+}
+
+// ─── 手動重新同步（按鈕用）────────────────────────────────────
+async function manualSync(){
+  showSyncBadge('loading');
+  const db=await fetchFromSheets();
+  if(db){
+    DB=db;
+    localStorage.setItem(CLOUD_CACHE_KEY,JSON.stringify(db));
+    buildPriceTables();rebuildForms();
+    showSyncBadge('ok');
+    alert('✅ 已從 Google 試算表同步最新導線資料！');
+  }else{
+    showSyncBadge('error');
+    alert('❌ 無法連線到 Google 試算表，請檢查網路或 CSV 網址設定。');
+  }
+}
+
+document.addEventListener('DOMContentLoaded',async()=>{
+  // Firebase 初始化
+  initFirebase();
+
+  document.getElementById('report-date').value=new Date().toISOString().slice(0,10);
+  document.getElementById('theft-time').value='08:00';
+
+  // ─ UI 先初始化（不等同步，讓表單立即可用）─
+  renderUnitSelect();buildFormTables();buildPriceTables();buildUnitTable();calcAll();
+  setInterval(()=>{const n=new Date();document.getElementById('clock').innerHTML=n.toLocaleDateString('zh-TW',{year:'numeric',month:'2-digit',day:'2-digit'})+'<br>'+n.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});},1000);
+
+  // ─ 雲端同步（背景執行，不阻擋表單操作）─
+  if(SHEETS_CSV_URL){
+    const sub=document.getElementById('price-page-sub');
+    if(sub)sub.textContent='資料來自 Google 試算表（共用），如需更新請至試算表修改後按「重新同步」。';
+    showSyncBadge('loading');
+    const cloudDB=await fetchFromSheets();
+    if(cloudDB&&cloudDB.line.length+cloudDB.service.length+cloudDB.meter.length>0){
+      DB=cloudDB;
+      localStorage.setItem(CLOUD_CACHE_KEY,JSON.stringify(cloudDB));
+      showSyncBadge('ok');
+    }else{
+      const cached=localStorage.getItem(CLOUD_CACHE_KEY);
+      if(cached){try{DB=JSON.parse(cached);showSyncBadge('cache');}catch{showSyncBadge('error');}}
+      else{showSyncBadge('error');}
+    }
+    // 同步完成後更新導線選單，不影響已填寫的 unit
+    buildPriceTables();rebuildForms();
+  }else{
+    showSyncBadge('local');
+  }
+
+  // ─ 每月1~5號無失竊案件提醒 ─
+  setTimeout(()=>checkMonthlyReport(), 2000);
+
+  // ─ 填寫頁變更追蹤：欄位有任何 input/change 就標記為 dirty ─
+  document.getElementById('page-form').addEventListener('input', ()=>{ if(!_suppressDirty) markDirty(); }, true);
+  document.getElementById('page-form').addEventListener('change', ()=>{ if(!_suppressDirty) markDirty(); }, true);
+});
+
+function renderUnitSelect(){
+  const sel=document.getElementById('unit');const cur=sel.value;
+  sel.innerHTML='<option value="">請選擇…</option>';
+  UNITS.forEach(u=>{const o=document.createElement('option');o.value=u.name;o.textContent=u.name;if(u.name===cur)o.selected=true;sel.appendChild(o);});
+}
+function onUnitChange(){const name=document.getElementById('unit').value;const u=UNITS.find(x=>x.name===name)||{addr:'',tel:''};document.getElementById('unit-addr').value=u.addr||'';document.getElementById('unit-tel').value=u.tel||'';}
+
+// 動態新增的行追蹤 (uid -> {section, dbIdx})
+let _lossRows = {line:[], svc:[], rst:[]};
+let _lossUid = 0;
+
+function buildFormTables(){
+  // 清空並顯示提示列
+  ['line','svc','rst'].forEach(pfx=>{
+    _lossRows[pfx] = [];
+    const tb = document.getElementById(pfx==='rst'?'restore-tbody':pfx+'-tbody');
+    if(tb) tb.innerHTML = `<tr id="${pfx}-empty-row"><td colspan="7" style="text-align:center;padding:14px;color:var(--text3);font-size:13px">按「＋ 新增」按鈕選擇材料</td></tr>`;
+  });
+  buildMeterForm();
+  calcAll();
+}
+
+function addLossRow(section){
+  const items = section==='line' ? DB.line : section==='svc' ? DB.service : [...DB.line,...DB.service];
+  // 建立選擇視窗
+  const existing = _lossRows[section].map(r=>r.dbIdx);
+  const available = items.filter((_,i)=>!existing.includes(i));
+  if(!available.length){ alert('所有材料已全部加入'); return; }
+
+  const opts = available.map((item,i)=>`<option value="${items.indexOf(item)}">${esc(item.name)}</option>`).join('');
+  const uid = ++_lossUid;
+
+  // 移除空提示列
+  const emptyRow = document.getElementById(section+'-empty-row');
+  if(emptyRow) emptyRow.remove();
+  const rstEmpty = document.getElementById('rst-empty-row');
+
+  const tbodyId = section==='rst' ? 'restore-tbody' : section+'-tbody';
+  const tb = document.getElementById(tbodyId);
+  const tr = document.createElement('tr');
+  tr.id = `loss-row-${section}-${uid}`;
+  tr.dataset.uid = uid;
+  tr.dataset.section = section;
+  tr.dataset.dbidx = -1;
+
+  const isRst = section==='rst';
+  tr.innerHTML = `
+    <td>
+      <select class="fs" style="font-size:12px;padding:4px 6px" onchange="onLossSelect(this,'${section}',${uid})">
+        <option value="">— 請選擇導線 —</option>
+        ${opts}
+      </select>
+    </td>
+    <td><input type="number" min="0" id="lq_${section}_${uid}" placeholder="0"
+        oninput="calcLossRow('${section}',${uid})" style="width:72px" disabled></td>
+    <td class="calc-cell" id="lw_${section}_${uid}">—</td>
+    <td class="num" id="lup_${section}_${uid}">—</td>
+    <td class="calc-cell" id="ll_${section}_${uid}" style="color:var(${isRst?'--green':'--red'});font-weight:600">—</td>
+    <td class="calc-cell" id="lp_${section}_${uid}">—</td>
+    <td style="text-align:center">
+      <button class="btn btn-danger btn-xs" onclick="delLossRow('${section}',${uid})">✕</button>
+    </td>`;
+  tb.appendChild(tr);
+  _lossRows[section].push({uid, dbIdx:-1});
+}
+
+function onLossSelect(sel, section, uid){
+  const dbIdx = parseInt(sel.value);
+  const row = _lossRows[section].find(r=>r.uid===uid);
+  if(!row) return;
+  row.dbIdx = dbIdx;
+  const tr = document.getElementById(`loss-row-${section}-${uid}`);
+  if(tr) tr.dataset.dbidx = dbIdx;
+  const qInput = document.getElementById(`lq_${section}_${uid}`);
+  if(qInput){ qInput.disabled = (dbIdx<0); if(dbIdx>=0) qInput.focus(); }
+  calcLossRow(section, uid);
+}
+
+function delLossRow(section, uid){
+  _lossRows[section] = _lossRows[section].filter(r=>r.uid!==uid);
+  const tr = document.getElementById(`loss-row-${section}-${uid}`);
+  if(tr) tr.remove();
+  const tbodyId = section==='rst'?'restore-tbody':section+'-tbody';
+  const tb = document.getElementById(tbodyId);
+  if(tb && tb.querySelectorAll('tr[id^="loss-row"]').length===0){
+    const empty = document.createElement('tr');
+    empty.id = section+'-empty-row';
+    empty.innerHTML = `<td colspan="7" style="text-align:center;padding:14px;color:var(--text3);font-size:13px">按「＋ 新增」按鈕選擇材料</td>`;
+    tb.appendChild(empty);
+  }
+  calcAll();
+}
+
+function calcLossRow(section, uid){
+  const row = _lossRows[section].find(r=>r.uid===uid);
+  if(!row || row.dbIdx<0) return;
+  const items = section==='line'?DB.line:section==='svc'?DB.service:[...DB.line,...DB.service];
+  const item = items[row.dbIdx];
+  if(!item) return;
+  const q = parseFloat(document.getElementById(`lq_${section}_${uid}`)?.value)||0;
+  setText(`lw_${section}_${uid}`, q>0?F2(q*item.weight)+' kg':'—');
+  setText(`lup_${section}_${uid}`, N(item.price));
+  setText(`ll_${section}_${uid}`, q>0?'$'+N(q*item.price):'—');
+  setText(`lp_${section}_${uid}`, q>0?F2(q*item.pts):'—');
+  calcAll();
+}
+
+function buildFormSection(tbodyId,items,pfx){
+  // 保留舊函數以備兼容（不再主動呼叫）
+}
+// 電表動態行追蹤
+let _meterRows = [];
+let _meterUid = 0;
+
+function buildMeterForm(){
+  // 清空顯示提示列
+  _meterRows = [];
+  const tb = document.getElementById('meter-tbody');
+  if(tb) tb.innerHTML = '<tr id="meter-empty-row"><td colspan="5" style="text-align:center;padding:14px;color:var(--text3);font-size:13px">按「＋ 新增電表」選擇失竊的電表器材</td></tr>';
+  calcAll();
+}
+
+function addMeterRow(){
+  const existing = _meterRows.map(r=>r.dbIdx);
+  const available = DB.meter.filter((_,i)=>!existing.includes(i));
+  if(!available.length){ alert('所有電表器材已全部加入'); return; }
+  const opts = available.map((item)=>`<option value="${DB.meter.indexOf(item)}">${esc(item.name)}</option>`).join('');
+  const uid = ++_meterUid;
+  const emptyRow = document.getElementById('meter-empty-row');
+  if(emptyRow) emptyRow.remove();
+  const tb = document.getElementById('meter-tbody');
+  const tr = document.createElement('tr');
+  tr.id = `meter-row-${uid}`;
+  tr.innerHTML = `
+    <td><select class="fs" style="font-size:12px;padding:4px 6px" onchange="onMeterSelect(this,${uid})">
+      <option value="">— 請選擇器材 —</option>${opts}
+    </select></td>
+    <td><input type="number" min="0" id="mq_${uid}" placeholder="0" oninput="calcMeterRow(${uid})" style="width:72px" disabled></td>
+    <td class="num" id="mup_${uid}">—</td>
+    <td class="calc-cell" id="ml_${uid}" style="color:var(--red);font-weight:600">—</td>
+    <td style="text-align:center"><button class="btn btn-danger btn-xs" onclick="delMeterRow(${uid})">✕</button></td>`;
+  tb.appendChild(tr);
+  _meterRows.push({uid, dbIdx:-1});
+}
+
+function onMeterSelect(sel, uid){
+  const dbIdx = parseInt(sel.value);
+  const row = _meterRows.find(r=>r.uid===uid);
+  if(!row) return;
+  row.dbIdx = dbIdx;
+  const item = dbIdx>=0 ? DB.meter[dbIdx] : null;
+  const qInput = document.getElementById(`mq_${uid}`);
+  if(qInput){ qInput.disabled=(dbIdx<0); if(dbIdx>=0) qInput.focus(); }
+  setText(`mup_${uid}`, item ? N(item.price) : '—');
+  calcMeterRow(uid);
+}
+
+function delMeterRow(uid){
+  _meterRows = _meterRows.filter(r=>r.uid!==uid);
+  const tr = document.getElementById(`meter-row-${uid}`);
+  if(tr) tr.remove();
+  const tb = document.getElementById('meter-tbody');
+  if(tb && tb.querySelectorAll('tr[id^="meter-row"]').length===0){
+    const empty = document.createElement('tr');
+    empty.id = 'meter-empty-row';
+    empty.innerHTML = '<td colspan="5" style="text-align:center;padding:14px;color:var(--text3);font-size:13px">按「＋ 新增電表」選擇失竊的電表器材</td>';
+    tb.appendChild(empty);
+  }
+  calcAll();
+}
+
+function calcMeterRow(uid){
+  const row = _meterRows.find(r=>r.uid===uid);
+  if(!row || row.dbIdx<0) return;
+  const item = DB.meter[row.dbIdx];
+  if(!item) return;
+  const q = parseFloat(document.getElementById(`mq_${uid}`)?.value)||0;
+  setText(`ml_${uid}`, q>0?'$'+N(q*item.price):'—');
+  calcAll();
+}
+// buildRestoreForm 已由動態新增取代
+
+function calcRow(pfx,i){
+  const items=pfx==='line'?DB.line:DB.service;const item=items[i];const q=n(`${pfx}_q${i}`);
+  setText(`${pfx}_w${i}`,q>0?F2(q*item.weight)+' kg':'—');
+  setText(`${pfx}_l${i}`,q>0?'$'+N(q*item.price):'—');
+  setText(`${pfx}_p${i}`,q>0?F2(q*item.pts):'—');
+  calcAll();
+}
+function calcAll(){
+  // 線路損失 (動態行)
+  let lW=0,lL=0,lP=0;
+  (_lossRows.line||[]).forEach(row=>{
+    if(row.dbIdx<0) return;
+    const item=DB.line[row.dbIdx]; if(!item)return;
+    const q=parseFloat(document.getElementById(`lq_line_${row.uid}`)?.value)||0;
+    lW+=q*item.weight; lL+=q*item.price; lP+=q*item.pts;
+  });
+  setText('line-wt-total',lW>0?F2(lW)+' kg':'—');
+  setText('line-loss-total',lL>0?'$'+N(lL):'—');
+  setText('line-pts-total',lP>0?F2(lP):'—');
+  // 接戶線損失 (動態行)
+  let sW=0,sL=0,sP=0;
+  (_lossRows.svc||[]).forEach(row=>{
+    if(row.dbIdx<0) return;
+    const item=DB.service[row.dbIdx]; if(!item)return;
+    const q=parseFloat(document.getElementById(`lq_svc_${row.uid}`)?.value)||0;
+    sW+=q*item.weight; sL+=q*item.price; sP+=q*item.pts;
+  });
+  setText('svc-wt-total',sW>0?F2(sW)+' kg':'—');
+  setText('svc-loss-total',sL>0?'$'+N(sL):'—');
+  setText('svc-pts-total',sP>0?F2(sP):'—');
+  // 電表 (動態行)
+  let mL=0;
+  (_meterRows||[]).forEach(row=>{
+    if(row.dbIdx<0) return;
+    const item=DB.meter[row.dbIdx]; if(!item)return;
+    const q=parseFloat(document.getElementById(`mq_${row.uid}`)?.value)||0;
+    mL+=q*item.price;
+    setText(`ml_${row.uid}`, q>0?'$'+N(q*item.price):'—');
+  });
+  setText('meter-loss-total',mL>0?'$'+N(mL):'—');
+  const totalLoss=lL+sL+mL;
+  // 復舊材料 (動態行)
+  let rW=0,rC=0,rP=0;
+  const _allItems=[...DB.line,...DB.service];
+  (_lossRows.rst||[]).forEach(row=>{
+    if(row.dbIdx<0) return;
+    const item=_allItems[row.dbIdx]; if(!item)return;
+    const q=parseFloat(document.getElementById(`lq_rst_${row.uid}`)?.value)||0;
+    rW+=q*item.weight; rC+=q*item.price; rP+=q*item.pts;
+  });
+  setText('rst-wt-total',rW>0?F2(rW)+' kg':'—');
+  setText('rst-cost-total',rC>0?'$'+N(rC):'—');
+  setText('rst-pts-total',rP>0?F2(rP):'—');
+  const wage=n('wage'),hrs=n('labor-hrs'),labor=wage*hrs;
+  const lc=document.getElementById('labor-cost');if(lc)lc.value='$'+N(labor);
+  const impact=n('impact-value');
+  setText('bar-loss','$'+N(totalLoss));setText('bar-restore','$'+N(rC));setText('bar-labor','$'+N(labor));setText('bar-impact','$'+N(impact));
+}
+
+function buildPriceTables(){buildPriceSection('price-line-tbody',DB.line,'line');buildPriceSection('price-svc-tbody',DB.service,'service');buildMeterPrice();}
+function buildPriceSection(tbodyId,items,sec){
+  const tb=document.getElementById(tbodyId);tb.innerHTML='';
+  if(!items.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:16px">（尚未同步資料，請按「🔄 重新同步」）</td></tr>';return;}
+  items.forEach((item)=>{
+    const tr=document.createElement('tr');if(item.updated)tr.classList.add('updated-row');
+    tr.innerHTML=`<td>${esc(item.name)}</td><td style="color:var(--text3)">${esc(item.code||'—')}</td><td style="text-align:right">${item.weight||'—'}</td><td style="text-align:right">${item.price}</td><td style="text-align:right">${item.pts}</td><td style="text-align:right">${item.mult}</td><td style="font-size:11px;color:var(--text3)">${item.updated||'—'}</td>`;
+    tb.appendChild(tr);
+  });
+}
+function buildMeterPrice(){
+  const tb=document.getElementById('price-meter-tbody');tb.innerHTML='';
+  if(!DB.meter.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:16px">（尚未同步資料，請按「🔄 重新同步」）</td></tr>';return;}
+  DB.meter.forEach((item)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${esc(item.name)}</td><td style="color:var(--text3)">${esc(item.code||'—')}</td><td style="text-align:right">${item.price}</td><td style="text-align:right">${item.pts||0}</td><td style="text-align:right">${item.mult||1}</td><td style="font-size:11px;color:var(--text3)">${item.updated||'—'}</td>`;
+    tb.appendChild(tr);
+  });
+}
+function markUpdated(sec,i){DB[sec][i].updated=new Date().toLocaleDateString('zh-TW');}
+function addPriceRow(sec){
+  if(sec==='meter'){DB.meter.push({name:'（新增器材）',code:'',price:0,pts:0,mult:1,updated:''});buildMeterPrice();}
+  else{DB[sec].push({name:'（新增材料）',code:'',weight:0,price:0,pts:1,mult:1.1,updated:''});buildPriceSection(sec==='line'?'price-line-tbody':'price-svc-tbody',DB[sec],sec);}
+  rebuildForms();
+}
+function delPriceRow(sec,i){if(!confirm('確定要刪除「'+DB[sec][i].name+'」嗎？'))return;DB[sec].splice(i,1);buildPriceTables();rebuildForms();}
+function rebuildForms(){buildFormTables();calcAll();}
+function savePriceDB(){
+  if(SHEETS_CSV_URL){
+    // 雲端模式：引導到試算表
+    const sheetBase=SHEETS_CSV_URL.split('/pub?')[0].split('/export?')[0];
+    const editUrl=sheetBase+'/edit';
+    if(confirm('📋 目前使用「Google 試算表」作為共用資料來源。\n\n請直接在試算表中更新導線品名與價格，\n其他使用者按「重新同步」按鈕即可取得最新資料。\n\n【一般外勤人員不需要操作此步驟】\n\n確定要開啟試算表嗎？（需要有編輯權限）')){
+      window.open(editUrl,'_blank');
+    }
+  }else{
+    // 本機模式（未設定試算表網址）
+    localStorage.setItem('taipower_db',JSON.stringify(DB));
+    alert('✅ 導線價格資料已儲存！\n（儲存於本機瀏覽器）');
+    buildPriceTables();rebuildForms();
+  }
+}
+function openNDCIS(){window.open('https://intra.ndcis.taipower.com.tw/ndcis/web/','_blank');}
+function openSheetsEdit(){
+  if(SHEETS_EDIT_URL){
+    window.open(SHEETS_EDIT_URL, '_blank');
+  } else {
+    alert('⚠️ 尚未設定試算表編輯網址。\n\n請用文字編輯器開啟 HTML 檔案，\n找到 SHEETS_EDIT_URL 這一行，\n將你的 Google 試算表網址貼入引號內。\n\n格式：https://docs.google.com/spreadsheets/d/【ID】/edit');
+  }
+}
+
+function buildUnitTable(){
+  const tb=document.getElementById('units-tbody');tb.innerHTML='';
+  UNITS.forEach((u,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><input type="text" value="${esc(u.name)}" onchange="UNITS[${i}].name=this.value"></td><td><input type="text" value="${esc(u.addr)}" onchange="UNITS[${i}].addr=this.value"></td><td><input type="text" value="${esc(u.tel)}" onchange="UNITS[${i}].tel=this.value"></td><td><div class="act-cell"><button class="btn btn-danger btn-xs" onclick="delUnit(${i})">刪除</button></div></td>`;
+    tb.appendChild(tr);
+  });
+}
+function addUnitRow(){UNITS.push({name:'（新服務所）',addr:'',tel:'',zone:''});buildUnitTable();}
+function delUnit(i){if(!confirm('確定刪除「'+UNITS[i].name+'」嗎？'))return;UNITS.splice(i,1);buildUnitTable();}
+function saveUnits(){localStorage.setItem('taipower_units',JSON.stringify(UNITS));renderUnitSelect();alert('✅ 服務所資料已儲存！填表頁下拉選單已同步更新。');}
+
+async function doPrint(){
+  generatePrintArea();
+  const rd = v('report-date').replace(/-/g,'');
+  const ut = v('unit') || '失竊調查表';
+  const origTitle = document.title;
+  document.title = (rd||'') + ut + '失竊調查表';
+  setTimeout(()=>{
+    window.print(); markClean();
+    setTimeout(()=>{ document.title = origTitle; }, 2000);
+  }, 300);
+}
+function generatePrintArea_OLD_DISABLED(){
+  const unit=v('unit'),addr=v('unit-addr'),tel=v('unit-tel');
+  const rdate=v('report-date'),rtime=v('theft-time');
+  const loc1=v('location1'),loc2=v('location2');
+  const lineName=v('line-name'),feeder=v('feeder'),police=v('police'),caseNo=v('case-no');
+  const reporter=v('reporter'),homes=v('outage-homes'),hrs=v('outage-hrs'),impact=v('impact-value'),photos=v('photos'),remarks=v('remarks');
+  const wage=parseFloat(v('wage'))||0,laborHrs=parseFloat(v('labor-hrs'))||0,labor=wage*laborHrs;
+  let lineLoss=0,svcLoss=0,mtrLoss=0,rstCost=0,lineRows='',svcRows='',mtrRows='',rstRows='';
+  DB.line.forEach((item,i)=>{const q=n(`line_q${i}`);if(!q)return;const loss=q*item.price;lineLoss+=loss;lineRows+=`<tr><td>${esc(item.name)}</td><td class="r">${q}M</td><td class="r">${F2(q*item.weight)}kg</td><td class="r">$${N(item.price)}</td><td class="r">$${N(loss)}</td></tr>`;});
+  DB.service.forEach((item,i)=>{const q=n(`svc_q${i}`);if(!q)return;const loss=q*item.price;svcLoss+=loss;svcRows+=`<tr><td>${esc(item.name)}</td><td class="r">${q}M</td><td class="r">${F2(q*item.weight)}kg</td><td class="r">$${N(item.price)}</td><td class="r">$${N(loss)}</td></tr>`;});
+  DB.meter.forEach((item,i)=>{const q=n(`mtr_q${i}`);if(!q)return;const loss=q*item.price;mtrLoss+=loss;mtrRows+=`<tr><td>${esc(item.name)}</td><td class="r">${q}具</td><td class="r">$${N(item.price)}</td><td class="r">$${N(loss)}</td></tr>`;});
+  [...DB.line,...DB.service].forEach((item,i)=>{const q=n(`rst_q${i}`);if(!q)return;const cost=q*item.price;rstCost+=cost;rstRows+=`<tr><td>${esc(item.name)}</td><td class="r">${q}M</td><td class="r">$${N(item.price)}</td><td class="r">$${N(cost)}</td></tr>`;});
+  const totalLoss=lineLoss+svcLoss+mtrLoss;
+  const ms=(title,rows,total,cols)=>rows?`<div class="rpt-sec">${title}</div><table class="rpt-mat"><thead><tr>${cols}</tr></thead><tbody>${rows}</tbody><tfoot><tr class="sub"><td colspan="${cols.split('<th').length-2}">小計</td><td class="r">$${N(total)}</td></tr></tfoot></table>`:'';
+  document.getElementById('print-area').innerHTML=`
+<div class="rpt-co">臺灣電力股份有限公司　臺東區營業處</div>
+<div class="rpt-title">電線電纜被竊損失計算暨現場調查報告表</div>
+<div class="rpt-date">製表日期：${rdate}　通報人：${reporter}</div>
+<table class="rpt-summary"><tr>
+<td><div class="s-lbl">損失材料合計</div><div class="s-val">$${N(totalLoss)}</div></td>
+<td><div class="s-lbl">修復裝設費用</div><div class="s-val bk">$${N(rstCost)}</div></td>
+<td><div class="s-lbl">勘查處理費</div><div class="s-val bk">$${N(labor)}</div></td>
+<td><div class="s-lbl">影響產值</div><div class="s-val bk">$${N(parseFloat(impact)||0)}</div></td>
+</tr></table>
+<div class="rpt-sec">一、基本資訊</div>
+<table class="rpt-info">
+<tr><td class="lbl">經營線路單位</td><td>${unit}</td><td class="lbl">填報日期</td><td>${rdate}</td></tr>
+<tr><td class="lbl">地址</td><td>${addr}</td><td class="lbl">電話</td><td>${tel}</td></tr>
+<tr><td class="lbl">發現失竊時間</td><td>${rdate} ${rtime}</td><td class="lbl">通報人</td><td>${reporter}</td></tr>
+</table>
+<div class="rpt-sec">二、案件資訊</div>
+<table class="rpt-info">
+<tr><td class="lbl">失竊地點</td><td colspan="3">${loc1}　${loc2}</td></tr>
+<tr><td class="lbl">線路名稱</td><td>${lineName}變電所　${feeder}饋線</td><td class="lbl">管轄警察</td><td>${police}分駐所</td></tr>
+<tr><td class="lbl">報案三聯單</td><td>${caseNo||'（待補）'}</td><td class="lbl">停電</td><td>${homes}戶　${hrs}小時</td></tr>
+<tr><td class="lbl">影響產值</td><td>$${N(parseFloat(impact)||0)}</td><td class="lbl">照片</td><td>${photos}張</td></tr>
+</table>
+${remarks?'<div class="rpt-remarks"><b>備註：</b>'+remarks+'</div>':''}
+${ms('三、B-1 損失材料 — 線路電纜',lineRows,lineLoss,'<th style="width:44%">導線規範</th><th class="r">數量</th><th class="r">重量</th><th class="r">單價</th><th class="r">損失金額</th>')}
+${ms('四、B-1 損失材料 — 接戶線',svcRows,svcLoss,'<th style="width:44%">導線規範</th><th class="r">數量</th><th class="r">重量</th><th class="r">單價</th><th class="r">損失金額</th>')}
+${ms('五、B-1 損失材料 — 電表',mtrRows,mtrLoss,'<th style="width:52%">器材別</th><th class="r">數量</th><th class="r">單價</th><th class="r">損失金額</th>')}
+${(lineRows||svcRows||mtrRows)?'<table class="rpt-mat"><tbody><tr class="grand"><td colspan="3"><b>B-1 損失材料總合計</b></td><td class="r"><b>$'+N(totalLoss)+'</b></td></tr></tbody></table>':''}
+${ms('六、B-2 復舊材料',rstRows,rstCost,'<th style="width:52%">導線規範</th><th class="r">數量</th><th class="r">單價</th><th class="r">裝設金額</th>')}
+<div class="rpt-sec">七、A 勘查處理費</div>
+<table class="rpt-labor"><tr><td class="lbl">薪資／小時</td><td class="r">$${N(wage)}</td><td class="lbl">處理時數</td><td class="r">${laborHrs}小時</td><td class="lbl">處理費用</td><td class="r"><b>$${N(labor)}</b></td></tr></table>
+<div class="rpt-notes"><ol>
+<li>各經管單位於發現線路失竊時應攜帶本表前往現場調查（應請當地警察派出所人員會同調查）。</li>
+<li>現場情況應填寫剪線方法之判斷及現場遺留痕跡等。本表於發現失竊後12小時以內報主管單位。</li>
+<li>本表一式二聯，經管單位自存一份，另一份直寄主管組（股系）。</li>
+</ol></div>
+<table class="rpt-sign"><tr>
+<td><div class="role">調查人</div></td><td><div class="role">所長</div></td>
+<td><div class="role">課長</div></td><td><div class="role">經理</div></td>
+</tr></table>`;
+}
+
+// ── 未儲存變更追蹤 ──────────────────────────────────────────
+let _formDirty = false;
+let _suppressDirty = false;
+function markDirty(){ _formDirty = true; _refreshUnsavedToast(); }
+function markClean(){ _formDirty = false; showUnsavedToast(false); }
+function _refreshUnsavedToast(){
+  // 只有離開填寫頁後才顯示提醒，在填寫頁本身不顯示
+  const onForm = document.querySelector('.page.active')?.id === 'page-form';
+  showUnsavedToast(_formDirty && !onForm);
+}
+function showUnsavedToast(show){
+  const t = document.getElementById('unsaved-toast');
+  if(t) t.classList.toggle('show', show);
+}
+
+function switchTab(tab){
+  // 若從填寫頁離開且有未儲存變更，先詢問
+  const curPage = document.querySelector('.page.active');
+  if(_formDirty && curPage && curPage.id==='page-form' && tab!=='form'){
+    document.getElementById('leave-overlay')._targetTab = tab;
+    document.getElementById('leave-overlay').classList.add('show');
+    return;
+  }
+  _doSwitchTab(tab);
+}
+function _doSwitchTab(tab){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['checklist','form','price','units','records','help','history'][i]===tab));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+tab).classList.add('active');
+  document.querySelectorAll('.mobile-nav-item').forEach(el=>{
+    el.classList.toggle('active', el.id==='mnav-'+tab);
+  });
+  if(tab==='records') loadRecords();
+  // 切換後重新評估：回到填寫頁就隱藏 Toast，離開填寫頁且有未儲存才顯示
+  _refreshUnsavedToast();
+}
+function leaveConfirm(){
+  const tab = document.getElementById('leave-overlay')._targetTab;
+  document.getElementById('leave-overlay').classList.remove('show');
+  markClean();
+  _doSwitchTab(tab);
+}
+function leaveCancel(){
+  document.getElementById('leave-overlay').classList.remove('show');
+}
+
+// Toast 提示（自動消失）
+function showToast(msg, duration=2500){
+  const t = document.getElementById('msg-toast');
+  if(!t) return;
+  document.getElementById('toast-msg').textContent = msg;
+  t.style.display='block';
+  clearTimeout(t._toastTimer);
+  t._toastTimer = setTimeout(()=>{ t.style.display='none'; }, duration);
+}
+function goSec(id){switchTab('form');setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}),50);document.querySelectorAll('.sb-item').forEach(el=>el.classList.toggle('active',el.getAttribute('onclick')?.includes(id)));}
+function clearFormSilent(){
+  _suppressDirty = true;
+  // 清空所有輸入欄位（不跳確認、不清除 unit 選單選項）
+  document.querySelectorAll('#page-form input[type=number]').forEach(el=>{if(!['wage','labor-hrs'].includes(el.id))el.value='';});
+  document.querySelectorAll('#page-form input[type=text], #page-form input[type=date]').forEach(el=>{if(!el.readOnly)el.value='';});
+  document.querySelectorAll('#page-form select').forEach(el=>el.selectedIndex=0);
+  document.getElementById('report-date').value=new Date().toISOString().slice(0,10);
+  document.getElementById('theft-time').value='08:00';
+  document.getElementById('remarks').value='';
+  buildFormTables(); // 清空動態列
+  renderUnitSelect(); // 確保 unit 選單選項完整
+  onUnitChange(); calcAll();
+  setDocId('');
+  _suppressDirty = false; markClean();
+}
+function clearForm(){
+  if(!confirm('確定清除所有填寫資料？'))return;
+  clearFormSilent();
+  alert('✅ 已清除。');
+}
+function n(id){return parseFloat(document.getElementById(id)?.value)||0;}
+function v(id){return document.getElementById(id)?.value||'';}
+function setText(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
+function N(num){return Math.round(num).toLocaleString('zh-TW');}
+function F2(num){return parseFloat(num).toFixed(2);}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function setRemarks(txt){ document.getElementById('remarks').value = txt; }
+
+function delDropdownOption(selectId){
+  const sel = document.getElementById(selectId);
+  const idx = sel.selectedIndex;
+  if(idx <= 0){ alert('請先在下拉選單選擇要刪除的選項'); return; }
+  if(!confirm('確定要刪除「'+sel.options[idx].text+'」嗎？')) return;
+  sel.remove(idx);
+}
+
+function addDropdownOption(selectId){
+  const val = prompt('請輸入要新增的選項名稱：');
+  if(!val || !val.trim()) return;
+  const sel = document.getElementById(selectId);
+  const opt = document.createElement('option');
+  opt.value = val.trim(); opt.textContent = val.trim(); opt.selected = true;
+  sel.appendChild(opt);
+}
+
+function generatePrintArea(){
+  const unit=v('unit'),addr=v('unit-addr'),tel=v('unit-tel');
+  const rdate=v('report-date'),rtime=v('theft-time');
+  const loc1=v('location1'),loc2=v('location2');
+  const lineName=v('line-name'),feeder=v('feeder'),police=v('police'),caseNo=v('case-no');
+  const reporter=v('reporter'),homes=v('outage-homes')||'0',hrs=v('outage-hrs')||'0';
+  const impact=v('impact-value')||'0',photos=v('photos')||'0',remarks=v('remarks');
+  const wage=parseFloat(v('wage'))||250,laborHrs=parseFloat(v('labor-hrs'))||4;
+  const labor=wage*laborHrs;
+
+  const dt=rdate?rdate.replace(/-/g,''):'';
+  const yr=rdate?rdate.split('-')[0]:'';
+  const mo=rdate?parseInt(rdate.split('-')[1]):'';
+  const dy=rdate?parseInt(rdate.split('-')[2]):'';
+  const tp=rtime?rtime.split(':'):['8','00'];
+  const timeH=parseInt(tp[0]||'8'),timeM=tp[1]||'00';
+  const ampm=timeH<12?'上午':'下午';
+  const h12=timeH===0?12:timeH>12?timeH-12:timeH;
+  const fullLoc=loc1+(loc2?'（'+loc2+'）':'');
+
+  // 從動態行收集損失/復舊材料
+  const _all=[...DB.line,...DB.service];
+  let lineItems=[],svcItems=[],mtrItems=[],rstItems=[];
+  let lineLoss=0,svcLoss=0,mtrLoss=0,rstCost=0,totalRstPts=0;
+
+  (_lossRows.line||[]).forEach(row=>{
+    if(row.dbIdx<0)return;
+    const item=DB.line[row.dbIdx];if(!item)return;
+    const q=parseFloat(document.getElementById(`lq_line_${row.uid}`)?.value)||0;if(!q)return;
+    const loss=q*item.price,wt=q*item.weight;lineLoss+=loss;
+    lineItems.push({name:item.name,qty:q,wt,price:item.price,loss,pts:item.pts,tpts:q*item.pts});
+  });
+  (_lossRows.svc||[]).forEach(row=>{
+    if(row.dbIdx<0)return;
+    const item=DB.service[row.dbIdx];if(!item)return;
+    const q=parseFloat(document.getElementById(`lq_svc_${row.uid}`)?.value)||0;if(!q)return;
+    const loss=q*item.price,wt=q*item.weight;svcLoss+=loss;
+    svcItems.push({name:item.name,qty:q,wt,price:item.price,loss,pts:item.pts,tpts:q*item.pts});
+  });
+  (_meterRows||[]).forEach(row=>{
+    if(row.dbIdx<0) return;
+    const item=DB.meter[row.dbIdx]; if(!item)return;
+    const q=parseFloat(document.getElementById(`mq_${row.uid}`)?.value)||0; if(!q)return;
+    mtrLoss+=q*item.price;mtrItems.push({name:item.name,qty:q,price:item.price,loss:q*item.price});
+  });
+  (_lossRows.rst||[]).forEach(row=>{
+    if(row.dbIdx<0)return;
+    const item=_all[row.dbIdx];if(!item)return;
+    const q=parseFloat(document.getElementById(`lq_rst_${row.uid}`)?.value)||0;if(!q)return;
+    const cost=q*item.price,wt=q*item.weight,tpts=q*item.pts;
+    rstCost+=cost;totalRstPts+=tpts;
+    rstItems.push({name:item.name,qty:q,wt,price:item.price,cost,pts:item.pts,tpts});
+  });
+
+  const totalLoss=lineLoss+svcLoss+mtrLoss;
+  const allLossItems=[...lineItems,...svcItems];
+  const accessoryCost=Math.round(totalRstPts/1000*2940*10)/10;
+  const laborUnits=Math.round(totalRstPts/100*10)/10;
+  const laborWageCost=Math.round(laborUnits*1500*10)/10;
+  const travelCost=Math.round(laborUnits*250*10)/10;
+  const matBase=rstCost+accessoryCost;
+  const miscCost=Math.round(matBase*0.07*10)/10;
+  const totalRepairFull=Math.round((rstCost+accessoryCost+laborWageCost+travelCost+miscCost)*10)/10+labor;
+
+  const F="font-family:'PMingLiU','新細明體','MingLiU',serif";
+  const B='border:1px solid #000';
+  const FS='font-size:9pt';   // 表格內文
+  const FSS='font-size:8pt';  // 小字
+  const FSH='font-size:16.5pt'; // 主標題(11pt×1.5)
+  const FSH2='font-size:13.5pt'; // 副標(9pt×1.5)
+  const FS2='font-size:8pt';
+  const FSS2='font-size:7pt';
+  const SEC='font-size:12pt';
+
+  const lbl=(w='')=>`style="${B};padding:1.5mm 2mm;background:#dde8f5;font-weight:bold;white-space:nowrap;${F};${FS}${w?';width:'+w:''}"`;
+  const val=(extra='')=>`style="${B};padding:1.5mm 2mm;${F};${FS}${extra}"`;
+
+  function lossRows(items,fs){
+    if(!items.length) return `<tr><td colspan="7" style="${B};padding:1mm 2mm;text-align:center;${F};${fs}">以下空白</td></tr>`;
+    return items.map(it=>`<tr>
+      <td style="${B};padding:1mm 2mm;${F};${fs}">${esc(it.name)}</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${fs}">${it.qty}</td>
+      <td style="${B};padding:1mm;text-align:center;${F};${fs}">M</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${fs}">${it.wt.toFixed(2)}</td>
+      <td style="${B};padding:1mm;text-align:center;${F};${fs}">KG</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${fs}">$${N(it.price)}</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${fs}">$${N(it.loss)}</td></tr>`).join('')
+    +`<tr><td colspan="7" style="${B};padding:1mm 2mm;text-align:center;${F};${fs}">以下空白</td></tr>`;
+  }
+
+  // ══ 頁1+2：現場調查表 ══
+  // 表頭放大1.5倍：11pt→16.5pt，9pt→13.5pt
+  const page12=`<div style="width:192mm;box-sizing:border-box;page-break-after:always;${F};${FS}">
+  <div style="text-align:right;font-size:8pt;font-weight:normal;margin-bottom:1mm;${F}">${yr}${mo.toString().padStart(2,'0')}${dy.toString().padStart(2,'0')}${esc(unit)}失竊調查表</div>
+  <div style="text-align:center;${FSH};font-weight:bold;margin-bottom:2mm;${F}">
+    台東區營業處 電力線路失竊現場調查表
+  </div>
+  <table style="width:100%;border-collapse:collapse;${F};${FS};margin-bottom:1mm">
+    <tr>
+      <td ${lbl('20mm')}>填報日期</td><td ${val()}>${yr}年${mo}月${dy}日</td>
+      <td ${lbl('16mm')}>填報單位</td><td ${val()} colspan="3">${esc(unit)}</td>
+    </tr><tr>
+      <td ${lbl()}>經營線路單位</td><td ${val()} colspan="2">${esc(unit)}</td>
+      <td ${lbl('10mm')}>地址</td><td ${val()} colspan="2">${esc(addr)}</td>
+    </tr><tr>
+      <td ${lbl()}>電話</td><td ${val()}>${esc(tel)}</td>
+      <td ${lbl()}>通報人</td>
+      <td style="${B};padding:1.5mm 2mm;${F};${FS};white-space:nowrap;min-width:18mm">${esc(reporter)}</td>
+      <td ${lbl()}>通報時間</td><td ${val()}>${yr}年${mo}月${dy}日 ${timeH}時${timeM}分</td>
+    </tr>
+  </table>
+  <table style="width:100%;border-collapse:collapse;${F};${FS};margin-bottom:1mm">
+    <tr><td ${lbl('32mm')}>發現失竊時間</td><td ${val()} colspan="5">${dt} ${ampm} ${h12}時${timeM}分　發現失竊</td></tr>
+    <tr><td ${lbl()}>失竊前巡視線路情形</td><td ${val()} colspan="5">良好</td></tr>
+    <tr><td ${lbl()}>失竊地點（詳細地址）</td><td ${val()} colspan="5">${esc(fullLoc)}</td></tr>
+    <tr><td ${lbl()}>線路名稱</td><td ${val()} colspan="5">${esc(lineName)} 變電所　${esc(feeder)} 饋線</td></tr>
+  </table>
+  <div style="background:#1a4a7a;color:#fff;font-weight:bold;padding:1mm 2mm;margin:1mm 0;${F};${FSS}">損失器材名稱、數（公斤）量、價（元）值</div>
+  <table style="width:100%;border-collapse:collapse;${F};${FS};margin-bottom:1mm">
+    <thead><tr>
+      <th style="${B};padding:1mm 2mm;background:#1a4a7a;color:#fff;text-align:left;width:34%">器材名稱</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:8%">數量(M)</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:5%">單位</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:10%">重量（KG）</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:5%">單位</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:14%">單價／M</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:right">價值（元）</th>
+    </tr></thead>
+    <tbody>${lossRows(allLossItems,FS)}</tbody>
+    <tfoot><tr>
+      <td colspan="6" style="${B};padding:1mm 2mm;font-weight:bold;${F};${FS}">合　計</td>
+      <td style="${B};padding:1mm;text-align:right;font-weight:bold;${F};${FS}">$${N(totalLoss)}</td>
+    </tr></tfoot>
+  </table>
+  <table style="width:100%;border-collapse:collapse;${F};${FS};margin-bottom:1mm">
+    <tr><td ${lbl('32mm')}>該管警察分局（所）名</td>
+      <td ${val()} colspan="5">${esc(police)} 分局　${esc(police)} 分駐、派出所</td></tr>
+    <tr><td ${lbl()}>口頭報案</td>
+      <td ${val()} colspan="2">${mo}月${dy}日 ${timeH}時${timeM}分</td>
+      <td colspan="3" style="${B};padding:1.5mm 2mm"></td></tr>
+  </table>
+  <div style="${B};border-bottom:none;padding:1mm 2mm;${F};${FS}">現場情形（以圖畫詳細報示）</div>
+  <div style="border:1px solid #000;border-top:none;min-height:45mm;padding:2mm;${F};${FS};margin-bottom:1mm"></div>
+  <table style="width:100%;border-collapse:collapse;${F};${FS};margin-bottom:1mm">
+    <tr>
+      <td style="${B};padding:1.5mm 2mm;font-weight:bold;background:#dde8f5;width:22mm;${F};${FS}">報案（或會同）:</td>
+      <td style="${B};padding:1.5mm 2mm;width:24%;${F};${FS}">${esc(police)} 分駐、派出所</td>
+      <td style="${B};padding:1.5mm 2mm;background:#dde8f5;text-align:center;white-space:nowrap;${F};font-size:8pt">職稱:</td>
+      <td style="${B};padding:1.5mm 2mm;width:18%"></td>
+      <td style="${B};padding:1.5mm 2mm;background:#dde8f5;text-align:center;white-space:nowrap;${F};font-size:8pt">蓋章:</td>
+      <td style="${B};padding:1.5mm 2mm;width:18%"></td>
+    </tr>
+    <tr>
+      <td style="${B};padding:1.5mm 2mm;font-weight:bold;background:#dde8f5;${F};${FS}">調查人員證明:</td>
+      <td style="${B};padding:1.5mm 2mm;${F};${FS}"></td>
+      <td style="${B};padding:1.5mm 2mm;background:#dde8f5;text-align:center;white-space:nowrap;${F};font-size:8pt">姓名:</td>
+      <td style="${B};padding:1.5mm 2mm" colspan="3"></td>
+    </tr>
+  </table>
+  <ol style="${FSS};color:#000;margin:1mm 0 1.5mm;padding-left:5mm;${F};line-height:1.4">
+    <li>各經管單位於發現線路失竊時應攜帶本表前往現場調查（應請當地警察派出所人員會同調查）。</li>
+    <li>現場情況應填寫剪線方法之判斷及現場遺留痕跡等。</li>
+    <li>本表於發現失竊後12小時以內報主管單位（並應先用電話報告主管組股系）。</li>
+    <li>現場情況應待警察機構派員堪察後再行修復以利判斷做為破案之線索。</li>
+    <li>本表一式二份，經管單位自存一份，另一份直寄主管組（股系）。</li>
+  </ol>
+  <div style="${F};${FSS};font-weight:bold;margin-bottom:0.5mm">調查部門</div>
+  <table style="width:100%;border-collapse:collapse;${F};${FS};margin-bottom:1.5mm">
+    <tr>
+      <td style="padding:8mm 0 2mm;text-align:left;font-weight:bold;${F};${FS};width:25%;border-bottom:1px solid #000;padding-left:2mm">調查人:</td>
+      <td style="padding:8mm 0 2mm;text-align:left;font-weight:bold;${F};${FS};width:25%;border-bottom:1px solid #000;padding-left:2mm">所長(主任):</td>
+      <td style="padding:8mm 0 2mm;text-align:left;font-weight:bold;${F};${FS};width:25%;border-bottom:1px solid #000;padding-left:2mm">課長:</td>
+      <td style="padding:8mm 0 2mm;text-align:left;font-weight:bold;${F};${FS};width:25%;border-bottom:1px solid #000;padding-left:2mm">經理:</td>
+    </tr>
+  </table>
+  <div style="${F};${FSS};font-weight:bold;margin-bottom:0.5mm">會辦部門</div>
+  <table style="width:100%;border-collapse:collapse;${F};${FS}">
+    <tr>
+      <td style="padding:8mm 0 2mm;text-align:left;font-weight:bold;${F};${FS};width:25%;border-bottom:1px solid #000;padding-left:2mm">經辦:</td>
+      <td style="padding:8mm 0 2mm;text-align:left;font-weight:bold;${F};${FS};width:25%;border-bottom:1px solid #000;padding-left:2mm">線路課長:</td>
+      <td style="padding:8mm 0 2mm;text-align:left;font-weight:bold;${F};${FS};width:25%;border-bottom:1px solid #000;padding-left:2mm">經理:</td>
+      <td style="padding:8mm 0 2mm;text-align:left;font-weight:bold;${F};${FS};width:25%;border-bottom:1px solid #000;padding-left:2mm">副處長:</td>
+    </tr>
+  </table>
+</div>`;
+
+  // ══ 頁3+4：計算式 ══
+  function rstRows2(items){
+    if(!items.length) return `<tr><td colspan="9" style="${B};padding:1mm 2mm;text-align:center;${F};${FS2}">以下空白</td></tr>`;
+    return items.map(it=>`<tr>
+      <td style="${B};padding:1mm 2mm;${F};${FS2}">${esc(it.name)}</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">${it.qty}</td>
+      <td style="${B};padding:1mm;text-align:center;${F};${FS2}">M</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">${it.wt.toFixed(2)}</td>
+      <td style="${B};padding:1mm;text-align:center;${F};${FS2}">KG</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">$${N(it.price)}</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">$${N(it.cost)}</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">${it.pts}</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">${it.tpts.toFixed(1)}</td></tr>`).join('')
+    +`<tr><td colspan="9" style="${B};padding:1mm 2mm;text-align:center;${F};${FS2}">以下空白</td></tr>`;
+  }
+  const thl=(t,w='')=>`<td style="${B};padding:1mm 2mm;background:#dde8f5;font-weight:bold;${F};${FS2}${w?';width:'+w:''}">${t}</td>`;
+  const tdr=(t)=>`<td style="${B};padding:1mm;text-align:right;${F};${FS2}">${t}</td>`;
+  const thh=(t,w='')=>`<th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;${F};${FS2}${w?';width:'+w:''}">${t}</th>`;
+  const thal=(t,w='')=>`<th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:left;${F};${FS2}${w?';width:'+w:''}">${t}</th>`;
+  const SECH=(t)=>`<div style="${SEC};font-weight:bold;margin:2mm 0 0.5mm;${F};color:#000">${t}</div>`;
+
+  const page34=`<div style="width:192mm;box-sizing:border-box;page-break-after:always;${F};${FS2}">
+  <div style="text-align:center;font-size:11pt;font-weight:bold;margin-bottom:0.5mm;${F}">電纜線被竊計算式及說明</div>
+  <div style="text-align:right;${FSS2};margin-bottom:2mm;${F}">${yr}年${mo}月${dy}日　失竊地點：${esc(loc1)}</div>
+  ${SECH('A、勘查處理費（處理者每小時基本薪資×處理時數）')}
+  <table style="width:100%;border-collapse:collapse;${F};${FS2};margin-bottom:1.5mm">
+    <tr>${thl('薪資／小時','14%')}${tdr('$'+N(wage))}${thl('處理時數','10%')}${tdr(laborHrs+' 小時')}${thl('處理費用','12%')}<td style="${B};padding:1mm 2mm;text-align:right;font-weight:bold;${F};${FS2}">$${N(labor)}</td></tr>
+  </table>
+  ${SECH('B-1、損失材料')}
+  <table style="width:100%;border-collapse:collapse;${F};${FS2};margin-bottom:1.5mm">
+    <thead><tr style="line-height:1.2">${thal('導線規範','30%')}${thh('數量','6%')}${thh('單位','4%')}${thh('重量','8%')}${thh('單位','4%')}${thh('單價／M','12%')}
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:right;${F};${FS2}">損失金額</th></tr></thead>
+    <tbody>${lossRows(allLossItems,FS2)}</tbody>
+    <tfoot><tr><td colspan="6" style="${B};padding:1mm 2mm;font-weight:bold;${F};${FS2}">材料合計</td>
+      <td style="${B};padding:1mm;text-align:right;font-weight:bold;${F};${FS2}">$${N(totalLoss)}</td></tr></tfoot>
+  </table>
+  ${SECH('B-2、復舊材料')}
+  <table style="width:100%;border-collapse:collapse;${F};${FS2};margin-bottom:1.5mm">
+    <thead><tr>${thal('導線規範','26%')}${thh('數量','5%')}${thh('單位','4%')}${thh('重量','7%')}${thh('單位','4%')}${thh('單價／M','9%')}
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:right;${F};${FS2};width:11%">裝設金額</th>${thh('積點/M','7%')}${thh('工作積點','8%')}</tr></thead>
+    <tbody>${rstRows2(rstItems)}</tbody>
+    <tfoot><tr><td colspan="6" style="${B};padding:1mm 2mm;font-weight:bold;${F};${FS2}">材料合計</td>
+      <td style="${B};padding:1mm;text-align:right;font-weight:bold;${F};${FS2}">$${N(rstCost)}</td>
+      <td style="${B};padding:1mm"></td>
+      <td style="${B};padding:1mm;text-align:right;font-weight:bold;${F};${FS2}">${totalRstPts.toFixed(1)}</td></tr></tfoot>
+  </table>
+  ${SECH('C、裝設附屬器材（每1,000積點2,940元）')}
+  <table style="width:100%;border-collapse:collapse;${F};${FS2};margin-bottom:1.5mm">
+    <tr>${thl('工作積點','14%')}${tdr(totalRstPts.toFixed(1))}${thl('單價','10%')}${tdr('2,940')}${thl('總計','10%')}${tdr('$'+N(accessoryCost))}</tr>
+  </table>
+  ${SECH('D、工資（每100積點1,500元）／E、旅費（每100積點250元）')}
+  <table style="width:100%;border-collapse:collapse;${F};${FS2};margin-bottom:1.5mm">
+    <tr>${thl('工量（積點/100）','18%')}${tdr(laborUnits.toFixed(1))}${thl('工資單價','10%')}${tdr('$1,500')}${thl('搶修加乘','10%')}${tdr('1')}${thl('工資總計','10%')}${tdr('$'+N(laborWageCost))}</tr>
+    <tr>${thl('工量')}${tdr(laborUnits.toFixed(1))}${thl('旅費單價')}${tdr('$250')}${thl('搶修加乘')}${tdr('1')}${thl('旅費總計')}${tdr('$'+N(travelCost))}</tr>
+  </table>
+  ${SECH('F、運雜費（裝設材料費＋裝設附屬器材）×7%')}
+  <table style="width:100%;border-collapse:collapse;${F};${FS2};margin-bottom:1.5mm">
+    <tr>${thl('材料費','14%')}${tdr('$'+N(matBase))}${thl('乘數','10%')}${tdr('0.07')}${thl('運雜費','10%')}${tdr('$'+N(miscCost))}</tr>
+  </table>
+  ${SECH('G、修復費用總計')}
+  <table style="width:100%;border-collapse:collapse;${F};${FS2}">
+    <tr>${thl('裝設材料','13%')}${tdr('$'+N(rstCost))}${thl('裝設附屬器材','13%')}${tdr('$'+N(accessoryCost))}${thl('工資','8%')}${tdr('$'+N(laborWageCost))}${thl('旅費','8%')}${tdr('$'+N(travelCost))}${thl('運雜費','8%')}${tdr('$'+N(miscCost))}</tr>
+    <tr><td colspan="9" style="${B};padding:1mm 2mm;font-weight:bold;${F};${FS2}">修復費用總計（含勘查處理費）</td>
+      <td style="${B};padding:1mm;text-align:right;font-weight:bold;${F};${FS2}">$${N(totalRepairFull)}</td></tr>
+  </table>
+</div>`;
+
+  // ══ 頁5：補充資料表（刪一式兩聯、失竊地點右側置中）══
+  const page5=`<div style="width:192mm;box-sizing:border-box;page-break-after:always;${F};${FS}">
+  <div style="text-align:center;font-size:14pt;font-weight:bold;margin-bottom:1mm;${F}">台灣電力公司　台東區營業處</div>
+  <div style="text-align:center;font-size:12pt;font-weight:bold;margin-bottom:3mm;${F}">電線電纜被竊補充資料</div>
+  <table style="width:100%;border-collapse:collapse;${F};${FS}">
+    <tr><td style="${B};padding:2mm;background:#dde8f5;font-weight:bold;width:8mm">1．</td>
+      <td style="${B};padding:2mm;background:#dde8f5;font-weight:bold;width:52mm">失竊地點</td>
+      <td style="${B};padding:2mm;text-align:center">${esc(fullLoc)}</td></tr>
+    <tr><td style="${B};padding:2mm">2．</td><td style="${B};padding:2mm;font-weight:bold">失竊日期</td>
+      <td style="${B};padding:2mm;text-align:center">${dt}</td></tr>
+    <tr><td style="${B};padding:2mm">3．</td><td style="${B};padding:2mm;font-weight:bold">刑事案件報案三聯單編號</td>
+      <td style="${B};padding:2mm;text-align:center">${esc(caseNo)||''}</td></tr>
+    <tr><td style="${B};padding:2mm">4．</td><td style="${B};padding:2mm;font-weight:bold">相關電力線路失竊現場<br>調查報告表（份）</td>
+      <td style="${B};padding:2mm;text-align:center">1</td></tr>
+    <tr><td style="${B};padding:2mm">5．</td><td style="${B};padding:2mm;font-weight:bold">損失金額（元）</td>
+      <td style="${B};padding:2mm;text-align:center">$${N(totalLoss)}</td></tr>
+    <tr><td style="${B};padding:2mm">6．</td><td style="${B};padding:2mm;font-weight:bold">修復金額（元）</td>
+      <td style="${B};padding:2mm;text-align:center">$${N(totalRepairFull)}</td></tr>
+    <tr><td style="${B};padding:2mm">7．</td><td style="${B};padding:2mm;font-weight:bold">影響產值（元）</td>
+      <td style="${B};padding:2mm;text-align:center">$${N(parseFloat(impact)||0)}</td></tr>
+    <tr><td style="${B};padding:2mm">8．</td><td style="${B};padding:2mm;font-weight:bold">停電戶數（戶）</td>
+      <td style="${B};padding:2mm;text-align:center">${homes}</td></tr>
+    <tr><td style="${B};padding:2mm">9．</td><td style="${B};padding:2mm;font-weight:bold">停電時間（小時）</td>
+      <td style="${B};padding:2mm;text-align:center">${hrs}</td></tr>
+    <tr><td style="${B};padding:2mm">10．</td><td style="${B};padding:2mm;font-weight:bold">現況照片（張）</td>
+      <td style="${B};padding:2mm;text-align:center">${photos}</td></tr>
+    <tr><td style="${B};padding:2mm">11．</td><td style="${B};padding:2mm;font-weight:bold">備註：</td>
+      <td style="${B};padding:2mm;text-align:center">${esc(remarks)}</td></tr>
+  </table>
+</div>`;
+
+  // ══ 頁6：登記表（發現時間=發生時間格式，通報時間加西元年）══
+  const lossQtyText=allLossItems.map(it=>`${esc(it.name)} ${it.qty}M`).join('<br>');
+  const mtrQtyText=mtrItems.map(it=>`${esc(it.name)} ${it.qty}具`).join('<br>');
+  const page6=`<div style="width:192mm;box-sizing:border-box;${F};${FS2}">
+  <div style="text-align:center;font-size:13pt;font-weight:bold;margin-bottom:2mm;${F}">臺灣電力股份有限公司臺東區營業處電纜失竊案登記表</div>
+  <div style="text-align:right;font-size:9pt;margin-bottom:1mm;${F}">通報時間：${yr}年${mo}月${dy}日 ${timeH}時${timeM}分</div>
+  <table style="width:100%;border-collapse:collapse;${F};font-size:9pt">
+    <thead><tr>
+      <th style="${B};padding:1.5mm;background:#1a4a7a;color:#fff;text-align:center;width:5%">編號</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:9%">發現時間</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:9%">發生時間</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:22%">發生地點</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:9%">轄區分局</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:23%">損失數量</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:12%">損失價值（元）</th>
+      <th style="${B};padding:1mm;background:#1a4a7a;color:#fff;text-align:center;width:11%">通報人</th>
+    </tr></thead>
+    <tbody><tr>
+      <td style="${B};padding:1mm;text-align:center">1</td>
+      <td style="${B};padding:1mm;text-align:center">${dt}</td>
+      <td style="${B};padding:1mm;text-align:center">${dt}</td>
+      <td style="${B};padding:1mm;${FS2}">${esc(fullLoc)}</td>
+      <td style="${B};padding:1mm;text-align:center">${esc(police)}分駐所</td>
+      <td style="${B};padding:1mm;${FS2}">${lossQtyText||'（無）'}${mtrQtyText?'<br>'+mtrQtyText:''}</td>
+      <td style="${B};padding:1mm;text-align:right">$${N(totalLoss)}</td>
+      <td style="${B};padding:1mm;text-align:center">${esc(reporter)}<br>${esc(tel)}</td>
+    </tr></tbody>
+    <tfoot><tr>
+      <td colspan="5" style="${B};padding:1mm;text-align:center;font-weight:bold">合計</td>
+      <td style="${B};padding:1mm"></td>
+      <td style="${B};padding:1mm;text-align:right;font-weight:bold">$${N(totalLoss)}</td>
+      <td style="${B};padding:1mm"></td>
+    </tr></tfoot>
+  </table>
+  <div style="margin-top:2mm;${FSS2};${F};line-height:1.8;color:#000">
+    <b>備　註</b><br>
+    一、臺東縣警察局刑事警察大隊值日室　聯絡電話：322354分機9　傳真電話：350752<br>
+    二、臺東區營業處聯絡窗口　上班時間：322481轉355　下班時間：322440　傳真：上班322464　下班361200
+  </div>
+</div>`;
+
+  document.getElementById('print-area').innerHTML = page12 + page34 + page5 + page6;
+}
+
+
+
+
+
+
+const CL_LINE = [
+  '當發現服務區內配電線路設備失竊、遭人撞損、挖損或破壞時，發現部門須派員至現場勘察、照相，如有肇事者，請肇事者於「賠償登記單」、「電力線路設施遭受損害會勘簽認單」上簽章並填寫身份證字號及聯絡方式。如未發現肇事者，請填報「電力線路現場調查報告表」向當地警局派出所報案備查或取報案三聯單（報案以當天為原則，若遇例假日或國定假日則以次個上班日）。',
+  '填報時間、發現失竊時間與口頭報案時間、填表人蓋章日期應為同1日，',
+  '口頭報案時間不可早於發現失竊時間，且應有先後之時差，相關日期欄位之「年、月、日、上、下午、時」都必須填寫，時序是否合理。',
+  '失竊前巡視日期須在失竊日期前，且不超過6個月。',
+  '失竊前線路情形、失竊地點、線路名稱、失竊桿號，是否填寫確實。',
+  '器材名稱、數量及價值是否填寫確實。',
+  '接戶電纜線不屬財產，如須報案及表達請另填電力線路失竊現場調查報告表，不要填在同1張報告表內。',
+  '分局及分駐所/派出所名稱須與警局圓戳章一致，其警局圓戳章及警員職章是否具清晰度。',
+  '各部門核章印章之清晰度及日期是否正確，並依規定於時限內核妥（尤其是年度更替時，及複核人員蓋章日不可早於填表人）。',
+  '「現場情況」欄位內容如不敷使用，另附件繪製之失竊現場線路圖是否有核章。',
+];
+const CL_METER = [
+  '發現服務區內電表設備失竊、遺失、遭人撞損或破壞時，發現部門須派員至現場勘察並填報「計量設備報損（廢）佐證表」向當地警局派出所報案備查或取報案三聯單（報案以當天為原則，若遇例假日或國定假日則以次個上班日）。若警察局不同意由本公司人員報案備查時，可於「計量設備報損（廢）佐證表」上備註說明。',
+  '電表設備失竊、遺失、遭人撞損或破壞時，是否用戶先前已報案並辦理報損，切勿重複作業。',
+  '填報日期、發現時間及報案時間、經辦部門經辦人蓋章日期應為同1日（若不是同1日應於佐證表加註說明）。',
+  '發現時間及報案日期是否填報至時、分，時序是否合理。',
+  '單位名稱、設備報損（廢）單憑証編號、電號、用戶名稱、設備報損（廢）原因及設備報損（廢）設備資料是否確實填寫。',
+  '分局、分駐所/派出所圓戳章及警員職章是否具清晰度。',
+  '各部門核章印章之清晰度及日期是否正確，並依規定於時限內核妥（尤其是年度更替時，及複核人員蓋章日不可早於經辦部門經辦人）。',
+];
+const CL_ASSET = [
+  '設備失竊、遺失、遭外力損壞自發生日起，依規定應於時效內開立「資產報損單」（報損日期不可早於發生日期）。',
+  '報損日期與使用（會核）部門經辦人核章應為同1日。',
+  '資產報損單報損設備說明、規範及報損數量是否與「電力線路失竊現場調查報告表」或「計費設備報損（廢）佐證表」之名稱、數量相符。',
+  '資產報損單之「報損原因」、「處理方式」欄位是否漏填或誤植。',
+  '資產報損單報損金額是否合理。',
+  '設備辦理報損，其報損原因如為過載燒損，除已追究用戶人為疏失索取賠償金額外，是否於「固定資產意外損失總說明表」與「資產報損單」加註說明有關加強用戶使用安全等相關宣導文字。',
+];
+
+function buildChecklist(){
+  function makeRows(items, tbodyId){
+    const tb = document.getElementById(tbodyId);
+    if(!tb) return;
+    tb.innerHTML = '';
+    items.forEach((txt, i) => {
+      const tr = document.createElement('tr');
+      tr.style.borderBottom = '1px solid var(--border)';
+      tr.innerHTML = `
+        <td style="padding:8px;text-align:center;vertical-align:top;font-size:13px">${i+1}</td>
+        <td style="padding:8px;line-height:1.6;font-size:13px">${txt}</td>
+        <td style="padding:8px;text-align:center;vertical-align:middle">
+          <input type="checkbox" id="${tbodyId}_${i}" style="width:18px;height:18px;cursor:pointer">
+        </td>`;
+      tb.appendChild(tr);
+    });
+  }
+  makeRows(CL_LINE,  'cl-line-items');
+  makeRows(CL_METER, 'cl-meter-items');
+  makeRows(CL_ASSET, 'cl-asset-items');
+}
+
+function printChecklist(){
+  const formNo = document.getElementById('cl-form-no').value;
+  // 設定 document.title 讓 PDF 儲存時帶入檔名
+  const _rd2 = v('report-date').replace(/-/g,'');
+  const _ut2 = v('unit') || '自主檢核表';
+  const _origTitle2 = document.title;
+  document.title = (_rd2||'') + _ut2 + '自主檢核表';
+  setTimeout(()=>{ document.title = _origTitle2; }, 3000);
+  const w = window.open('', '_blank', 'width=900,height=700');
+  w.document.write(`<!DOCTYPE html><html lang="zh-TW"><head>
+    <meta charset="UTF-8">
+    <style>
+      @page{size:A4 portrait;margin:6mm 10mm 6mm 10mm}
+      /* 若要完全去除頁首/頁尾網址，請在 Chrome 列印設定中取消勾選「頁首和頁尾」*/
+      body{font-family:'PMingLiU','新細明體','MingLiU',serif;margin:0;padding:0;font-size:9pt;color:#000;line-height:1.3}
+      h2{text-align:center;font-size:13pt;font-weight:bold;margin-bottom:1.5mm}
+      .warn{border:1px solid #999;padding:1mm 2mm;margin-bottom:2mm;font-size:9pt}
+      .sec{font-weight:bold;font-size:10pt;border-left:3px solid #1a4a7a;padding-left:5pt;margin:2mm 0 1mm;color:#000}
+      table{width:100%;border-collapse:collapse;font-size:8.5pt}
+      th{border-bottom:1px solid #666;padding:1mm 2mm;white-space:nowrap}
+      th.tn{width:16pt;text-align:center}
+      th.tc{width:18pt;text-align:center}
+      th.tc2{text-align:left}
+      td{border-bottom:1px solid #ddd;padding:0.4mm 2mm;vertical-align:top}
+      td.tn{width:16pt;text-align:center}
+      td.tc{width:18pt;text-align:center}
+      .note{font-size:8pt;margin-top:2mm;line-height:1.4;color:#000}
+      .sign-area{margin-top:3mm}
+      .sign-block{margin-bottom:1.5mm}
+      .sign-title{font-size:9pt;font-weight:bold;margin-bottom:1.5mm}
+      .sign-row{display:flex;gap:0;font-size:9pt}
+      .sign-item{flex:1}
+      .sign-line{display:inline-block;min-width:55pt}
+    </style>
+    </head><body>
+    <h2>固定資產配電設備意外報損作業自主檢核表</h2>
+    <p style="font-size:10pt;margin-bottom:2mm">資產報損單E表單單號：<u style="display:inline-block;min-width:80pt">${formNo||''}</u></p>
+    <div class="warn">▲ 請依序打勾確認（禁止用電子檔直接打勾確認）</div>
+
+    <div class="sec">電力(訊)線路失竊現場調查報告表</div>
+    <table><thead><tr>
+      <th class="tn">項次</th><th class="tc2">檢核內容</th><th class="tc">確認</th>
+    </tr></thead><tbody>
+    ${CL_LINE.map((t,i)=>`<tr><td class="tn">${i+1}</td><td>${t}</td><td class="tc">□</td></tr>`).join('')}
+    </tbody></table>
+
+    <div class="sec">計量設備報損（廢）佐證表</div>
+    <table><thead><tr>
+      <th class="tn">項次</th><th class="tc2">檢核內容</th><th class="tc">確認</th>
+    </tr></thead><tbody>
+    ${CL_METER.map((t,i)=>`<tr><td class="tn">${i+1}</td><td>${t}</td><td class="tc">□</td></tr>`).join('')}
+    </tbody></table>
+
+    <div class="sec">資產報損單</div>
+    <table><thead><tr>
+      <th class="tn">項次</th><th class="tc2">檢核內容</th><th class="tc">確認</th>
+    </tr></thead><tbody>
+    ${CL_ASSET.map((t,i)=>`<tr><td class="tn">${i+1}</td><td>${t}</td><td class="tc">□</td></tr>`).join('')}
+    </tbody></table>
+
+    <div class="note">
+      備註1：本表依本處常見缺失訂定，日後依執行成效不定期修正公告周知。<br>
+      備註2：本表採1案1檢查表（1張電力線路失竊現場調查報告表或計量設備報損（廢）佐證表就要1張檢查表）。<br>
+      備註3：本表由發現部門（巡修班、服務所、服務中心等）作自主檢查用，陳核後送回原填報人存查。
+    </div>
+
+    <div class="sign-area" style="margin-top:3mm">
+      <div class="sign-block">
+        <div class="sign-title">使用（會核部門）</div>
+        <div class="sign-row">
+          <div class="sign-item">填報人：<span class="sign-line">&nbsp;</span></div>
+          <div class="sign-item">課長（所長、主任）：<span class="sign-line">&nbsp;</span></div>
+          <div class="sign-item">經理：<span class="sign-line">&nbsp;</span></div>
+        </div>
+      </div>
+      <div class="sign-block">
+        <div class="sign-title">經管部門</div>
+        <div class="sign-row">
+          <div class="sign-item">經辦：<span class="sign-line">&nbsp;</span></div>
+          <div class="sign-item">課長：<span class="sign-line">&nbsp;</span></div>
+          <div class="sign-item">經理：</div>
+        </div>
+      </div>
+    </div>
+    
+    </body></html>`);
+  w.document.close();
+  setTimeout(()=>w.print(), 500);
+}
+
+
+
+
+
+// ══ 手機響應式 JS ══
+function isMobile(){ return window.innerWidth <= 768; }
+
+function mobileTab(tab){
+  switchTab(tab);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  function applyMobileLayout(){
+    const mobile = isMobile();
+    const tabsEl = document.querySelector('.tabs');
+    if(tabsEl) tabsEl.style.display = mobile ? 'none' : '';
+    const fab = document.getElementById('fab-nav');
+    if(fab) fab.style.display = mobile ? 'flex' : 'none';
+  }
+  window.addEventListener('resize', applyMobileLayout);
+  applyMobileLayout();
+
+  let lastScrollY = 0;
+  window.addEventListener('scroll', ()=>{
+    const nav = document.getElementById('mobile-nav');
+    if(!nav || !isMobile()) return;
+    const y = window.scrollY;
+    if(y > lastScrollY && y > 80){
+      nav.style.transform = 'translateY(100%)';
+    } else {
+      nav.style.transform = 'translateY(0)';
+    }
+    nav.style.transition = 'transform 0.2s ease';
+    lastScrollY = y;
+  }, {passive:true});
+});
+
+</script>
+
+<!-- ══ 手機底部導覽列 ══ -->
+<nav class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-item active" id="mnav-checklist" onclick="mobileTab('checklist')">
+    <span class="nav-icon">✅</span>
+    <span>檢核表</span>
+  </div>
+  <div class="mobile-nav-item" id="mnav-form" onclick="mobileTab('form')">
+    <span class="nav-icon">📋</span>
+    <span>填寫</span>
+  </div>
+  <div class="mobile-nav-item" id="mnav-price" onclick="mobileTab('price')">
+    <span class="nav-icon">💰</span>
+    <span>價格</span>
+  </div>
+  <div class="mobile-nav-item" id="mnav-units" onclick="mobileTab('units')">
+    <span class="nav-icon">🏢</span>
+    <span>服務所</span>
+  </div>
+  <div class="mobile-nav-item" id="mnav-records" onclick="mobileTab('records')">
+    <span class="nav-icon">📁</span>
+    <span>填報歷史</span>
+  </div>
+  <div class="mobile-nav-item" id="mnav-help" onclick="mobileTab('help')">
+    <span class="nav-icon">📌</span>
+    <span>說明</span>
+  </div>
+  <div class="mobile-nav-item" id="mnav-history" onclick="mobileTab('history')">
+    <span class="nav-icon">📜</span>
+    <span>歷史</span>
+  </div>
+  <div class="mobile-nav-item" id="mnav-print" onclick="doPrint()">
+    <span class="nav-icon">🖨</span>
+    <span>列印</span>
+  </div>
+</nav>
+
+<!-- ══ 手機 FAB 快速操作 ══ -->
+<div class="fab-nav" id="fab-nav">
+  <button class="fab-btn blue" onclick="doPrint()" title="列印">🖨</button>
+</div>
+
+<!-- ══ PIN 驗證 Modal（放在 body 底部，脫離所有容器）══ -->
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-box">
+    <div class="pin-title">🔐 請輸入修改密碼</div>
+    <div class="pin-sub">輸入 PIN 碼才能修改或刪除紀錄</div>
+    <input class="pin-input" type="password" id="pin-input" placeholder="——" oninput="pinInputChanged()" onkeydown="if(event.key==='Enter')confirmPin()">
+    <div class="pin-error" id="pin-error"></div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-secondary" style="flex:1" onclick="closePinModal()">取消</button>
+      <button class="btn btn-primary" style="flex:1" onclick="confirmPin()">確認</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 編輯紀錄 Modal ══ -->
+<div class="edit-overlay" id="edit-overlay">
+  <div class="edit-box">
+    <div class="edit-box-title">✏️ 修改填報紀錄</div>
+    <div class="edit-fg">
+      <label class="edit-fl">通報人</label>
+      <input class="edit-fi" id="em-reporter" type="text" placeholder="填入姓名">
+    </div>
+    <div class="edit-fg">
+      <label class="edit-fl">失竊地點</label>
+      <input class="edit-fi" id="em-location" type="text" placeholder="詳細地址">
+    </div>
+    <div class="edit-fg">
+      <label class="edit-fl">刑事報案三聯單編號</label>
+      <input class="edit-fi" id="em-caseno" type="text" placeholder="報案後填入">
+    </div>
+    <div class="edit-fg">
+      <label class="edit-fl">備註</label>
+      <textarea class="edit-fi edit-fta" id="em-remarks" placeholder="備註說明…"></textarea>
+    </div>
+    <div class="edit-fg">
+      <label class="edit-fl">狀態</label>
+      <select class="edit-fi" id="em-status">
+        <option value="draft">💾 暫存草稿</option>
+        <option value="done">✅ 已完成</option>
+        <option value="no_theft">📋 無失竊案件</option>
+      </select>
+    </div>
+    <div id="em-error" style="font-size:12px;color:#c0392b;min-height:18px;margin-bottom:8px"></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-secondary" style="flex:1" onclick="closeEditModal()">取消</button>
+      <button class="btn btn-primary" style="flex:1" onclick="confirmEdit()">💾 儲存修改</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 離開填寫頁確認 Modal ══ -->
+<div class="leave-overlay" id="leave-overlay">
+  <div class="leave-box">
+    <div style="font-size:32px;margin-bottom:10px">⚠️</div>
+    <div style="font-size:16px;font-weight:700;margin-bottom:8px">有未儲存的變更</div>
+    <div style="font-size:13px;color:#6b7280;margin-bottom:20px;line-height:1.6">
+      填寫頁的資料尚未暫存。<br>離開後內容不會遺失，但建議先按「暫存草稿」。
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-secondary" style="flex:1" onclick="leaveCancel()">繼續填寫</button>
+      <button class="btn btn-primary" style="flex:1" onclick="leaveConfirm()">直接離開</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 未儲存提醒 Toast ══ -->
+<div class="unsaved-toast" id="unsaved-toast">
+  <span>⚠️ 有未儲存的變更</span>
+  <button onclick="_doSwitchTab('form');window.scrollTo({top:0,behavior:'smooth'});" style="background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:12px;padding:3px 10px;border-radius:10px;cursor:pointer">返回填寫</button>
+</div>
+<!-- ══ 操作成功 Toast ══ -->
+<div id="msg-toast" style="display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e6b45;color:#fff;padding:10px 22px;border-radius:24px;font-size:13px;font-weight:500;z-index:9991;box-shadow:0 4px 20px rgba(0,0,0,.25);white-space:nowrap;">
+  <span id="toast-msg"></span>
+</div>
+
+<!-- ══ 無失竊案件提醒 Modal ══ -->
+<div class="pin-overlay" id="no-theft-overlay">
+  <div class="pin-box" style="width:360px">
+    <div style="font-size:36px;margin-bottom:10px">📋</div>
+    <div class="pin-title">本月尚無失竊填報紀錄</div>
+    <div class="pin-sub" id="no-theft-month" style="margin-bottom:16px"></div>
+    <div style="background:#f0f7ff;border:1px solid #bfd9f2;border-radius:8px;padding:12px 14px;font-size:13px;color:#2a4a6a;text-align:left;margin-bottom:16px;line-height:1.7">
+      本月目前沒有任何失竊案件的填報紀錄。<br>
+      如確認本月無失竊案件，請按「送出無失竊回報」，系統將自動記錄一筆回報紀錄。<br>
+      <span style="color:#c0392b;font-weight:600">送出後仍可繼續填報失竊案件，不影響後續作業。</span>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-secondary" style="flex:1" onclick="closeNoTheftModal()">關閉（繼續填報）</button>
+      <button class="btn btn-primary" style="flex:1" onclick="submitNoTheft()">✅ 送出無失竊回報</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
