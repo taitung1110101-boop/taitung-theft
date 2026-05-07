@@ -1297,48 +1297,67 @@ function renderRecCard(id, d){
     : '<span class="rec-badge draft">💾 暫存草稿</span>';
   const title = [d.reportDate, d.unit, d.location1].filter(Boolean).join('　') || '（未填寫基本資訊）';
 
-  // 完全不使用 onclick 字串，改用 data-action 屬性
-  const body = document.createElement('div');
-  body.innerHTML = `
-    <div class="rec-card-hdr">
-      <div>
+  // ── 標題列（點擊展開/收合）──
+  const hdr = document.createElement('div');
+  hdr.className = 'rec-card-hdr';
+  hdr.style.cursor = 'pointer';
+  hdr.style.userSelect = 'none';
+  hdr.innerHTML = `
+    <div style="display:flex;align-items:center;gap:8px;min-width:0;flex:1">
+      <span class="rec-toggle-icon" style="font-size:11px;color:#9aa5b4;flex-shrink:0;transition:transform .2s">▶</span>
+      <div style="min-width:0">
         <div class="rec-card-title">${esc(title)}</div>
         <div class="rec-card-meta">儲存時間：${dateStr}　通報人：${esc(d.reporter||'—')}</div>
       </div>
-      <div style="display:flex;align-items:center;gap:8px">${badge}</div>
     </div>
-    <div class="rec-card-body">
-      <span>📍 ${esc(d.location1||'—')} ${esc(d.location2||'')}</span>　
-      <span>⚡ ${esc(d.lineName||'—')} ${esc(d.feeder||'—')}</span>　
-      <span>🚨 ${esc(d.police||'—')}分駐所</span>　
-      <span>💰 損失：${esc(d.totalLoss||'—')}</span>
-      ${d.remarks?`<br>📝 ${esc(d.remarks)}`:''}
-    </div>`;
+    <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">${badge}</div>`;
+  card.appendChild(hdr);
+
+  // ── 內容區（預設收合）──
+  const body = document.createElement('div');
+  body.className = 'rec-card-body';
+  body.style.display = 'none';
+  body.innerHTML = `
+    <span>📍 ${esc(d.location1||'—')} ${esc(d.location2||'')}</span>　
+    <span>⚡ ${esc(d.lineName||'—')} ${esc(d.feeder||'—')}</span>　
+    <span>🚨 ${esc(d.police||'—')}分駐所</span>　
+    <span>💰 損失：${esc(d.totalLoss||'—')}</span>
+    ${d.remarks?`<br>📝 ${esc(d.remarks)}`:''}`;
   card.appendChild(body);
 
-  // 用 JavaScript 直接建立按鈕，不透過 innerHTML
+  // ── 按鈕列（預設收合）──
   const footer = document.createElement('div');
   footer.className = 'rec-card-footer';
+  footer.style.display = 'none';
 
   const btnLoad = document.createElement('button');
   btnLoad.className = 'btn btn-secondary btn-xs';
   btnLoad.textContent = '📋 載入表單';
-  btnLoad.addEventListener('click', function(){ loadToForm(id); });
+  btnLoad.addEventListener('click', function(e){ e.stopPropagation(); loadToForm(id); });
 
   const btnEdit = document.createElement('button');
   btnEdit.className = 'btn btn-secondary btn-xs';
   btnEdit.textContent = '✏️ 修改';
-  btnEdit.addEventListener('click', function(){ requirePin(function(){ editRecord(id); }); });
+  btnEdit.addEventListener('click', function(e){ e.stopPropagation(); requirePin(function(){ editRecord(id); }); });
 
   const btnDel = document.createElement('button');
   btnDel.className = 'btn btn-danger btn-xs';
   btnDel.textContent = '🗑 刪除';
-  btnDel.addEventListener('click', function(){ requirePin(function(){ deleteRecord(id); }); });
+  btnDel.addEventListener('click', function(e){ e.stopPropagation(); requirePin(function(){ deleteRecord(id); }); });
 
   footer.appendChild(btnLoad);
   footer.appendChild(btnEdit);
   footer.appendChild(btnDel);
   card.appendChild(footer);
+
+  // ── 點擊標題列切換展開/收合 ──
+  hdr.addEventListener('click', function(){
+    const expanded = body.style.display !== 'none';
+    body.style.display = expanded ? 'none' : 'block';
+    footer.style.display = expanded ? 'none' : 'flex';
+    const icon = hdr.querySelector('.rec-toggle-icon');
+    if(icon) icon.style.transform = expanded ? '' : 'rotate(90deg)';
+  });
 
   return card;
 }
