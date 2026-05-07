@@ -687,6 +687,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text
   <div><div class="page-title">導線價格資料庫</div>
   <div class="page-sub" id="price-page-sub">資料來自 Google 試算表（共用），如需更新請至試算表修改後按「重新同步」。</div></div>
   <div style="display:flex;gap:8px">
+    <button class="btn btn-green" onclick="savePriceDB()">📋 編輯導線價格表</button>
     <button class="btn btn-blue" onclick="openNDCIS()">🔗 開啟 NDCIS</button>
     <button class="btn btn-secondary" onclick="manualSync()" id="btn-sync">🔄 重新同步</button>
   </div>
@@ -1668,6 +1669,8 @@ const DEFAULT_DB={
 //   2. 選擇「工作表1」→ 格式選「逗號分隔值 (.csv)」→ 按「發布」
 //   3. 複製產生的網址，貼到下方 SHEETS_CSV_URL（取代空字串）
 const SHEETS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQwBpDpTzf-65x5EV_DQRR2RKAhXD0ZvaJLcndvrc1dYyE8q9Y74xkbqAVkzCwrRnVvNwgnbNEm_X_n/pub?gid=1084776175&single=true&output=csv';
+// 試算表編輯網址（供「📋 編輯導線價格表」按鈕使用）
+const SHEETS_EDIT_URL = 'https://docs.google.com/spreadsheets/d/1J8D-Zar4z0VxAbPFbunibA7iZSeGawkOsYvfarED6NE/edit?gid=1084776175#gid=1084776175';
 // ▲▲▲  只需要改這一行  ▲▲▲
 // ═══════════════════════════════════════════════════════════════
 
@@ -2080,15 +2083,13 @@ function addPriceRow(sec){
 function delPriceRow(sec,i){if(!confirm('確定要刪除「'+DB[sec][i].name+'」嗎？'))return;DB[sec].splice(i,1);buildPriceTables();rebuildForms();}
 function rebuildForms(){buildFormTables();calcAll();}
 function savePriceDB(){
-  if(SHEETS_CSV_URL){
-    // 雲端模式：引導到試算表
-    const sheetBase=SHEETS_CSV_URL.split('/pub?')[0].split('/export?')[0];
-    const editUrl=sheetBase+'/edit';
+  if(SHEETS_EDIT_URL){
     if(confirm('📋 目前使用「Google 試算表」作為共用資料來源。\n\n請直接在試算表中更新導線品名與價格，\n其他使用者按「重新同步」按鈕即可取得最新資料。\n\n【一般外勤人員不需要操作此步驟】\n\n確定要開啟試算表嗎？（需要有編輯權限）')){
-      window.open(editUrl,'_blank');
+      window.open(SHEETS_EDIT_URL,'_blank');
     }
+  }else if(SHEETS_CSV_URL){
+    alert('⚠️ 尚未設定試算表編輯網址（SHEETS_EDIT_URL），請洽主辦設定。');
   }else{
-    // 本機模式（未設定試算表網址）
     localStorage.setItem('taipower_db',JSON.stringify(DB));
     alert('✅ 導線價格資料已儲存！\n（儲存於本機瀏覽器）');
     buildPriceTables();rebuildForms();
