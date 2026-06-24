@@ -185,7 +185,8 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text
     gap: 10px 20px;
     width: 100%;
   }
-  .total-bar > .btn { width: 100%; justify-content: center; }
+  .total-bar > div:last-child { width: 100%; display: grid !important; grid-template-columns: 1fr 1fr; flex-wrap: wrap; }
+  .total-bar > div:last-child .btn { width: 100%; justify-content: center; }
 
   /* ── 卡片 ── */
   .card { padding: 14px; margin-bottom: 12px; }
@@ -1151,12 +1152,15 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text
   <div style="display:flex;gap:8px;flex-shrink:0">
     <button class="btn btn-secondary btn-sm" onclick="saveReport('draft')" title="暫時儲存，之後可繼續編輯">💾 暫存草稿</button>
     <button class="btn btn-green btn-sm" onclick="saveReport('done')" title="正式儲存完成，記錄至填報歷史">✅ 完成送出</button>
+    <button class="btn btn-blue btn-sm" id="btn-excel-report" style="display:none" onclick="downloadExcelFromButton()" title="下載已填入資料的 Excel 報表">📥 下載 Excel</button>
     <button class="btn btn-primary btn-sm" onclick="doPrint()" title="列印紙本，不影響雲端紀錄">🖨 列印</button>
   </div>
 </div>
 
 <div id="print-area"></div>
 
+<script src="vendor/jszip.min.js"></script>
+<script src="excel-report.js"></script>
 <script>
 // ══════════════════════════════════════════════════════════════
 // Firebase 設定
@@ -1238,6 +1242,10 @@ async function saveReport(status='draft'){
   const data = collectFormData();
   if(!data.unit && !data.reportDate && !data.location1){
     alert('⚠️ 請至少填寫「經營線路單位」或「失竊地點」再儲存。'); return; }
+  if(status==='done'){
+    try{ buildExcelReportModel(data); }
+    catch(e){ alert('⚠️ '+e.message); return; }
+  }
   const badge = document.getElementById('sync-badge');
   const origText = badge?.textContent;
   try{
@@ -1253,13 +1261,37 @@ async function saveReport(status='draft'){
     if(badge){ badge.textContent='✅ 已儲存'; badge.style.background='rgba(30,180,80,0.85)'; }
     setTimeout(()=>{ if(badge&&origText) badge.textContent=origText; },3000);
     if(status==='draft') alert('✅ 已暫存草稿！\n可至「📁 填報歷史」繼續編輯或查看。');
-    if(status==='done')  alert('✅ 已完成送出！\n紀錄已正式儲存至填報歷史。');
+    if(status==='done'){
+      const btn=document.getElementById('btn-excel-report');
+      if(btn) btn.style.display='';
+      try{
+        const filename=await downloadExcelReport(data);
+        alert(`✅ 已完成送出！\n紀錄已正式儲存，Excel 報表已開始下載：\n${filename}`);
+      }catch(excelError){
+        console.error('[excel-report]',excelError);
+        alert('✅ 紀錄已完成送出。\n⚠️ Excel 下載失敗：'+excelError.message+'\n請按「📥 下載 Excel」重試。');
+      }
+    }
     return docRef.id;
   }catch(e){
     console.error('[saveReport]',e);
     alert('❌ 儲存失敗：'+e.message);
     if(badge&&origText) badge.textContent=origText;
     return null;
+  }
+}
+
+async function downloadExcelFromButton(){
+  const btn=document.getElementById('btn-excel-report');
+  const old=btn?.textContent;
+  try{
+    if(btn){btn.disabled=true;btn.textContent='⏳ 產生中…';}
+    await downloadExcelReport(collectFormData());
+  }catch(e){
+    console.error('[excel-report]',e);
+    alert('❌ Excel 下載失敗：'+e.message);
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent=old;}
   }
 }
 
@@ -1454,6 +1486,8 @@ async function loadToForm(id){
       setTimeout(()=>calcAll(), 200);
     }, 100);
 
+    const excelBtn=document.getElementById('btn-excel-report');
+    if(excelBtn) excelBtn.style.display=d.status==='done'?'':'none';
     switchTab('form');
     alert('✅ 已載入！請確認資料後再列印或重新暫存。');
   }catch(e){ alert('載入失敗：'+e.message); }
@@ -2194,6 +2228,8 @@ function clearFormSilent(){
   document.getElementById('report-date').value=new Date().toISOString().slice(0,10);
   document.getElementById('theft-time').value='08:00';
   document.getElementById('remarks').value='';
+  const excelBtn=document.getElementById('btn-excel-report');
+  if(excelBtn) excelBtn.style.display='none';
   buildFormTables(); // 清空動態列
   renderUnitSelect(); // 確保 unit 選單選項完整
   onUnitChange(); calcAll();
