@@ -1152,8 +1152,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text
   <div style="display:flex;gap:8px;flex-shrink:0">
     <button class="btn btn-secondary btn-sm" onclick="saveReport('draft')" title="暫時儲存，之後可繼續編輯">💾 暫存草稿</button>
     <button class="btn btn-green btn-sm" onclick="saveReport('done')" title="正式儲存完成，記錄至填報歷史">✅ 完成送出</button>
-    <button class="btn btn-blue btn-sm" id="btn-excel-report" style="display:none" onclick="downloadExcelFromButton()" title="下載已填入資料的 Excel 報表">📥 下載 Excel</button>
-    <button class="btn btn-primary btn-sm" onclick="doPrint()" title="列印紙本，不影響雲端紀錄">🖨 列印</button>
+    <button class="btn btn-blue btn-sm" id="btn-excel-report" onclick="downloadExcelFromButton()" title="下載已填入資料的 Excel 報表">📥 下載 Excel</button>
   </div>
 </div>
 
@@ -1262,8 +1261,6 @@ async function saveReport(status='draft'){
     setTimeout(()=>{ if(badge&&origText) badge.textContent=origText; },3000);
     if(status==='draft') alert('✅ 已暫存草稿！\n可至「📁 填報歷史」繼續編輯或查看。');
     if(status==='done'){
-      const btn=document.getElementById('btn-excel-report');
-      if(btn) btn.style.display='';
       try{
         const filename=await downloadExcelReport(data);
         alert(`✅ 已完成送出！\n紀錄已正式儲存，Excel 報表已開始下載：\n${filename}`);
@@ -1486,8 +1483,6 @@ async function loadToForm(id){
       setTimeout(()=>calcAll(), 200);
     }, 100);
 
-    const excelBtn=document.getElementById('btn-excel-report');
-    if(excelBtn) excelBtn.style.display=d.status==='done'?'':'none';
     switchTab('form');
     alert('✅ 已載入！請確認資料後再列印或重新暫存。');
   }catch(e){ alert('載入失敗：'+e.message); }
@@ -2228,8 +2223,6 @@ function clearFormSilent(){
   document.getElementById('report-date').value=new Date().toISOString().slice(0,10);
   document.getElementById('theft-time').value='08:00';
   document.getElementById('remarks').value='';
-  const excelBtn=document.getElementById('btn-excel-report');
-  if(excelBtn) excelBtn.style.display='none';
   buildFormTables(); // 清空動態列
   renderUnitSelect(); // 確保 unit 選單選項完整
   onUnitChange(); calcAll();
