@@ -1192,32 +1192,22 @@ function initFirebase(){
 
 // ── 收集表單資料 ────────────────────────────────────────────
 function collectFormData(){
-  // 收集動態損失列（含品名 dbIdx 和數量）
-  const lossLines=[], lossSvc=[], lossRst=[], lossMeter=[];
-  _lossRows.line.forEach(r=>{
-    if(r.dbIdx<0) return;
-    const qty=parseFloat(document.getElementById(`lq_line_${r.uid}`)?.value)||0;
-    lossLines.push({dbIdx:r.dbIdx, name:DB.line[r.dbIdx]?.name||'', qty});
+  const readRows = (rows, items, quantityId) => rows.flatMap(row=>{
+    const name = row.materialName||(row.dbIdx>=0?items[row.dbIdx]?.name||'':row.unresolvedName||'');
+    if(row.dbIdx<0 && !name) return [];
+    return [{
+      dbIdx:row.dbIdx,
+      name,
+      qty:parseFloat(document.getElementById(quantityId(row.uid))?.value)||0,
+    }];
   });
-  _lossRows.svc.forEach(r=>{
-    if(r.dbIdx<0) return;
-    const qty=parseFloat(document.getElementById(`lq_svc_${r.uid}`)?.value)||0;
-    lossSvc.push({dbIdx:r.dbIdx, name:DB.service[r.dbIdx]?.name||'', qty});
-  });
-  _lossRows.rst.forEach(r=>{
-    if(r.dbIdx<0) return;
-    const items=[...DB.line,...DB.service];
-    const qty=parseFloat(document.getElementById(`lq_rst_${r.uid}`)?.value)||0;
-    lossRst.push({dbIdx:r.dbIdx, name:items[r.dbIdx]?.name||'', qty});
-  });
-  _meterRows.forEach(r=>{
-    if(r.dbIdx<0) return;
-    const qty=parseFloat(document.getElementById(`mq_${r.uid}`)?.value)||0;
-    lossMeter.push({dbIdx:r.dbIdx, name:DB.meter[r.dbIdx]?.name||'', qty});
-  });
+  const lossLines=readRows(_lossRows.line,DB.line,uid=>`lq_line_${uid}`);
+  const lossSvc=readRows(_lossRows.svc,DB.service,uid=>`lq_svc_${uid}`);
+  const lossRst=readRows(_lossRows.rst,[...DB.line,...DB.service],uid=>`lq_rst_${uid}`);
+  const lossMeter=readRows(_meterRows,DB.meter,uid=>`mq_${uid}`);
   // 收集自訂下拉選項
   const getOpts=id=>Array.from(document.getElementById(id)?.options||[]).map(o=>o.value).filter(Boolean);
-  return {
+  return ReportDraft.hydrate({
     unit:v('unit'), unitAddr:v('unit-addr'), unitTel:v('unit-tel'),
     reportDate:v('report-date'), theftTime:v('theft-time'),
     reporter:v('reporter'), outagHrs:v('outage-hrs'),
@@ -1234,7 +1224,79 @@ function collectFormData(){
     customLineNames:getOpts('line-name'),
     customFeeders:getOpts('feeder'),
     customPolice:getOpts('police'),
+  },DB);
+}
+
+function renderReportDraft(value){
+  const draft=ReportDraft.hydrate(value,DB);
+  clearFormSilent();
+
+  const restoreOpts=(selectId,values)=>{
+    const select=document.getElementById(selectId);
+    if(!select) return;
+    const existing=new Set(Array.from(select.options).map(option=>option.value));
+    values.forEach(value=>{
+      if(!value||existing.has(value)) return;
+      const option=document.createElement('option');
+      option.value=option.textContent=value;
+      select.appendChild(option);
+      existing.add(value);
+    });
   };
+  restoreOpts('unit',[draft.unit]);
+  restoreOpts('line-name',draft.customLineNames);
+  restoreOpts('feeder',draft.customFeeders);
+  restoreOpts('police',draft.customPolice);
+
+  const fields={
+    unit:'unit',unitAddr:'unit-addr',unitTel:'unit-tel',
+    reportDate:'report-date',theftTime:'theft-time',reporter:'reporter',outagHrs:'outage-hrs',
+    location1:'location1',location2:'location2',lineName:'line-name',feeder:'feeder',police:'police',
+    caseNo:'case-no',outageHomes:'outage-homes',impactValue:'impact-value',photos:'photos',
+    remarks:'remarks',wage:'wage',laborHrs:'labor-hrs',
+  };
+  Object.entries(fields).forEach(([field,id])=>{
+    const element=document.getElementById(id);
+    if(element) element.value=draft[field];
+  });
+
+  const restoreRows=(rows,section)=>rows.forEach(row=>{
+    const uid=addLossRow(section,row);
+    if(uid==null) return;
+    const select=document.querySelector(`#loss-row-${section}-${uid} select`);
+    const quantity=document.getElementById(`lq_${section}_${uid}`);
+    if(row.dbIdx>=0&&select){
+      select.value=String(row.dbIdx);
+      onLossSelect(select,section,uid);
+    }
+    if(quantity){
+      quantity.disabled=false;
+      quantity.value=String(row.qty);
+    }
+    if(row.dbIdx>=0) calcLossRow(section,uid);
+  });
+  const restoreMeters=rows=>rows.forEach(row=>{
+    const uid=addMeterRow(row);
+    if(uid==null) return;
+    const select=document.querySelector(`#meter-row-${uid} select`);
+    const quantity=document.getElementById(`mq_${uid}`);
+    if(row.dbIdx>=0&&select){
+      select.value=String(row.dbIdx);
+      onMeterSelect(select,uid);
+    }
+    if(quantity){
+      quantity.disabled=false;
+      quantity.value=String(row.qty);
+    }
+    if(row.dbIdx>=0) calcMeterRow(uid);
+  });
+
+  restoreRows(draft.lossLines,'line');
+  restoreRows(draft.lossSvc,'svc');
+  restoreRows(draft.lossRst,'rst');
+  restoreMeters(draft.lossMeter);
+  calcAll();
+  return draft;
 }
 
 // ── 暫存 / 列印存檔 ─────────────────────────────────────────
@@ -1253,7 +1315,7 @@ async function saveReport(status='draft'){
     if(badge){ badge.textContent='⏳ 儲存中…'; badge.style.background='rgba(255,255,255,0.2)'; badge.style.display='block'; }
     const docRef = db.collection('reports').doc();
     await docRef.set({
-      ...data,
+      ...ReportDraft.serialize(data),
       status,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -1401,92 +1463,14 @@ async function loadToForm(id){
   try{
     const doc = await db.collection('reports').doc(id).get();
     if(!doc.exists){ alert('找不到此紀錄'); return; }
-    const d = doc.data();
-
-    // 靜默清空表單（不跳確認視窗）
-    clearFormSilent();
-
-    // 還原自訂下拉選項（在 set 之前，確保選項存在）
-    const restoreOpts = (selId, vals) => {
-      if(!vals?.length) return;
-      const sel = document.getElementById(selId);
-      if(!sel) return;
-      const existing = new Set(Array.from(sel.options).map(o=>o.value));
-      vals.forEach(v=>{ if(v && !existing.has(v)){ const o=document.createElement('option'); o.value=o.textContent=v; sel.appendChild(o); } });
-    };
-    restoreOpts('line-name', d.customLineNames);
-    restoreOpts('feeder', d.customFeeders);
-    restoreOpts('police', d.customPolice);
-
-    // 還原一般欄位
-    const set = (fid, val) => { const el=document.getElementById(fid); if(el) el.value=val||''; };
-    set('unit',d.unit); set('unit-addr',d.unitAddr); set('unit-tel',d.unitTel);
-    set('report-date',d.reportDate); set('theft-time',d.theftTime);
-    set('reporter',d.reporter); set('outage-hrs',d.outagHrs);
-    set('location1',d.location1); set('location2',d.location2);
-    set('line-name',d.lineName); set('feeder',d.feeder); set('police',d.police);
-    set('case-no',d.caseNo); set('outage-homes',d.outageHomes);
-    set('impact-value',d.impactValue); set('photos',d.photos);
-    set('remarks',d.remarks); set('wage',d.wage); set('labor-hrs',d.laborHrs);
-
-    // 還原動態列（新格式）
-    const restoreRows = (rows, section) => {
-      if(!rows?.length) return;
-      rows.forEach(r=>{
-        addLossRow(section);
-        const uid = _lossRows[section][_lossRows[section].length-1].uid;
-        const sel = document.querySelector(`#loss-row-${section}-${uid} select`);
-        if(sel){
-          // 先嘗試用 dbIdx 找，若品名已變動改用名稱比對
-          const items = section==='line'?DB.line:section==='svc'?DB.service:[...DB.line,...DB.service];
-          let idx = r.dbIdx;
-          if(idx<0 || !items[idx] || items[idx].name!==r.name){
-            idx = items.findIndex(it=>it.name===r.name);
-          }
-          if(idx>=0){
-            sel.value = idx;
-            onLossSelect(sel, section, uid);
-            setTimeout(()=>{
-              const qEl = document.getElementById(`lq_${section}_${uid}`);
-              if(qEl){ qEl.value=r.qty; calcLossRow(section, uid); }
-            }, 50);
-          }
-        }
-      });
-    };
-    const restoreMeters = (rows) => {
-      if(!rows?.length) return;
-      rows.forEach(r=>{
-        addMeterRow();
-        const uid = _meterRows[_meterRows.length-1].uid;
-        const sel = document.querySelector(`#meter-row-${uid} select`);
-        if(sel){
-          let idx = r.dbIdx;
-          if(idx<0 || !DB.meter[idx] || DB.meter[idx].name!==r.name){
-            idx = DB.meter.findIndex(it=>it.name===r.name);
-          }
-          if(idx>=0){
-            sel.value = idx;
-            onMeterSelect(sel, uid);
-            setTimeout(()=>{
-              const qEl = document.getElementById(`mq_${uid}`);
-              if(qEl){ qEl.value=r.qty; calcMeterRow(uid); }
-            }, 50);
-          }
-        }
-      });
-    };
-
-    setTimeout(()=>{
-      restoreRows(d.lossLines, 'line');
-      restoreRows(d.lossSvc, 'svc');
-      restoreRows(d.lossRst, 'rst');
-      restoreMeters(d.lossMeter);
-      setTimeout(()=>calcAll(), 200);
-    }, 100);
+    const draft=renderReportDraft(doc.data());
+    const unavailable=[...draft.lossLines,...draft.lossSvc,...draft.lossRst,...draft.lossMeter]
+      .filter(row=>row.dbIdx<0).length;
 
     switchTab('form');
-    alert('✅ 已載入！請確認資料後再列印或重新暫存。');
+    alert(unavailable
+      ? `✅ 已載入！其中 ${unavailable} 筆原材料已不在目前價格資料庫，請確認後改選或保留。`
+      : '✅ 已載入！請確認資料後再列印或重新暫存。');
   }catch(e){ alert('載入失敗：'+e.message); }
 }
 
@@ -1852,7 +1836,7 @@ function renderUnitSelect(){
 }
 function onUnitChange(){const name=document.getElementById('unit').value;const u=UNITS.find(x=>x.name===name)||{addr:'',tel:''};document.getElementById('unit-addr').value=u.addr||'';document.getElementById('unit-tel').value=u.tel||'';}
 
-// 動態新增的行追蹤 (uid -> {section, dbIdx})
+// 動態新增的材料列狀態（保留名稱，避免 catalog 更新後指到錯誤品項）
 let _lossRows = {line:[], svc:[], rst:[]};
 let _lossUid = 0;
 
@@ -1867,14 +1851,19 @@ function buildFormTables(){
   calcAll();
 }
 
-function addLossRow(section){
+function addLossRow(section,restoredRow=null){
   const items = section==='line' ? DB.line : section==='svc' ? DB.service : [...DB.line,...DB.service];
   // 建立選擇視窗
   const existing = _lossRows[section].map(r=>r.dbIdx);
-  const available = items.filter((_,i)=>!existing.includes(i));
-  if(!available.length){ alert('所有材料已全部加入'); return; }
+  const restoredIdx=Number.isInteger(restoredRow?.dbIdx)?restoredRow.dbIdx:-1;
+  const unavailableName=restoredIdx<0?restoredRow?.name||'':'';
+  const available = items.filter((_,i)=>!existing.includes(i)||i===restoredIdx);
+  if(!available.length&&!unavailableName){ alert('所有材料已全部加入'); return null; }
 
   const opts = available.map((item,i)=>`<option value="${items.indexOf(item)}">${esc(item.name)}</option>`).join('');
+  const unavailableOpt=unavailableName
+    ? `<option value="" selected disabled>⚠ 原品項已不存在：${esc(unavailableName)}</option>`
+    : '';
   const uid = ++_lossUid;
 
   // 移除空提示列
@@ -1895,6 +1884,7 @@ function addLossRow(section){
     <td>
       <select class="fs" style="font-size:12px;padding:4px 6px" onchange="onLossSelect(this,'${section}',${uid})">
         <option value="">— 請選擇導線 —</option>
+        ${unavailableOpt}
         ${opts}
       </select>
     </td>
@@ -1908,18 +1898,31 @@ function addLossRow(section){
       <button class="btn btn-danger btn-xs" onclick="delLossRow('${section}',${uid})">✕</button>
     </td>`;
   tb.appendChild(tr);
-  _lossRows[section].push({uid, dbIdx:-1});
+  _lossRows[section].push({uid,dbIdx:-1,materialName:unavailableName,unresolvedName:unavailableName});
+  if(unavailableName){
+    const quantity=document.getElementById(`lq_${section}_${uid}`);
+    if(quantity) quantity.disabled=false;
+  }
+  return uid;
 }
 
 function onLossSelect(sel, section, uid){
-  const dbIdx = parseInt(sel.value);
+  const parsed = parseInt(sel.value,10);
+  const dbIdx = Number.isInteger(parsed)?parsed:-1;
   const row = _lossRows[section].find(r=>r.uid===uid);
   if(!row) return;
   row.dbIdx = dbIdx;
+  if(dbIdx>=0){
+    const items=section==='line'?DB.line:section==='svc'?DB.service:[...DB.line,...DB.service];
+    row.materialName=items[dbIdx]?.name||'';
+    row.unresolvedName='';
+  }else if(!row.unresolvedName){
+    row.materialName='';
+  }
   const tr = document.getElementById(`loss-row-${section}-${uid}`);
   if(tr) tr.dataset.dbidx = dbIdx;
   const qInput = document.getElementById(`lq_${section}_${uid}`);
-  if(qInput){ qInput.disabled = (dbIdx<0); if(dbIdx>=0) qInput.focus(); }
+  if(qInput){ qInput.disabled = (dbIdx<0&&!row.unresolvedName); if(dbIdx>=0) qInput.focus(); }
   calcLossRow(section, uid);
 }
 
@@ -1967,11 +1970,16 @@ function buildMeterForm(){
   calcAll();
 }
 
-function addMeterRow(){
+function addMeterRow(restoredRow=null){
   const existing = _meterRows.map(r=>r.dbIdx);
-  const available = DB.meter.filter((_,i)=>!existing.includes(i));
-  if(!available.length){ alert('所有電表器材已全部加入'); return; }
+  const restoredIdx=Number.isInteger(restoredRow?.dbIdx)?restoredRow.dbIdx:-1;
+  const unavailableName=restoredIdx<0?restoredRow?.name||'':'';
+  const available = DB.meter.filter((_,i)=>!existing.includes(i)||i===restoredIdx);
+  if(!available.length&&!unavailableName){ alert('所有電表器材已全部加入'); return null; }
   const opts = available.map((item)=>`<option value="${DB.meter.indexOf(item)}">${esc(item.name)}</option>`).join('');
+  const unavailableOpt=unavailableName
+    ? `<option value="" selected disabled>⚠ 原品項已不存在：${esc(unavailableName)}</option>`
+    : '';
   const uid = ++_meterUid;
   const emptyRow = document.getElementById('meter-empty-row');
   if(emptyRow) emptyRow.remove();
@@ -1980,24 +1988,36 @@ function addMeterRow(){
   tr.id = `meter-row-${uid}`;
   tr.innerHTML = `
     <td><select class="fs" style="font-size:12px;padding:4px 6px" onchange="onMeterSelect(this,${uid})">
-      <option value="">— 請選擇器材 —</option>${opts}
+      <option value="">— 請選擇器材 —</option>${unavailableOpt}${opts}
     </select></td>
     <td><input type="number" min="0" id="mq_${uid}" placeholder="0" oninput="calcMeterRow(${uid})" style="width:72px" disabled></td>
     <td class="num" id="mup_${uid}">—</td>
     <td class="calc-cell" id="ml_${uid}" style="color:var(--red);font-weight:600">—</td>
     <td style="text-align:center"><button class="btn btn-danger btn-xs" onclick="delMeterRow(${uid})">✕</button></td>`;
   tb.appendChild(tr);
-  _meterRows.push({uid, dbIdx:-1});
+  _meterRows.push({uid,dbIdx:-1,materialName:unavailableName,unresolvedName:unavailableName});
+  if(unavailableName){
+    const quantity=document.getElementById(`mq_${uid}`);
+    if(quantity) quantity.disabled=false;
+  }
+  return uid;
 }
 
 function onMeterSelect(sel, uid){
-  const dbIdx = parseInt(sel.value);
+  const parsed = parseInt(sel.value,10);
+  const dbIdx = Number.isInteger(parsed)?parsed:-1;
   const row = _meterRows.find(r=>r.uid===uid);
   if(!row) return;
   row.dbIdx = dbIdx;
+  if(dbIdx>=0){
+    row.materialName=DB.meter[dbIdx]?.name||'';
+    row.unresolvedName='';
+  }else if(!row.unresolvedName){
+    row.materialName='';
+  }
   const item = dbIdx>=0 ? DB.meter[dbIdx] : null;
   const qInput = document.getElementById(`mq_${uid}`);
-  if(qInput){ qInput.disabled=(dbIdx<0); if(dbIdx>=0) qInput.focus(); }
+  if(qInput){ qInput.disabled=(dbIdx<0&&!row.unresolvedName); if(dbIdx>=0) qInput.focus(); }
   setText(`mup_${uid}`, item ? N(item.price) : '—');
   calcMeterRow(uid);
 }

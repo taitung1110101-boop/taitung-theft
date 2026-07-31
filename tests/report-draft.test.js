@@ -85,6 +85,11 @@ assert.deepEqual(missingCatalogItem.lossLines[0], {
   name: '硬銅線 22mm²',
   qty: 10,
 });
+assert.deepEqual(ReportDraft.serialize(missingCatalogItem).lossLines[0], {
+  dbIdx: -1,
+  name: '硬銅線 22mm²',
+  qty: 10,
+});
 
 const legacyRecord = ReportDraft.hydrate({
   unit: '舊服務所',
