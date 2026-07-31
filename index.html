@@ -1160,6 +1160,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text
 
 <script src="vendor/jszip.min.js"></script>
 <script src="report-draft.js"></script>
+<script src="report-repository.js"></script>
 <script src="loss-calculator.js"></script>
 <script src="excel-report.js"></script>
 <script>
@@ -1174,15 +1175,20 @@ const FB_CONFIG = {
   messagingSenderId: "514593892105",
   appId: "1:514593892105:web:ea3966a90c461cfedcd5d8"
 };
-// PIN 碼以 SHA-256 雜湊儲存，不以明文存放（無法從此值反推原始 PIN）
+// PIN 只降低介面誤操作風險；真正的資料授權必須由 Firebase Auth 與 Firestore Rules 執行。
 const EDIT_PIN_HASH = '23004bc74042b497c022110c85665db5f22b159912459807f3319aaeebb0e7f5';
 
-let fbApp, db, _pendingPinAction = null;
+let fbApp, db, reportRepository, _pendingPinAction = null;
 
 function initFirebase(){
   try{
     fbApp = firebase.initializeApp(FB_CONFIG);
     db = firebase.firestore();
+    reportRepository = ReportRepository.createFirestoreReportRepository({
+      firestore: db,
+      serverTimestamp: () => firebase.firestore.FieldValue.serverTimestamp(),
+      timestampFromDate: date => firebase.firestore.Timestamp.fromDate(date),
+    });
     // Firebase 連線後顯示「無失竊案件」按鈕
     const btn = document.getElementById('btn-no-theft-top');
     if(btn) btn.style.display='';
@@ -1301,7 +1307,7 @@ function renderReportDraft(value){
 
 // ── 暫存 / 列印存檔 ─────────────────────────────────────────
 async function saveReport(status='draft'){
-  if(!db){ alert('⚠️ Firebase 尚未連線，無法儲存。'); return; }
+  if(!reportRepository){ alert('⚠️ Firebase 尚未連線，無法儲存。'); return; }
   const data = collectFormData();
   if(!data.unit && !data.reportDate && !data.location1){
     alert('⚠️ 請至少填寫「經營線路單位」或「失竊地點」再儲存。'); return; }
@@ -1313,14 +1319,7 @@ async function saveReport(status='draft'){
   const origText = badge?.textContent;
   try{
     if(badge){ badge.textContent='⏳ 儲存中…'; badge.style.background='rgba(255,255,255,0.2)'; badge.style.display='block'; }
-    const docRef = db.collection('reports').doc();
-    await docRef.set({
-      ...ReportDraft.serialize(data),
-      status,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-      docId: docRef.id,
-    });
+    const docId = await reportRepository.save(data, status);
     if(badge){ badge.textContent='✅ 已儲存'; badge.style.background='rgba(30,180,80,0.85)'; }
     setTimeout(()=>{ if(badge&&origText) badge.textContent=origText; },3000);
     if(status==='draft') alert('✅ 已暫存草稿！\n可至「📁 填報歷史」繼續編輯或查看。');
@@ -1333,7 +1332,7 @@ async function saveReport(status='draft'){
         alert('✅ 紀錄已完成送出。\n⚠️ Excel 下載失敗：'+excelError.message+'\n請按「📥 下載 Excel」重試。');
       }
     }
-    return docRef.id;
+    return docId;
   }catch(e){
     console.error('[saveReport]',e);
     alert('❌ 儲存失敗：'+e.message);
@@ -1363,18 +1362,16 @@ const _origDoPrint = typeof doPrint !== 'undefined' ? doPrint : null;
 async function loadRecords(){
   const listEl = document.getElementById('rec-list');
   if(!listEl) return;
-  if(!db){ listEl.innerHTML='<div class="rec-empty"><div class="rec-empty-icon">⚠️</div><div>Firebase 尚未連線</div></div>'; return; }
+  if(!reportRepository){ listEl.innerHTML='<div class="rec-empty"><div class="rec-empty-icon">⚠️</div><div>Firebase 尚未連線</div></div>'; return; }
   listEl.innerHTML='<div class="rec-empty"><div class="rec-empty-icon">⏳</div><div>載入中…</div></div>';
   try{
     const filter = document.getElementById('rec-filter')?.value || 'all';
-    let q = db.collection('reports').orderBy('createdAt','desc').limit(50);
-    if(filter!=='all') q = q.where('status','==',filter);
-    const snap = await q.get();
-    if(snap.empty){ listEl.innerHTML='<div class="rec-empty"><div class="rec-empty-icon">📭</div><div>目前尚無填報紀錄</div></div>'; return; }
+    const records = await reportRepository.list({ status: filter, limit: 50 });
+    if(!records.length){ listEl.innerHTML='<div class="rec-empty"><div class="rec-empty-icon">📭</div><div>目前尚無填報紀錄</div></div>'; return; }
     listEl.innerHTML='';
-    snap.forEach(doc=>{ listEl.appendChild(renderRecCard(doc.id, doc.data())); });
+    records.forEach(record=>{ listEl.appendChild(renderRecCard(record.id, record.data)); });
   }catch(e){
-    listEl.innerHTML=`<div class="rec-empty"><div class="rec-empty-icon">❌</div><div>載入失敗：${e.message}<br><small>請確認 Firestore 規則已設定為開放讀取</small></div></div>`;
+    listEl.innerHTML=`<div class="rec-empty"><div class="rec-empty-icon">❌</div><div>載入失敗：${e.message}<br><small>請確認登入狀態或資料庫權限</small></div></div>`;
   }
 }
 
@@ -1458,12 +1455,12 @@ function renderRecCard(id, d){
 
 // ── 載入紀錄到表單 ───────────────────────────────────────────
 async function loadToForm(id){
-  if(!db) return;
+  if(!reportRepository) return;
   if(!confirm('確定將此紀錄載入到填寫頁？目前填寫中的資料將被覆蓋。')) return;
   try{
-    const doc = await db.collection('reports').doc(id).get();
-    if(!doc.exists){ alert('找不到此紀錄'); return; }
-    const draft=renderReportDraft(doc.data());
+    const record = await reportRepository.get(id);
+    if(!record){ alert('找不到此紀錄'); return; }
+    const draft=renderReportDraft(record);
     const unavailable=[...draft.lossLines,...draft.lossSvc,...draft.lossRst,...draft.lossMeter]
       .filter(row=>row.dbIdx<0).length;
 
@@ -1505,11 +1502,10 @@ function confirmPin(){
 
 // ── 修改紀錄 ────────────────────────────────────────────────
 async function editRecord(id){
-  if(!db) return;
+  if(!reportRepository) return;
   try{
-    const doc = await db.collection('reports').doc(id).get();
-    if(!doc.exists){ alert('找不到此紀錄'); return; }
-    const d = doc.data();
+    const d = await reportRepository.get(id);
+    if(!d){ alert('找不到此紀錄'); return; }
     const newReporter = prompt('通報人：', d.reporter||'');
     if(newReporter===null) return;
     const newLocation = prompt('失竊地點：', d.location1||'');
@@ -1518,12 +1514,11 @@ async function editRecord(id){
     if(newCaseNo===null) return;
     const newRemarks = prompt('備註：', d.remarks||'');
     if(newRemarks===null) return;
-    await db.collection('reports').doc(id).update({
+    await reportRepository.updateEditableFields(id, {
       reporter: newReporter,
       location1: newLocation,
       caseNo: newCaseNo,
       remarks: newRemarks,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     alert('✅ 已更新！');
     loadRecords();
@@ -1532,10 +1527,10 @@ async function editRecord(id){
 
 // ── 刪除紀錄 ────────────────────────────────────────────────
 async function deleteRecord(id){
-  if(!db) return;
+  if(!reportRepository) return;
   if(!confirm('確定刪除此筆紀錄？此動作無法復原。')) return;
   try{
-    await db.collection('reports').doc(id).delete();
+    await reportRepository.remove(id);
     // 用 data-doc-id 找到對應卡片移除
     const card = document.querySelector(`[data-doc-id="${id}"]`);
     if(card) card.remove();
@@ -1548,7 +1543,7 @@ async function deleteRecord(id){
 
 // ── 每月1~5號無失竊案件提醒 ──────────────────────────────────
 async function checkMonthlyReport(){
-  if(!db) return;
+  if(!reportRepository) return;
   const now = new Date();
   const day = now.getDate();
   const year = now.getFullYear();
@@ -1565,13 +1560,9 @@ async function checkMonthlyReport(){
     // 查詢本月是否有任何填報紀錄
     const monthStart = new Date(year, month, 1);
     const monthEnd   = new Date(year, month+1, 1);
-    const snap = await db.collection('reports')
-      .where('createdAt','>=', firebase.firestore.Timestamp.fromDate(monthStart))
-      .where('createdAt','<',  firebase.firestore.Timestamp.fromDate(monthEnd))
-      .limit(1)
-      .get();
+    const hasRecords = await reportRepository.hasRecordsBetween(monthStart, monthEnd);
 
-    if(!snap.empty){
+    if(hasRecords){
       // 本月已有紀錄，不提醒
       localStorage.setItem(cacheKey,'has_records');
       return;
@@ -1604,14 +1595,13 @@ function openNoTheftManual(){
 }
 
 async function submitNoTheft(){
-  if(!db){ alert('⚠️ Firebase 尚未連線'); return; }
+  if(!reportRepository){ alert('⚠️ Firebase 尚未連線'); return; }
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth()+1;
   const monthLabel = `${year}年${month}月`;
   try{
-    await db.collection('reports').add({
-      status: 'no_theft',
+    await reportRepository.saveNoTheft({
       reportDate: `${year}-${String(month).padStart(2,'0')}-01`,
       unit: document.getElementById('unit')?.value || '（未填）',
       location1: `${monthLabel}無失竊案件`,
@@ -1620,8 +1610,6 @@ async function submitNoTheft(){
       totalRestore: '$0',
       remarks: `${monthLabel}本月無導線失竊案件，系統自動回報。`,
       lossLines:[], lossSvc:[], lossRst:[], lossMeter:[],
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     closeNoTheftModal();
     localStorage.setItem(`no_theft_reminded_${year}_${month}`,'submitted');
@@ -2786,7 +2774,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 <div class="pin-overlay" id="pin-overlay">
   <div class="pin-box">
     <div class="pin-title">🔐 請輸入修改密碼</div>
-    <div class="pin-sub">輸入 PIN 碼才能修改或刪除紀錄</div>
+    <div class="pin-sub">PIN 僅防止介面誤操作，不代表資料庫授權</div>
     <input class="pin-input" type="password" id="pin-input" placeholder="——" oninput="pinInputChanged()" onkeydown="if(event.key==='Enter')confirmPin()">
     <div class="pin-error" id="pin-error"></div>
     <div style="display:flex;gap:8px;margin-top:16px">
