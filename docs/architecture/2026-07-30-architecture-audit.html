@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>taitung-theft 深層架構盤點</title>
+  <style>
+    :root{--ink:#172033;--muted:#657084;--line:#dce2ec;--bg:#f5f7fb;--card:#fff;--blue:#2456a6;--red:#b42318;--amber:#9a6700;--green:#18794e}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 system-ui,-apple-system,"Segoe UI","Noto Sans TC",sans-serif}
+    main{max-width:1180px;margin:0 auto;padding:36px 22px 72px}.hero{background:linear-gradient(135deg,#16345f,#2c69b7);color:#fff;border-radius:18px;padding:30px 34px;margin-bottom:22px;box-shadow:0 12px 30px #16345f22}.hero h1{margin:0 0 8px;font-size:30px}.hero p{margin:4px 0;color:#e6efff}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:18px 0;box-shadow:0 4px 14px #15284a0a}.card h2{margin:0 0 12px;font-size:21px}.card h3{margin:20px 0 7px;font-size:17px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.stat{border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:#fbfcff}.stat strong{display:block;font-size:22px;color:var(--blue)}.muted{color:var(--muted)}.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:700;margin-right:6px}.p0{background:#fee4e2;color:var(--red)}.p1{background:#fff1c7;color:var(--amber)}.p2{background:#e3f5eb;color:var(--green)}table{width:100%;border-collapse:collapse}th,td{padding:10px 11px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:#f0f4fa;font-weight:700}code{background:#f0f3f8;border-radius:4px;padding:1px 5px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.92em}pre{margin:8px 0;padding:12px 14px;background:#111827;color:#e5edf9;border-radius:8px;overflow:auto;font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}.node{padding:10px 13px;background:#edf4ff;border:1px solid #b8cff4;border-radius:9px}.arrow{color:var(--muted);font-size:20px}.candidate{border-left:5px solid var(--blue);padding-left:18px}.candidate.p0border{border-left-color:var(--red)}.candidate.p1border{border-left-color:#d49b00}.candidate h3{margin-top:0}.meta{display:flex;flex-wrap:wrap;gap:7px;margin:7px 0 12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}@media(max-width:760px){.two{grid-template-columns:1fr}.hero{padding:24px 22px}.hero h1{font-size:25px}}
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <h1>taitung-theft 深層架構盤點</h1>
+    <p>唯讀審查日期：2026-07-30　｜　repo：<code>D:\失竊調查表\taitung-theft</code></p>
+    <p>目的：找出最值得建立 deep module、清楚 seam、改善 locality 與 testability 的架構位置。</p>
+  </section>
+
+  <section class="card">
+    <h2>執行摘要</h2>
+    <p>目前專案是一個以 GitHub Pages 提供的單頁 HTML 工具，功能集中在 <code>index.html</code>。主要風險不是檔案數量少，而是同一份案件資料與計算規則被 DOM、global state、Firebase、Google Sheets、列印模板與 Excel Open XML 實作同時理解。最值得先處理的是把計算規則與案件草稿模型放在穩定 seam 後，再逐步拆 UI 與 adapter。</p>
+    <p><strong>建議第一項：</strong><code>ARCH-01</code> 損失／復舊計算的重複邏輯。它可以用小範圍、純函式的 deep module 先建立可靠的 test surface，並降低 UI 列印與 Excel 結果分歧的風險。</p>
+  </section>
+
+  <section class="card">
+    <h2>盤點範圍與現況證據</h2>
+    <div class="grid">
+      <div class="stat"><strong>2,849</strong><span><code>index.html</code> 行，含 CSS、markup、inline JS</span></div>
+      <div class="stat"><strong>341</strong><span><code>excel-report.js</code> 行，含 model、XML adapter、下載副作用</span></div>
+      <div class="stat"><strong>1</strong><span>測試檔：<code>tests/excel-report.test.js</code></span></div>
+      <div class="stat"><strong>0</strong><span>repo-local CONTEXT、ADR、交接文件、<code>docs/agents/</code></span></div>
+    </div>
+    <h3>文件與規範</h3>
+    <ul>
+      <li>repo-local <code>AGENTS.md</code>、<code>CLAUDE.md</code>、<code>CONTEXT.md</code>、<code>CONTEXT-MAP.md</code> 都不存在。</li>
+      <li>沒有 <code>docs/adr/</code>、<code>.scratch/</code> 或 <code>.github/</code>；現有文件集中在兩份 Excel 功能 spec 與兩份 plan。</li>
+      <li><code>README.md</code> 只有專案標題與極少描述，不能作為架構或 domain contract。</li>
+    </ul>
+    <h3>目前可觀察的資料流</h3>
+    <div class="flow">
+      <div class="node">HTML form / dynamic rows</div><div class="arrow">→</div>
+      <div class="node"><code>collectFormData()</code><br><span class="muted">DOM + globals</span></div><div class="arrow">→</div>
+      <div class="node">Firestore reports<br>或 Excel download</div>
+    </div>
+    <div class="flow">
+      <div class="node">Google Sheets CSV</div><div class="arrow">→</div>
+      <div class="node"><code>fetchFromSheets()</code></div><div class="arrow">→</div>
+      <div class="node">global <code>DB</code> → form / price UI / calculation</div>
+    </div>
+    <p class="muted">驗證：<code>node tests/excel-report.test.js</code> 通過（輸出：<code>excel-report model tests passed</code>）。沒有 <code>package.json</code>，也沒有 DOM、Firestore、Sheets sync、列印或實際 Excel template download 的自動化測試。</p>
+  </section>
+
+  <section class="card">
+    <h2>改善候選總覽</h2>
+    <table>
+      <thead><tr><th>ID</th><th>優先級</th><th>候選問題</th><th>預估</th><th>主要收益</th></tr></thead>
+      <tbody>
+        <tr><td><code>ARCH-01</code></td><td><span class="pill p0">P0</span></td><td>計算規則在 UI、列印、Excel 三處重複</td><td>M</td><td>消除金額／積點分歧，建立純邏輯測試 seam</td></tr>
+        <tr><td><code>ARCH-02</code></td><td><span class="pill p0">P0</span></td><td>案件草稿沒有 canonical model，DOM 成為狀態來源</td><td>L</td><td>改善儲存、還原、編輯與跨輸出的資料一致性</td></tr>
+        <tr><td><code>ARCH-03</code></td><td><span class="pill p1">P1</span></td><td>單一 <code>index.html</code> 同時承擔 UI、domain、adapter、event orchestration</td><td>L</td><td>提高 locality，讓變更不必穿越 2,849 行巨型模組</td></tr>
+        <tr><td><code>ARCH-04</code></td><td><span class="pill p0">P0</span></td><td>Firebase CRUD 與 UI 混合，PIN 只在 client side</td><td>M-L</td><td>建立可替換的資料 adapter，釐清真正的 authorization seam</td></tr>
+        <tr><td><code>ARCH-05</code></td><td><span class="pill p1">P1</span></td><td>Google Sheets、localStorage 與本地編輯的 source of truth 不清</td><td>M</td><td>可預測的 freshness、fallback 與衝突策略</td></tr>
+        <tr><td><code>ARCH-06</code></td><td><span class="pill p1">P1</span></td><td>Excel model builder 與 Open XML / browser download adapter 綁在一起</td><td>M</td><td>可單獨驗證商業模型與模板映射，降低模板改版成本</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>候選項目詳細證據</h2>
+
+    <article class="candidate p0border">
+      <h3><code>ARCH-01</code> 計算規則在三個輸出面重複 <span class="pill p0">P0</span></h3>
+      <div class="meta"><span class="pill p0">高影響</span><span class="pill p2">中工作量</span><span class="muted">建議首先處理</span></div>
+      <div class="two"><div><strong>目前問題</strong><p>同一組 loss、restore、points、accessory、labor、travel、misc 與 total repair 規則沒有單一 interface。UI 即時計算、HTML 列印與 Excel model 各自讀取資料並計算，未來公式修正容易只改到其中一處。</p></div><div><strong>實際證據</strong><ul><li><code>index.html:2035-2084</code>：<code>calcAll()</code> 從 DOM 與 <code>DB</code> 計算 loss totals。</li><li><code>index.html:2261-2323</code>：<code>generatePrintArea()</code> 重新建立 items 與完整 repair 公式。</li><li><code>excel-report.js:133-160</code>：<code>collectReportModel()</code> 再次計算同類數值。</li></ul></div></div>
+      <strong>改善方向</strong><p>建立純的 <code>LossCalculator</code> module，interface 可收 <code>ReportDraft</code>、material catalog 與費率設定，回傳一個完整 <code>LossBreakdown</code>。UI、print renderer、Excel model builder 都只消費這個結果；DOM 更新留在 UI adapter。這個 seam 有直接的 production caller 與 test caller，不需要為了抽象而增加空 port。</p>
+      <strong>影響範圍</strong><p><code>calcAll</code>、<code>generatePrintArea</code>、<code>collectReportModel</code>、Excel download、相關測試與既有數值相容性。</p>
+      <strong>風險與驗證</strong><p>最大風險是既有四捨五入、預設工資／工時與 Excel 欄位結果改變。先用目前 fixture 建立 characterization tests，再逐欄比對 UI、列印與 Excel model；不要一開始改公式。</p>
+    </article>
+
+    <article class="candidate p0border">
+      <h3><code>ARCH-02</code> 案件草稿沒有 canonical model <span class="pill p0">P0</span></h3>
+      <div class="meta"><span class="pill p0">高影響</span><span class="pill p1">高工作量</span></div>
+      <div class="two"><div><strong>目前問題</strong><p>表單值分散在 DOM、<code>_lossRows</code>、<code>_meterRows</code>、global <code>DB</code> 與各種 localStorage。儲存時才由 DOM 組合資料，還原時又反向操作 DOM 並依賴多個 <code>setTimeout</code>。這使「表單目前狀態」不是一個可獨立測試的 module。</p></div><div><strong>實際證據</strong><ul><li><code>index.html:1192-1236</code>：<code>collectFormData()</code> 直接讀取欄位、dynamic row 與 option DOM。</li><li><code>index.html:1396-1483</code>：<code>loadToForm()</code> 直接寫回 DOM，並以多層 <code>setTimeout</code> 重建 rows。</li><li><code>index.html:1854-1957</code>：dynamic rows 由 global arrays 與 DOM id 雙重維護。</li></ul></div></div>
+      <strong>改善方向</strong><p>定義 <code>ReportDraft</code> module，interface 僅處理 <code>read</code>、<code>update</code>、<code>serialize</code>、<code>hydrate</code> 與 validation；DOM 只作為 renderer / input adapter。歷史紀錄、Excel、列印都接收同一個 draft snapshot。先保留 Firestore 文件欄位名稱，降低資料 migration 風險。</p>
+      <strong>影響範圍</strong><p>表單輸入、動態材料列、草稿儲存／還原、列印、Excel、歷史紀錄編輯。</p>
+      <strong>風險與驗證</strong><p>既有資料含 <code>dbIdx</code> 與 <code>name</code> 的 fallback 邏輯，切換時不可只依 index。需測試空值、材料刪除或重排、舊文件還原與自訂下拉選項。</p>
+    </article>
+
+    <article class="candidate p1border">
+      <h3><code>ARCH-03</code> 單一 HTML 巨型 module 與混合事件模型 <span class="pill p1">P1</span></h3>
+      <div class="meta"><span class="pill p1">廣泛影響</span><span class="pill p1">高工作量</span></div>
+      <div class="two"><div><strong>目前問題</strong><p><code>index.html</code> 同時包含 CSS、頁面 markup、Firebase orchestration、catalog sync、表單 calculation、CRUD、列印模板、checklist 與 mobile navigation。事件又混用 inline handler、動態產生的 inline handler 與 <code>addEventListener</code>，global function 因而成為隱含 interface。</p></div><div><strong>實際證據</strong><ul><li><code>index.html</code> 共 2,849 行，沒有 source module 目錄。</li><li><code>index.html:350-374</code>、<code>2778-2844</code>：大量 markup inline <code>onclick</code>。</li><li><code>index.html:1894-1906</code>、<code>2133</code>：render function 產生含 inline event 的 HTML。</li><li><code>index.html:1366-1384</code>：歷史紀錄則改用 <code>addEventListener</code>，形成兩套事件路徑。</li></ul></div></div>
+      <strong>改善方向</strong><p>採增量拆分：先把 <code>LossCalculator</code>、<code>ReportDraft</code>、<code>ReportRepository</code> 形成深 module，再把 print、Excel、catalog adapter 移出 inline script。事件統一由 screen controller 或 delegation 綁定；不以「每個函式拆一檔」為目標，而以穩定 interface 和 locality 為目標。</p>
+      <strong>影響範圍</strong><p>所有 tab、dynamic rows、mobile nav、列印與歷史紀錄操作。</p>
+      <strong>風險與驗證</strong><p>拆分期間最容易出現 script loading order、global name 與 DOM id 斷裂。每次只移動一個 seam，配合 browser smoke test；本輪不建議直接大重構。</p>
+    </article>
+
+    <article class="candidate p0border">
+      <h3><code>ARCH-04</code> Firebase CRUD 與 UI 混合，client PIN 不是 authorization seam <span class="pill p0">P0</span></h3>
+      <div class="meta"><span class="pill p0">資料與安全風險</span><span class="pill p1">中至高工作量</span></div>
+      <div class="two"><div><strong>目前問題</strong><p>畫面函式直接建立 Firestore query、寫入、更新、刪除與錯誤訊息；編輯／刪除前的 PIN 只由瀏覽器 hash 比對後決定是否呼叫操作。repo 內沒有 Firebase Rules 或 auth policy 文件，因此無法從程式碼確認 server-side authorization 是否存在。</p></div><div><strong>實際證據</strong><ul><li><code>index.html:1252-1258</code>：<code>saveReport()</code> 直接 <code>db.collection('reports').doc().set()</code>。</li><li><code>index.html:1306</code>、<code>1400</code>、<code>1535</code>、<code>1552</code>、<code>1582</code>、<code>1627</code>：多處直接 CRUD / query。</li><li><code>index.html:1176</code>、<code>1492-1518</code>：<code>EDIT_PIN_HASH</code> 與 <code>requirePin()</code> 完全位於 client。</li></ul></div></div>
+      <strong>改善方向</strong><p>建立小而深的 <code>ReportRepository</code> interface，讓 UI 只知道 <code>save</code>、<code>list</code>、<code>get</code>、<code>updateEditableFields</code>、<code>remove</code> 等 domain operation。production 使用 Firestore adapter，測試使用 in-memory adapter。真正的權限應由 Firebase Auth / Rules seam 保證，client PIN 只能作 UX gate，不應作安全保證。</p>
+      <strong>影響範圍</strong><p>填報、歷史、草稿、無失竊回報、月初提醒與 Firestore Rules／部署設定。</p>
+      <strong>風險與驗證</strong><p>這項若涉及 Rules 是高風險部署工作。先盤點實際 Rules、Auth provider、匿名／登入身份與既有資料讀寫需求，再設 repository contract；不可在沒有 production policy 證據時直接收緊規則。</p>
+    </article>
+
+    <article class="candidate p1border">
+      <h3><code>ARCH-05</code> catalog 的 source of truth 與同步策略不清 <span class="pill p1">P1</span></h3>
+      <div class="meta"><span class="pill p1">資料一致性</span><span class="pill p2">中工作量</span></div>
+      <div class="two"><div><strong>目前問題</strong><p><code>DB</code> 可能來自預設值、localStorage cache 或 Google Sheets CSV；同步還會經過 direct fetch 與多個 CORS proxy。使用者在 UI 修改價格後只寫 localStorage，但 manual sync 又能以遠端資料覆蓋 global <code>DB</code>。<code>UNITS</code> 則是另一套 localStorage-only 路徑。</p></div><div><strong>實際證據</strong><ul><li><code>index.html:1708-1710</code>：<code>loadDB()</code>、<code>loadUnits()</code> 與 global state。</li><li><code>index.html:1766-1792</code>：遠端 CSV 與 proxy fallback。</li><li><code>index.html:1795-1803</code>：<code>manualSync()</code> 直接替換 <code>DB</code> 並重建 UI。</li><li><code>index.html:2114-2123</code>、<code>2139</code>：價格與服務所資料各自寫 localStorage。</li></ul></div></div>
+      <strong>改善方向</strong><p>建立 <code>CatalogStore</code> module，明確定義 <code>loadSnapshot</code>、<code>refresh</code>、<code>saveLocalEdits</code>、freshness 與 conflict policy。Google Sheets CSV、localStorage 與測試 fixture 是不同 adapter；UI 只收到 immutable snapshot，不直接改 global <code>DB</code>。</p>
+      <strong>影響範圍</strong><p>價格表、表單下拉選單、計算、同步 badge、離線 fallback 與使用者本機編輯。</p>
+      <strong>風險與驗證</strong><p>不能假設 Google Sheets 是唯一真相；需先決定本機修改是否允許、何時被覆蓋、離線資料保存多久，再補同步狀態與 fixture tests。</p>
+    </article>
+
+    <article class="candidate p1border">
+      <h3><code>ARCH-06</code> Excel model 與 Open XML / browser download adapter 綁定 <span class="pill p1">P1</span></h3>
+      <div class="meta"><span class="pill p1">中影響</span><span class="pill p2">中工作量</span></div>
+      <div class="two"><div><strong>目前問題</strong><p><code>excel-report.js</code> 同時包含 domain model 建立、工作簿載入、XML cell 操作、sheet mapping、formula clearing、Blob 產生與瀏覽器下載。model builder 又依賴 global <code>DB</code>，未傳入資料 catalog 時還會 fallback 到 global <code>collectFormData()</code>。</p></div><div><strong>實際證據</strong><ul><li><code>excel-report.js:133-160</code>：<code>collectReportModel()</code> 做 domain aggregation 並讀 global <code>DB</code>。</li><li><code>excel-report.js:165-308</code>：template / XML / sheet 變更與 workbook configuration。</li><li><code>excel-report.js:309-339</code>：Blob、Object URL、anchor click 與 filename。</li><li><code>tests/excel-report.test.js:1-39</code>：測試需手動注入 <code>window</code> 與 <code>DB</code>，只覆蓋 model，未覆蓋 template adapter。</li></ul></div></div>
+      <strong>改善方向</strong><p>保留外部的 <code>downloadExcelReport</code> 作薄 facade，內部拆成 <code>ReportModelBuilder</code>（純資料、可測試）與 <code>ExcelTemplateAdapter</code>（XML mapping、template loader、download sink）。template loader 與 download sink 可在測試使用 fixture / fake adapter，讓 adapter 的錯誤模式變成明確 interface。</p>
+      <strong>影響範圍</strong><p>Excel 報表、模板 sheet 名稱／cell mapping、檔名與瀏覽器下載流程。</p>
+      <strong>風險與驗證</strong><p>Open XML 的 sheet name、defined name、print area 與 formula 行為容易受影響。先增加 fixture-level XML assertions，再移動實作；不可只依現有 model test 判定 Excel 輸出正確。</p>
+    </article>
+  </section>
+
+  <section class="card">
+    <h2>建議處理順序</h2>
+    <ol>
+      <li><strong>先處理 <code>ARCH-01</code>：</strong>抽出純計算 module，保留既有輸出格式，補 characterization tests。這是最小 seam、leverage 最高、可獨立驗證的切入點。</li>
+      <li><strong>接著處理 <code>ARCH-02</code>：</strong>讓所有輸出消費同一個 <code>ReportDraft</code> snapshot，再處理 DOM 與 persistence。</li>
+      <li><strong>之後依需求選擇：</strong>若資料權限或歷史紀錄風險較急，優先 <code>ARCH-04</code>；若價格常變或離線使用重要，優先 <code>ARCH-05</code>；若 Excel 模板頻繁變更，優先 <code>ARCH-06</code>。</li>
+      <li><strong>最後進行 <code>ARCH-03</code> 的增量拆分：</strong>它是結構性改善，不建議在沒有前述 seam 的情況下直接把 2,849 行切成許多 shallow modules。</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>本輪結論與限制</h2>
+    <ul>
+      <li>本輪只讀取 repo、執行既有 Excel model test，沒有修改任何既有程式碼。</li>
+      <li>HTML 報告本身是本輪新增的檢查產物；它不代表任何架構改善已經實作。</li>
+      <li>Firebase Rules、部署設定與實際瀏覽器流程不在 repo 內，因此 <code>ARCH-04</code> 的 server-side authorization 是待確認的風險，不是本次已證實的 Rules 缺陷。</li>
+      <li>請從 <code>ARCH-01</code> 至 <code>ARCH-06</code> 選擇一項；在你選擇前不會修改程式碼。</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
