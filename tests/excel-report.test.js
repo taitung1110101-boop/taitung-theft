@@ -7,6 +7,7 @@ global.DB = {
   meter: [{name:'電表C',price:800,pts:2}],
 };
 
+require('../loss-calculator.js');
 require('../excel-report.js');
 
 const model = buildExcelReportModel({

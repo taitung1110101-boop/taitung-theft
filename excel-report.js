@@ -5,6 +5,7 @@ const REPORT_TEMPLATE_URL = 'templates/電力線路失竊報表範本.xlsx';
 const CALC_SHEET_NAME = '損失及修復費用計算式';
 const MAIN_NS = 'http://schemas.openxmlformats.org/spreadsheetml/2006/main';
 const REL_NS = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
+const { calculateLossBreakdown } = window.LossCalculator || {};
 
 const POLICE_DISTRICT = {
   '土坂':'大武','太麻里':'大武','台板':'大武','正興':'大武','多良':'大武','尚武':'大武','金峰':'大武','金崙':'大武','美和':'大武','森永':'大武','新化':'大武','達仁':'大武','歷坵':'大武','大武':'大武',
@@ -109,55 +110,31 @@ function dateInfo(dateText,timeText){
   };
 }
 
-function groupedRows(rows,items){
-  const map=new Map();
-  (rows||[]).forEach(row=>{
-    const item=items[row.dbIdx];
-    const qty=Number(row.qty)||0;
-    if(!item||qty<=0) return;
-    const key=String(row.dbIdx);
-    if(!map.has(key)) map.set(key,{item,qty:0});
-    map.get(key).qty+=qty;
-  });
-  return Array.from(map.values()).map(({item,qty})=>({
-    name:item.name,qty,
-    weight:Number(item.weight)||0,
-    price:Number(item.price)||0,
-    pts:Number(item.pts)||0,
-    totalWeight:qty*(Number(item.weight)||0),
-    amount:qty*(Number(item.price)||0),
-    totalPts:qty*(Number(item.pts)||0)
-  }));
-}
-
 function collectReportModel(data){
-  const line=groupedRows(data.lossLines,DB.line);
-  const service=groupedRows(data.lossSvc,DB.service);
-  const meter=groupedRows(data.lossMeter,DB.meter);
-  const restore=groupedRows(data.lossRst,[...DB.line,...DB.service]);
+  if(typeof calculateLossBreakdown !== 'function') throw new Error('LossCalculator 尚未載入');
+  const breakdown=calculateLossBreakdown(data,DB);
+  const line=breakdown.line.groups;
+  const service=breakdown.service.groups;
+  const meter=breakdown.meter.groups;
+  const restore=breakdown.restore.groups;
   if(line.length>5) throw new Error('線路電纜品項超過 Excel 版型上限 5 項');
   if(service.length>3) throw new Error('接戶線品項超過 Excel 版型上限 3 項');
   if(meter.length>3) throw new Error('電表／比流器品項超過 Excel 版型上限 3 項');
   if(restore.length>11) throw new Error('復舊材料品項超過 Excel 版型上限 11 項');
   if(!line.length&&!service.length&&!meter.length) throw new Error('請至少填寫一項失竊材料');
 
-  const lossTotal=[...line,...service,...meter].reduce((s,x)=>s+x.amount,0);
-  const restoreCost=restore.reduce((s,x)=>s+x.amount,0);
-  const restorePts=restore.reduce((s,x)=>s+x.totalPts,0);
-  const accessory=Math.round(restorePts/1000*2940*10)/10;
-  const workUnits=Math.round(restorePts/100*10)/10;
-  const wageCost=Math.round(workUnits*1500*10)/10;
-  const travel=Math.round(workUnits*250*10)/10;
-  const materialBase=restoreCost+accessory;
-  const misc=Math.round(materialBase*0.07*10)/10;
-  const handling=(Number(data.wage)||0)*(Number(data.laborHrs)||0);
-  const repairWithoutHandling=Math.round((restoreCost+accessory+wageCost+travel+misc)*10)/10;
+  const {
+    lossTotal,restoreCost,restorePts,
+    accessoryCost:accessory,workUnits,wageCost,travelCost:travel,
+    materialBase,miscCost:misc,handlingCost:handling,
+    repairWithoutHandling,repairTotal
+  }=breakdown;
   const info=dateInfo(data.reportDate,data.theftTime);
   return {
     ...data,line,service,meter,restore,info,
     district:POLICE_DISTRICT[data.police]||'',
     lossTotal,restoreCost,restorePts,accessory,workUnits,wageCost,travel,materialBase,misc,handling,
-    repairWithoutHandling,repairTotal:repairWithoutHandling+handling,
+    repairWithoutHandling,repairTotal,
     fullLocation:data.location1+(data.location2?`／${data.location2}`:'')
   };
 }

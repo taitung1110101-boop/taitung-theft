@@ -1159,6 +1159,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text
 <div id="print-area"></div>
 
 <script src="vendor/jszip.min.js"></script>
+<script src="loss-calculator.js"></script>
 <script src="excel-report.js"></script>
 <script>
 // ══════════════════════════════════════════════════════════════
@@ -2033,55 +2034,28 @@ function calcRow(pfx,i){
   calcAll();
 }
 function calcAll(){
+  const breakdown=LossCalculator.calculateLossBreakdown(collectFormData(),DB);
   // 線路損失 (動態行)
-  let lW=0,lL=0,lP=0;
-  (_lossRows.line||[]).forEach(row=>{
-    if(row.dbIdx<0) return;
-    const item=DB.line[row.dbIdx]; if(!item)return;
-    const q=parseFloat(document.getElementById(`lq_line_${row.uid}`)?.value)||0;
-    lW+=q*item.weight; lL+=q*item.price; lP+=q*item.pts;
-  });
-  setText('line-wt-total',lW>0?F2(lW)+' kg':'—');
-  setText('line-loss-total',lL>0?'$'+N(lL):'—');
-  setText('line-pts-total',lP>0?F2(lP):'—');
+  const lineTotals=breakdown.line.totals;
+  setText('line-wt-total',lineTotals.totalWeight>0?F2(lineTotals.totalWeight)+' kg':'—');
+  setText('line-loss-total',lineTotals.amount>0?'$'+N(lineTotals.amount):'—');
+  setText('line-pts-total',lineTotals.totalPts>0?F2(lineTotals.totalPts):'—');
   // 接戶線損失 (動態行)
-  let sW=0,sL=0,sP=0;
-  (_lossRows.svc||[]).forEach(row=>{
-    if(row.dbIdx<0) return;
-    const item=DB.service[row.dbIdx]; if(!item)return;
-    const q=parseFloat(document.getElementById(`lq_svc_${row.uid}`)?.value)||0;
-    sW+=q*item.weight; sL+=q*item.price; sP+=q*item.pts;
-  });
-  setText('svc-wt-total',sW>0?F2(sW)+' kg':'—');
-  setText('svc-loss-total',sL>0?'$'+N(sL):'—');
-  setText('svc-pts-total',sP>0?F2(sP):'—');
+  const serviceTotals=breakdown.service.totals;
+  setText('svc-wt-total',serviceTotals.totalWeight>0?F2(serviceTotals.totalWeight)+' kg':'—');
+  setText('svc-loss-total',serviceTotals.amount>0?'$'+N(serviceTotals.amount):'—');
+  setText('svc-pts-total',serviceTotals.totalPts>0?F2(serviceTotals.totalPts):'—');
   // 電表 (動態行)
-  let mL=0;
-  (_meterRows||[]).forEach(row=>{
-    if(row.dbIdx<0) return;
-    const item=DB.meter[row.dbIdx]; if(!item)return;
-    const q=parseFloat(document.getElementById(`mq_${row.uid}`)?.value)||0;
-    mL+=q*item.price;
-    setText(`ml_${row.uid}`, q>0?'$'+N(q*item.price):'—');
-  });
-  setText('meter-loss-total',mL>0?'$'+N(mL):'—');
-  const totalLoss=lL+sL+mL;
+  const meterTotals=breakdown.meter.totals;
+  setText('meter-loss-total',meterTotals.amount>0?'$'+N(meterTotals.amount):'—');
   // 復舊材料 (動態行)
-  let rW=0,rC=0,rP=0;
-  const _allItems=[...DB.line,...DB.service];
-  (_lossRows.rst||[]).forEach(row=>{
-    if(row.dbIdx<0) return;
-    const item=_allItems[row.dbIdx]; if(!item)return;
-    const q=parseFloat(document.getElementById(`lq_rst_${row.uid}`)?.value)||0;
-    rW+=q*item.weight; rC+=q*item.price; rP+=q*item.pts;
-  });
-  setText('rst-wt-total',rW>0?F2(rW)+' kg':'—');
-  setText('rst-cost-total',rC>0?'$'+N(rC):'—');
-  setText('rst-pts-total',rP>0?F2(rP):'—');
-  const wage=n('wage'),hrs=n('labor-hrs'),labor=wage*hrs;
-  const lc=document.getElementById('labor-cost');if(lc)lc.value='$'+N(labor);
+  const restoreTotals=breakdown.restore.totals;
+  setText('rst-wt-total',restoreTotals.totalWeight>0?F2(restoreTotals.totalWeight)+' kg':'—');
+  setText('rst-cost-total',restoreTotals.amount>0?'$'+N(restoreTotals.amount):'—');
+  setText('rst-pts-total',restoreTotals.totalPts>0?F2(restoreTotals.totalPts):'—');
+  const lc=document.getElementById('labor-cost');if(lc)lc.value='$'+N(breakdown.handlingCost);
   const impact=n('impact-value');
-  setText('bar-loss','$'+N(totalLoss));setText('bar-restore','$'+N(rC));setText('bar-labor','$'+N(labor));setText('bar-impact','$'+N(impact));
+  setText('bar-loss','$'+N(breakdown.lossTotal));setText('bar-restore','$'+N(breakdown.restoreCost));setText('bar-labor','$'+N(breakdown.handlingCost));setText('bar-impact','$'+N(impact));
 }
 
 function buildPriceTables(){buildPriceSection('price-line-tbody',DB.line,'line');buildPriceSection('price-svc-tbody',DB.service,'service');buildMeterPrice();}
@@ -2265,8 +2239,9 @@ function generatePrintArea(){
   const lineName=v('line-name'),feeder=v('feeder'),police=v('police'),caseNo=v('case-no');
   const reporter=v('reporter'),homes=v('outage-homes')||'0',hrs=v('outage-hrs')||'0';
   const impact=v('impact-value')||'0',photos=v('photos')||'0',remarks=v('remarks');
-  const wage=parseFloat(v('wage'))||250,laborHrs=parseFloat(v('labor-hrs'))||4;
-  const labor=wage*laborHrs;
+  const breakdown=LossCalculator.calculateLossBreakdown(collectFormData(),DB);
+  const wage=Number(v('wage'))||0,laborHrs=Number(v('labor-hrs'))||0;
+  const labor=breakdown.handlingCost;
 
   const dt=rdate?rdate.replace(/-/g,''):'';
   const yr=rdate?rdate.split('-')[0]:'';
@@ -2278,49 +2253,21 @@ function generatePrintArea(){
   const h12=timeH===0?12:timeH>12?timeH-12:timeH;
   const fullLoc=loc1+(loc2?'（'+loc2+'）':'');
 
-  // 從動態行收集損失/復舊材料
-  const _all=[...DB.line,...DB.service];
-  let lineItems=[],svcItems=[],mtrItems=[],rstItems=[];
-  let lineLoss=0,svcLoss=0,mtrLoss=0,rstCost=0,totalRstPts=0;
-
-  (_lossRows.line||[]).forEach(row=>{
-    if(row.dbIdx<0)return;
-    const item=DB.line[row.dbIdx];if(!item)return;
-    const q=parseFloat(document.getElementById(`lq_line_${row.uid}`)?.value)||0;if(!q)return;
-    const loss=q*item.price,wt=q*item.weight;lineLoss+=loss;
-    lineItems.push({name:item.name,qty:q,wt,price:item.price,loss,pts:item.pts,tpts:q*item.pts});
-  });
-  (_lossRows.svc||[]).forEach(row=>{
-    if(row.dbIdx<0)return;
-    const item=DB.service[row.dbIdx];if(!item)return;
-    const q=parseFloat(document.getElementById(`lq_svc_${row.uid}`)?.value)||0;if(!q)return;
-    const loss=q*item.price,wt=q*item.weight;svcLoss+=loss;
-    svcItems.push({name:item.name,qty:q,wt,price:item.price,loss,pts:item.pts,tpts:q*item.pts});
-  });
-  (_meterRows||[]).forEach(row=>{
-    if(row.dbIdx<0) return;
-    const item=DB.meter[row.dbIdx]; if(!item)return;
-    const q=parseFloat(document.getElementById(`mq_${row.uid}`)?.value)||0; if(!q)return;
-    mtrLoss+=q*item.price;mtrItems.push({name:item.name,qty:q,price:item.price,loss:q*item.price});
-  });
-  (_lossRows.rst||[]).forEach(row=>{
-    if(row.dbIdx<0)return;
-    const item=_all[row.dbIdx];if(!item)return;
-    const q=parseFloat(document.getElementById(`lq_rst_${row.uid}`)?.value)||0;if(!q)return;
-    const cost=q*item.price,wt=q*item.weight,tpts=q*item.pts;
-    rstCost+=cost;totalRstPts+=tpts;
-    rstItems.push({name:item.name,qty:q,wt,price:item.price,cost,pts:item.pts,tpts});
-  });
-
-  const totalLoss=lineLoss+svcLoss+mtrLoss;
+  const lineItems=breakdown.line.rows;
+  const svcItems=breakdown.service.rows;
+  const mtrItems=breakdown.meter.rows;
+  const rstItems=breakdown.restore.rows;
+  const rstCost=breakdown.restoreCost;
+  const totalRstPts=breakdown.restorePts;
+  const totalLoss=breakdown.lossTotal;
   const allLossItems=[...lineItems,...svcItems];
-  const accessoryCost=Math.round(totalRstPts/1000*2940*10)/10;
-  const laborUnits=Math.round(totalRstPts/100*10)/10;
-  const laborWageCost=Math.round(laborUnits*1500*10)/10;
-  const travelCost=Math.round(laborUnits*250*10)/10;
-  const matBase=rstCost+accessoryCost;
-  const miscCost=Math.round(matBase*0.07*10)/10;
-  const totalRepairFull=Math.round((rstCost+accessoryCost+laborWageCost+travelCost+miscCost)*10)/10+labor;
+  const accessoryCost=breakdown.accessoryCost;
+  const laborUnits=breakdown.workUnits;
+  const laborWageCost=breakdown.wageCost;
+  const travelCost=breakdown.travelCost;
+  const matBase=breakdown.materialBase;
+  const miscCost=breakdown.miscCost;
+  const totalRepairFull=breakdown.repairTotal;
 
   const F="font-family:'PMingLiU','新細明體','MingLiU',serif";
   const B='border:1px solid #000';
@@ -2341,10 +2288,10 @@ function generatePrintArea(){
       <td style="${B};padding:1mm 2mm;${F};${fs}">${esc(it.name)}</td>
       <td style="${B};padding:1mm;text-align:right;${F};${fs}">${it.qty}</td>
       <td style="${B};padding:1mm;text-align:center;${F};${fs}">M</td>
-      <td style="${B};padding:1mm;text-align:right;${F};${fs}">${it.wt.toFixed(2)}</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${fs}">${it.totalWeight.toFixed(2)}</td>
       <td style="${B};padding:1mm;text-align:center;${F};${fs}">KG</td>
       <td style="${B};padding:1mm;text-align:right;${F};${fs}">$${N(it.price)}</td>
-      <td style="${B};padding:1mm;text-align:right;${F};${fs}">$${N(it.loss)}</td></tr>`).join('')
+      <td style="${B};padding:1mm;text-align:right;${F};${fs}">$${N(it.amount)}</td></tr>`).join('')
     +`<tr><td colspan="7" style="${B};padding:1mm 2mm;text-align:center;${F};${fs}">以下空白</td></tr>`;
   }
 
@@ -2451,12 +2398,12 @@ function generatePrintArea(){
       <td style="${B};padding:1mm 2mm;${F};${FS2}">${esc(it.name)}</td>
       <td style="${B};padding:1mm;text-align:right;${F};${FS2}">${it.qty}</td>
       <td style="${B};padding:1mm;text-align:center;${F};${FS2}">M</td>
-      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">${it.wt.toFixed(2)}</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">${it.totalWeight.toFixed(2)}</td>
       <td style="${B};padding:1mm;text-align:center;${F};${FS2}">KG</td>
       <td style="${B};padding:1mm;text-align:right;${F};${FS2}">$${N(it.price)}</td>
-      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">$${N(it.cost)}</td>
+      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">$${N(it.amount)}</td>
       <td style="${B};padding:1mm;text-align:right;${F};${FS2}">${it.pts}</td>
-      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">${it.tpts.toFixed(1)}</td></tr>`).join('')
+      <td style="${B};padding:1mm;text-align:right;${F};${FS2}">${it.totalPts.toFixed(1)}</td></tr>`).join('')
     +`<tr><td colspan="9" style="${B};padding:1mm 2mm;text-align:center;${F};${FS2}">以下空白</td></tr>`;
   }
   const thl=(t,w='')=>`<td style="${B};padding:1mm 2mm;background:#dde8f5;font-weight:bold;${F};${FS2}${w?';width:'+w:''}">${t}</td>`;
